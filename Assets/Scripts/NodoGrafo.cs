@@ -13,16 +13,18 @@ public class NodoGrafo : MonoBehaviour
 	private NodoGrafo atras;
 	private string dialogo;
 	private Vector3 posicion;
+	private float angulo;
 	private int estado;
 	
 	//------------------------------------------------------------------------
 	// Constructor
 	//------------------------------------------------------------------------
 	
-	public NodoGrafo(int nEstado, string nDialogo, Vector3 nPosicion){
+	public NodoGrafo(int nEstado, string nDialogo, Vector3 nPosicion, float nAngulo){
 		estado = nEstado;
 		dialogo = nDialogo;
 		posicion = nPosicion;
+		angulo = nAngulo;
 	}
 	
 	//-----------------------------------------------------------------------
@@ -49,6 +51,12 @@ public class NodoGrafo : MonoBehaviour
 	public string darDialogo()
 	{
 		return dialogo;
+	}
+	/*
+	 * da angulo del estado
+	 * */
+	public float darAngulo(){
+		return angulo;	
 	}
 	
 	/*
@@ -132,6 +140,13 @@ public class NodoGrafo : MonoBehaviour
 	public void agregarDialogo(string dialog)
 	{
 		dialogo = dialog;
+	}
+	/*
+	 * Asigna un angulo al estado
+	 * */
+	public void agregarAngulo(float nAngulo)
+	{
+		angulo = nAngulo;
 	}
 }
 

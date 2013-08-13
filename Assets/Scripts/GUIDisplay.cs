@@ -4,14 +4,14 @@ using System.Collections;
 public class GUIDisplay : MonoBehaviour {
 	
 	public Texture2D iconoFlecha;
-	public float angulo = 0.0f;
 	public Grafo grafo;
 	public GameObject Camara;
 	public float velocidad;
 	
 	private bool flecha= false;
+	private float anguloLerp = 0.0f;
 	private Vector3 posicionDestino;
-	private Vector3 anguloDestino;
+	private float anguloDestino;
 	
 	private EstadosNivel estados;
 
@@ -31,8 +31,10 @@ public class GUIDisplay : MonoBehaviour {
 	 	if (flecha)
 		{
 			Vector3 posicionActual = Camara.transform.position;
-			//angulo = Mathf.LerpAngle(0.0f,-90.0f,Time.time*0.2f);
-			//Camara.transform.eulerAngles = new Vector3(0.0f,angulo,0.0f);
+			anguloLerp = Mathf.LerpAngle(0.0f,-90.0f,Time.time);
+			if(anguloDestino != 0){
+				Camara.transform.eulerAngles = new Vector3(0.0f,anguloLerp,0.0f);
+			}
 			Camara.transform.position = Vector3.MoveTowards(posicionActual,posicionDestino, Time.deltaTime*velocidad);
 			
 			if(posicionActual.Equals(posicionDestino)){
@@ -49,6 +51,7 @@ public class GUIDisplay : MonoBehaviour {
 			NodoGrafo estadoSig = estadoActual.darAdelante();
 			estados.cambiarEstadoActual(estadoSig);
 			posicionDestino = estadoSig.darPosicion();
+			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
 			print ("Adelante");
 		}
@@ -58,6 +61,7 @@ public class GUIDisplay : MonoBehaviour {
 			NodoGrafo estadoSig = estadoActual.darIzquierda();
 			estados.cambiarEstadoActual(estadoSig);
 			posicionDestino = estadoSig.darPosicion();
+			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
 			print ("Izquierda");
 		}
@@ -67,6 +71,7 @@ public class GUIDisplay : MonoBehaviour {
 			NodoGrafo estadoSig = estadoActual.darDerecha();
 			estados.cambiarEstadoActual(estadoSig);
 			posicionDestino = estadoSig.darPosicion();
+			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
 			print ("Derecha");
 		}
@@ -77,6 +82,7 @@ public class GUIDisplay : MonoBehaviour {
 			NodoGrafo estadoSig = estadoActual.darAtras();
 			estados.cambiarEstadoActual(estadoSig);
 			posicionDestino = estadoSig.darPosicion();
+			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
 			print ("Atras");
 		}

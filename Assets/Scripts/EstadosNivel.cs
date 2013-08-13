@@ -33,15 +33,19 @@ public class EstadosNivel : MonoBehaviour
 	}
 	
 	public void inicializarGrafoPrincipal(){
-		GrafoPrincipal = new Grafo(2);
+		GrafoPrincipal = new Grafo(100);
 		
-		NodoGrafo estado0 = new NodoGrafo(0,"",new Vector3(3,0,0));
+		NodoGrafo estado0 = new NodoGrafo(0,"",new Vector3(3,0,0),0);
 		GrafoPrincipal.agregarEstado(estado0);
 		
-		NodoGrafo estado1 = new NodoGrafo(1,"",new Vector3(0,1,5));
+		NodoGrafo estado1 = new NodoGrafo(1,"",new Vector3(0,0,5),0);
 		GrafoPrincipal.agregarEstado(estado1);
 		
+		NodoGrafo estado2 = new NodoGrafo(2,"",new Vector3(1,0,5),-90.0f);
+		GrafoPrincipal.agregarEstado(estado2);
+		
 		GrafoPrincipal.asignarDelantero(estado0.darEstado(), estado1.darEstado());
+		GrafoPrincipal.asignarIzquierdo(estado1.darEstado(), estado2.darEstado());
 	}
 }
 
