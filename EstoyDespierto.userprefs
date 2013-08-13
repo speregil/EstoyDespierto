@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EstadosNivel.cs">
+    <Files>
+      <File FileName="Assets\Scripts\NodoGrafo.cs" Line="85" Column="79" />
+      <File FileName="Assets\Scripts\GUIDisplay.cs" Line="36" Column="17" />
+      <File FileName="Assets\Scripts\EstadosNivel.cs" Line="24" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
