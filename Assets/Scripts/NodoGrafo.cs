@@ -19,7 +19,7 @@ public class NodoGrafo : MonoBehaviour
 	// Constructor
 	//------------------------------------------------------------------------
 	
-	public NodoGrafo(int nEstado, int nDialogo, Vector3 nPosicion){
+	public NodoGrafo(int nEstado, string nDialogo, Vector3 nPosicion){
 		estado = nEstado;
 		dialogo = nDialogo;
 		posicion = nPosicion;
@@ -103,14 +103,14 @@ public class NodoGrafo : MonoBehaviour
 	 * */
 	public void asignarIzquierdo(NodoGrafo nodoIzquierdo)
 	{
-		derecha = nodoIzquierdo;
+		izquierda = nodoIzquierdo;
 	}
 	/*
 	 * Asigna un sucesor delantero directamente
 	 * */
 	public void asignarDelantero(NodoGrafo nodoDelantero)
 	{
-		derecha = nodoDelantero;
+		adelante = nodoDelantero;
 	}
 	/* 
 	 * Asigna un predecesor al nodo

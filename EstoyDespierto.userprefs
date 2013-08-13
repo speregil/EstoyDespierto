@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EstadosNivel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GUIDisplay.cs">
     <Files>
-      <File FileName="Assets\Scripts\NodoGrafo.cs" Line="85" Column="79" />
-      <File FileName="Assets\Scripts\GUIDisplay.cs" Line="36" Column="17" />
-      <File FileName="Assets\Scripts\EstadosNivel.cs" Line="24" Column="3" />
+      <File FileName="Assets\Scripts\EstadosNivel.cs" Line="38" Column="59" />
+      <File FileName="Assets\Scripts\NodoGrafo.cs" Line="106" Column="12" />
+      <File FileName="Assets\Scripts\GUIDisplay.cs" Line="81" Column="17" />
+      <File FileName="Assets\Scripts\Grafo.cs" Line="63" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
