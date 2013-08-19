@@ -1,17 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
-public class GUIDisplay : MonoBehaviour {
+public class MovimientoDisplay : MonoBehaviour {
 	
 	public Texture2D iconoFlecha;
-	public Grafo grafo;
 	public GameObject Camara;
 	public float velocidad;
 	
+	private Grafo grafo;
 	private bool flecha= false;
 	private float anguloLerp = 0.0f;
 	private Vector3 posicionDestino;
-	private float anguloDestino;
+	private float anguloDestino = 0.0f;
 	
 	private EstadosNivel estados;
 
@@ -28,19 +28,17 @@ public class GUIDisplay : MonoBehaviour {
 	
 	void Update ()
 	{
-	 	if (flecha)
-		{
 			Vector3 posicionActual = Camara.transform.position;
-			anguloLerp = Mathf.LerpAngle(0.0f,-90.0f,Time.time);
-			if(anguloDestino != 0){
-				Camara.transform.eulerAngles = new Vector3(0.0f,anguloLerp,0.0f);
-			}
-			Camara.transform.position = Vector3.MoveTowards(posicionActual,posicionDestino, Time.deltaTime*velocidad);
 			
+			if(flecha){
+				anguloLerp = Mathf.LerpAngle(0.0f,anguloDestino,Time.time*0.2f);
+				Camara.transform.eulerAngles = new Vector3(0.0f,anguloLerp,0.0f);
+				Camara.transform.position = Vector3.MoveTowards(posicionActual,posicionDestino, Time.deltaTime*velocidad);
+			}
+		
 			if(posicionActual.Equals(posicionDestino)){
 				flecha = false;	
 			}
-		}
 	}
 	
 	void OnGUI () {
@@ -53,7 +51,7 @@ public class GUIDisplay : MonoBehaviour {
 			posicionDestino = estadoSig.darPosicion();
 			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
-			print ("Adelante");
+			print ("EstadoActual: "+ estadoSig.darEstado());
 		}
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de la izquierda
 		if(GUI.Button(new Rect(20,(Screen.height/2),20,80), iconoFlecha)) {
@@ -63,7 +61,7 @@ public class GUIDisplay : MonoBehaviour {
 			posicionDestino = estadoSig.darPosicion();
 			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
-			print ("Izquierda");
+			print ("EstadoActual: "+ estadoSig.darEstado());
 		}
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de la derecha
 		if(GUI.Button(new Rect((Screen.width-40),(Screen.height/2),20,80), iconoFlecha)) {
@@ -73,7 +71,7 @@ public class GUIDisplay : MonoBehaviour {
 			posicionDestino = estadoSig.darPosicion();
 			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
-			print ("Derecha");
+			print ("EstadoActual: "+ estadoSig.darEstado());
 		}
 		
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de atrás
@@ -84,7 +82,7 @@ public class GUIDisplay : MonoBehaviour {
 			posicionDestino = estadoSig.darPosicion();
 			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
-			print ("Atras");
+			print ("EstadoActual: " + estadoSig.darEstado());
 		}
 	}
 }
