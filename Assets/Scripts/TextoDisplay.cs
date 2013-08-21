@@ -22,10 +22,10 @@ public class TextoDisplay : MonoBehaviour {
 // Start
 //=================================================================================
 
-	void Start(){
+	void Awake(){
 		ventana = new Rect(Screen.width/4,(Screen.height/4), Screen.width/2,(Screen.height/2));
 		mapaTextos = new TextosNivel();
-		empezarTexto(mapaTextos.darTexto(0));
+		//empezarTexto(TextosNivel.TEXTO_PRUEBA);
 	}
 
 // ================================================================================
@@ -90,8 +90,8 @@ public class TextoDisplay : MonoBehaviour {
 // Metodos
 //==================================================================================
 
-	private void empezarTexto(NodoTexto nuevo){
-		textoActual = nuevo;
+	public void empezarTexto(int IDnuevo){
+		textoActual = mapaTextos.darTexto(IDnuevo);
 		dialogosActivos = true;
 	}
 	
