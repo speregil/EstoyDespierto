@@ -5,8 +5,8 @@ public class TextosNivel : MonoBehaviour {
 
 	private NodoTexto[] listaTextos = new NodoTexto[100];
 	
-	public static int TEXTO_PRUEBA = 0;
-	public static int TEXTO_INTERACTOR = 1;
+	public const int TEXTO_PRUEBA = 0;
+	public const int TEXTO_INTERACTOR = 1;
 	
 	public TextosNivel(){
 		InicializarTextosNivelPrincipal();		

@@ -3,11 +3,14 @@ using System.Collections;
 
 public class MovimientoDisplay : MonoBehaviour {
 	
+	//=================================================================
+	// Atributos
+	//=================================================================
+	
 	public Texture2D iconoFlecha;
 	public GameObject Camara;
 	public float velocidad;
 	
-	private Grafo grafo;
 	private bool flecha= false;
 	private float anguloLerp = 0.0f;
 	private Vector3 posicionDestino;
@@ -15,9 +18,11 @@ public class MovimientoDisplay : MonoBehaviour {
 	
 	private EstadosNivel estados;
 
+	//=================================================================================
+	// Inicializacion
+	//=================================================================================
 	
-	void Awake()
-	{
+	void Awake(){
 		estados = new EstadosNivel();
 	}
 	
@@ -25,6 +30,10 @@ public class MovimientoDisplay : MonoBehaviour {
 		NodoGrafo n = estados.darEstadoActual();
 		Camara.transform.position = n.darPosicion();	
 	}
+	
+	//=================================================================================
+	// Update
+	//=================================================================================
 	
 	void Update ()
 	{
@@ -40,6 +49,10 @@ public class MovimientoDisplay : MonoBehaviour {
 				flecha = false;	
 			}
 	}
+	
+	//==============================================================================================
+	// OnGUI
+	//==============================================================================================
 	
 	void OnGUI () {
 
@@ -84,5 +97,21 @@ public class MovimientoDisplay : MonoBehaviour {
 			flecha = true;
 			print ("EstadoActual: " + estadoSig.darEstado());
 		}
+	}
+	
+	//==============================================================================================
+	// Metodos auxiliares
+	//==============================================================================================
+	
+	public void cambiarGrafo(int id){
+		estados.cambiarGrafoActual(id);	
+	}
+	
+	public NodoGrafo darEstadoActual(){
+		return estados.darEstadoActual();	
+	}
+	
+	public void irAEstado(NodoGrafo estado){
+		Camara.transform.position = estado.darPosicion();	
 	}
 }

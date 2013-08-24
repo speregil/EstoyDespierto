@@ -7,9 +7,13 @@ public class EstadosNivel
 	// Atributos
 	//-----------------------------------------------------------
 	
+	private Grafo GrafoActual;
 	private Grafo GrafoPrincipal;
 	private Grafo GrafoGemelas;
 	public NodoGrafo estadoActual;
+	
+	public const int PRINCIPAL = 0;
+	public const int GEMELAS = 1;
 	
 	//-----------------------------------------------------------
 	// Constructor
@@ -17,7 +21,9 @@ public class EstadosNivel
 	
 	public EstadosNivel(){
 		inicializarGrafoPrincipal();
-		estadoActual = GrafoPrincipal.darEstadoActual();
+		inicializarGrafoGemelas();
+		GrafoActual = GrafoPrincipal;
+		estadoActual = GrafoActual.darEstadoActual();
 	}
 	
 	//-----------------------------------------------------------
@@ -29,8 +35,22 @@ public class EstadosNivel
 	}
 	
 	public void cambiarEstadoActual(NodoGrafo nuevoEstado){
-		GrafoPrincipal.cambiarEstado(nuevoEstado);
-		estadoActual = GrafoPrincipal.darEstadoActual(); 	
+		GrafoActual.cambiarEstado(nuevoEstado);
+		estadoActual = GrafoActual.darEstadoActual();
+	}
+	
+	public void cambiarGrafoActual(int idGrafo){
+		switch(idGrafo){
+			case(PRINCIPAL)	:
+				GrafoActual = GrafoPrincipal;
+				estadoActual = GrafoActual.darEstadoActual();
+			break;
+			
+			case(GEMELAS) :
+				GrafoActual = GrafoGemelas;
+				estadoActual = GrafoActual.darEstadoActual();
+			break;
+		}
 	}
 	
 	//--------------------------------------------------------------
@@ -90,6 +110,8 @@ public class EstadosNivel
 	//-------------------------------------------------------------------------------------
 	
 	public void inicializarGrafoGemelas(){
+		GrafoGemelas = new Grafo(100);
+		
 		NodoGrafo estado0 = new NodoGrafo(0,"",new Vector3(5,0,-3),0.0f);
 		GrafoGemelas.agregarEstado(estado0);
 		
@@ -108,11 +130,14 @@ public class EstadosNivel
 		NodoGrafo estado5 = new NodoGrafo(5,"",new Vector3(4,0,-2),-90.0f);
 		GrafoGemelas.agregarEstado(estado5);
 		
+		NodoGrafo estado6 = new NodoGrafo(6,"",new Vector3(6,0,-1),-180.0f);
+		GrafoGemelas.agregarEstado(estado6);
+		
 		GrafoGemelas.asignarDelantero(estado0.darEstado(), estado1.darEstado());
 		GrafoGemelas.asignarIzquierdo(estado1.darEstado(), estado4.darEstado());
 		GrafoGemelas.asignarDerecho(estado1.darEstado(), estado3.darEstado());
 		GrafoGemelas.asignarDelantero(estado4.darEstado(), estado5.darEstado());
 		GrafoGemelas.asignarDelantero(estado1.darEstado(), estado2.darEstado());
+		GrafoGemelas.asignarIzquierdo(estado4.darEstado(), estado6.darEstado());
 	}
 }
-
