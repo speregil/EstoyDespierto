@@ -26,6 +26,7 @@ public class AdminPrincipal : MonoBehaviour {
 	}
 	
 	public void EventSwitch(string comando){
+		Debug.Log(comando+" AdminPrincipal");
 		if(comando.Equals("prueba")){
 			textos.empezarTexto(TextosNivel.TEXTO_INTERACTOR);
 		}

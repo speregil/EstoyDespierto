@@ -7,6 +7,7 @@ public class AdminGemelas : MonoBehaviour {
 	private TextoDisplay textos;
 	private MovimientoDisplay movimiento;
 	private VariablesGlobales globales;
+	private Minijuego1 mini1;
 	
 	void Awake(){
 		movimiento = (MovimientoDisplay)GetComponent(typeof(MovimientoDisplay));
@@ -24,10 +25,14 @@ public class AdminGemelas : MonoBehaviour {
 	}
 	
 	public void EventSwitch(string comando){
+		Debug.Log(comando+" AdminGemelas");
 		if(comando.Equals("Puerta")){
 			NodoGrafo actual = movimiento.darEstadoActual();
 			globales.establecerUltimoEstado(actual);
 			Application.LoadLevel("Principal");	
+		}
+		if(comando.Equals("MiniJuego1")){
+			mini1 = (Minijuego1)GetComponent(typeof(Minijuego1));
 		}
 	}
 	
