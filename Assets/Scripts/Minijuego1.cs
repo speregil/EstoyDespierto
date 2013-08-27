@@ -11,6 +11,7 @@ public class Minijuego1 : MonoBehaviour
 	private GUIStyle i;
 	private GUIStyle o;
 	private GUIStyle space;
+	private GUIStyle labelTexto;
 	/*Cadena a ejecutar en un segundo*/
 	string respuesta;
 	/*Tiempo actual registrado*/
@@ -23,26 +24,32 @@ public class Minijuego1 : MonoBehaviour
 	private int score;
 	public Texture2D botonOprimido;
 	public Texture2D botonNoOprimido;
+	public Font FuenteTexto;
+	public Texture2D backgroundTexto;
 	
 	void Start ()
 	{
-		q = new GUIStyle();
-		w = new GUIStyle();
-		e = new GUIStyle();
-		u = new GUIStyle();
-		i = new GUIStyle();
-		o = new GUIStyle();
-		space = new GUIStyle();
+		q =new GUIStyle();
+		q.normal.background = botonNoOprimido;
+		w =new GUIStyle();
+		e =new GUIStyle();
+		u =new GUIStyle();
+		i =new GUIStyle();
+		o =new GUIStyle();
+		space =new GUIStyle();
+		labelTexto =new GUIStyle();
+		labelTexto.font = FuenteTexto;
+		labelTexto.normal.background = backgroundTexto;
 		respuesta = random();
 		pasoSegundo = false;
 		tiempo = Time.time;
 		tiempoParseado = 0;
-		
 	}
 	
 	void Update ()
 	{
 		/*Parte que maneja todos los eventos de keypressed*/
+		print ("Cadena: " + respuesta);
 		if(Input.GetKeyDown(KeyCode.Q))
 		{
 			if(verificador("q"))
@@ -178,7 +185,7 @@ public class Minijuego1 : MonoBehaviour
 	/*Update del thread de la interfaz*/
 	void OnGUI()
 	{
-		/*Creacion de botones*/
+		//Creacion de botones
 		if(GUI.Button(new Rect((Screen.width/4),(Screen.height*3/4),20,20), "Q", q))
 		{
 		}
@@ -188,10 +195,10 @@ public class Minijuego1 : MonoBehaviour
 		if(GUI.Button(new Rect((Screen.width/4+40),(Screen.height*3/4),20,20), "E", e))
 		{
 		}
-		if(GUI.Button(new Rect((Screen.width*3/4),(Screen.height*3/4),20,20), "I", u))
+		if(GUI.Button(new Rect((Screen.width*3/4),(Screen.height*3/4),20,20), "U", u))
 		{
 		}
-		if(GUI.Button(new Rect((Screen.width*3/4+20),(Screen.height*3/4),20,20), "O", i))
+		if(GUI.Button(new Rect((Screen.width*3/4+20),(Screen.height*3/4),20,20), "I", i))
 		{
 		}
 		if(GUI.Button(new Rect((Screen.width*3/4+40),(Screen.height*3/4),20,20), "O", o))
@@ -202,15 +209,18 @@ public class Minijuego1 : MonoBehaviour
 		}
 		//Barra de progreso
 		GUI.Box(new Rect(0, 0, Screen.width, 60), "");
-        GUI.Box(new Rect(0, 0, 20 * score, 60), "", "Box2");
+        GUI.Box(new Rect(0, 0, 20 * score, 60), "");
+		
+		GUI.Label(new Rect(Screen.width/2, Screen.height/2, 50, 50), respuesta,labelTexto);
 	}
 	/*Metodo que crea un numero aleatorio entre 1 y 32 
 	 * para los posibles inputs desafiantes del nivel*/
 	public string random()
 	{
-		float aleatorio = Random.value + 1;
+		float aleatorio = Random.Range(1.0f,32.0f);
 		string respuesta = "";
-		int decision = (int)(aleatorio*32+(0.5));
+		int decision = (int)aleatorio;
+		//print ("Random seed: " + decision);
 		if(decision == 1)
 		{
 		   respuesta = "q";
@@ -365,4 +375,3 @@ public class Minijuego1 : MonoBehaviour
 		}
 	}
 }
-

@@ -25,7 +25,6 @@ public class AdminGemelas : MonoBehaviour {
 	}
 	
 	public void EventSwitch(string comando){
-		Debug.Log(comando+" AdminGemelas");
 		if(comando.Equals("Puerta")){
 			NodoGrafo actual = movimiento.darEstadoActual();
 			globales.establecerUltimoEstado(actual);
