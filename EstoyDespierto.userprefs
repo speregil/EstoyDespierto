@@ -1,8 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Minijuego1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AdminPrincipal.cs">
     <Files>
-      <File FileName="Assets\Scripts\Minijuego1.cs" Line="201" Column="78" />
+      <File FileName="Assets\Scripts\AdminPrincipal.cs" Line="40" Column="59" />
+      <File FileName="Assets\Scripts\AdminGemelas.cs" Line="33" Column="31" />
+      <File FileName="Assets\Scripts\MovimientoDisplay.cs" Line="44" Column="54" />
+      <File FileName="Assets\Scripts\VariablesGlobales.cs" Line="18" Column="25" />
+      <File FileName="Assets\Scripts\EstadosNivel.cs" Line="48" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

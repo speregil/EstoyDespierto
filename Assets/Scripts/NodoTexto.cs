@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class NodoTexto : MonoBehaviour {
+public class NodoTexto{
 	
 // ================================================================================
 // Atributos
@@ -26,12 +26,16 @@ public class NodoTexto : MonoBehaviour {
 	public NodoTexto(ArrayList nTexto){
 		texto = nTexto;
 		indiceActual = 0;
+		hijo1 = null;
+		hijo2 = null;
 	}
 
 	public NodoTexto(ArrayList nTexto, int nResultado){
 		resultado = nResultado;
 		texto = nTexto;
 		indiceActual = 0;
+		hijo1 = null;
+		hijo2 = null;
 	}
 
 // ================================================================================
@@ -39,7 +43,7 @@ public class NodoTexto : MonoBehaviour {
 // ================================================================================
 
 	public bool tieneHijos(){
-		if(!hijo1 && !hijo2){
+		if(hijo1 == null && hijo2 == null){
 			return false;
 		}else 
 		return true;

@@ -9,16 +9,22 @@ public class AdminPrincipal : MonoBehaviour {
 	private VariablesGlobales globales;
 	
 	void Awake(){
-		movimiento = (MovimientoDisplay)GetComponent(typeof(MovimientoDisplay));
+		
 	}
 	
 	void Start () {
 		textos = (TextoDisplay)GetComponent(typeof(TextoDisplay));
-		textos.empezarTexto(TextosNivel.TEXTO_PRUEBA);
 		Global = GameObject.Find("Global");
 		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
+		movimiento = (MovimientoDisplay)Global.GetComponent(typeof(MovimientoDisplay));
+		movimiento.EstablecerCamara(GameObject.Find("Main Camera"));
+		movimiento.activar();
 		movimiento.cambiarGrafo(EstadosNivel.PRINCIPAL);
-		
+		NodoGrafo ultimo = globales.darUltimoEstado();
+		movimiento.irAEstado(ultimo);
+		if(VariablesGlobales.primeraVez){
+			textos.empezarTexto(TextosNivel.TEXTO_PRUEBA);
+		}
 	}
 	
 	void Update () {
@@ -26,13 +32,13 @@ public class AdminPrincipal : MonoBehaviour {
 	}
 	
 	public void EventSwitch(string comando){
-		Debug.Log(comando+" AdminPrincipal");
 		if(comando.Equals("prueba")){
 			textos.empezarTexto(TextosNivel.TEXTO_INTERACTOR);
 		}
 		if(comando.Equals("PuertaGemelas")){
 			NodoGrafo actual = movimiento.darEstadoActual();
-			globales.establecerUltimoEstado(actual);
+			globales.establecerUltimoEstado(actual.darIzquierda());
+			movimiento.desactivar();
 			Application.LoadLevel("CuartoGemelas");
 		}
 	}

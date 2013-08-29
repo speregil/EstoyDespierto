@@ -49,7 +49,7 @@ public class Minijuego1 : MonoBehaviour
 	void Update ()
 	{
 		/*Parte que maneja todos los eventos de keypressed*/
-		print ("Cadena: " + respuesta);
+		//print ("Cadena: " + respuesta);
 		if(Input.GetKeyDown(KeyCode.Q))
 		{
 			if(verificador("q"))

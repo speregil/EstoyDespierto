@@ -8,27 +8,30 @@ public class MovimientoDisplay : MonoBehaviour {
 	//=================================================================
 	
 	public Texture2D iconoFlecha;
-	public GameObject Camara;
 	public float velocidad;
 	
+	private GameObject Camara;
 	private bool flecha= false;
 	private float anguloLerp = 0.0f;
 	private Vector3 posicionDestino;
 	private float anguloDestino = 0.0f;
-	
+	private VariablesGlobales globales;
 	private EstadosNivel estados;
-
+	private bool activo = false;
 	//=================================================================================
 	// Inicializacion
 	//=================================================================================
 	
 	void Awake(){
-		estados = new EstadosNivel();
+		
 	}
 	
 	void Start(){
-		NodoGrafo n = estados.darEstadoActual();
-		Camara.transform.position = n.darPosicion();	
+		GameObject Global = GameObject.Find("Global");
+		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
+		estados = globales.darEstados();
+		/*NodoGrafo n = estados.darEstadoActual();
+		Camara.transform.position = n.darPosicion();*/	
 	}
 	
 	//=================================================================================
@@ -37,8 +40,8 @@ public class MovimientoDisplay : MonoBehaviour {
 	
 	void Update ()
 	{
+		if(activo){
 			Vector3 posicionActual = Camara.transform.position;
-			
 			if(flecha){
 				anguloLerp = Mathf.LerpAngle(0.0f,anguloDestino,Time.time*0.2f);
 				Camara.transform.eulerAngles = new Vector3(0.0f,anguloLerp,0.0f);
@@ -48,6 +51,7 @@ public class MovimientoDisplay : MonoBehaviour {
 			if(posicionActual.Equals(posicionDestino)){
 				flecha = false;	
 			}
+		}
 	}
 	
 	//==============================================================================================
@@ -62,9 +66,9 @@ public class MovimientoDisplay : MonoBehaviour {
 			NodoGrafo estadoSig = estadoActual.darAdelante();
 			estados.cambiarEstadoActual(estadoSig);
 			posicionDestino = estadoSig.darPosicion();
+			print (posicionDestino);
 			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
-			print ("EstadoActual: "+ estadoSig.darEstado());
 		}
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de la izquierda
 		if(GUI.Button(new Rect(20,(Screen.height/2),20,80), iconoFlecha)) {
@@ -74,7 +78,6 @@ public class MovimientoDisplay : MonoBehaviour {
 			posicionDestino = estadoSig.darPosicion();
 			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
-			print ("EstadoActual: "+ estadoSig.darEstado());
 		}
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de la derecha
 		if(GUI.Button(new Rect((Screen.width-40),(Screen.height/2),20,80), iconoFlecha)) {
@@ -84,7 +87,6 @@ public class MovimientoDisplay : MonoBehaviour {
 			posicionDestino = estadoSig.darPosicion();
 			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
-			print ("EstadoActual: "+ estadoSig.darEstado());
 		}
 		
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de atrás
@@ -95,7 +97,6 @@ public class MovimientoDisplay : MonoBehaviour {
 			posicionDestino = estadoSig.darPosicion();
 			anguloDestino = estadoSig.darAngulo();
 			flecha = true;
-			print ("EstadoActual: " + estadoSig.darEstado());
 		}
 	}
 	
@@ -104,14 +105,32 @@ public class MovimientoDisplay : MonoBehaviour {
 	//==============================================================================================
 	
 	public void cambiarGrafo(int id){
-		estados.cambiarGrafoActual(id);	
+		estados.cambiarGrafoActual(id);
 	}
 	
 	public NodoGrafo darEstadoActual(){
+		
 		return estados.darEstadoActual();	
 	}
 	
 	public void irAEstado(NodoGrafo estado){
-		Camara.transform.position = estado.darPosicion();	
+		print ("Por fuera del if");
+		if(estado != null){
+			print ("Ir a estado se lanzo");
+			Camara.transform.position = estado.darPosicion();
+			estados.cambiarEstadoActual(estado);
+		}
+	}
+	
+	public void EstablecerCamara(GameObject camara){
+		Camara = camara;	
+	}
+	
+	public void activar(){
+		activo = true;	
+	}
+	
+	public void desactivar(){
+		activo = false;	
 	}
 }

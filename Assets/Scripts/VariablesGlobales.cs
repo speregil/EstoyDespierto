@@ -3,10 +3,13 @@ using System.Collections;
 
 public class VariablesGlobales : MonoBehaviour {
 	
+	public static bool primeraVez = true;
 	public NodoGrafo ultimoEstado;
+	public EstadosNivel estados;
 	
 	void Awake(){
-		DontDestroyOnLoad(transform.gameObject);	
+		DontDestroyOnLoad(transform.gameObject);
+		estados = new EstadosNivel();
 	}
 	void Start(){
 	}
@@ -17,5 +20,9 @@ public class VariablesGlobales : MonoBehaviour {
 	
 	public NodoGrafo darUltimoEstado(){
 		return ultimoEstado;	
+	}
+	
+	public EstadosNivel darEstados(){
+		return estados;	
 	}
 }

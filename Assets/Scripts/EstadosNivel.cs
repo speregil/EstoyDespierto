@@ -22,8 +22,8 @@ public class EstadosNivel
 	public EstadosNivel(){
 		inicializarGrafoPrincipal();
 		inicializarGrafoGemelas();
-		GrafoActual = GrafoPrincipal;
-		estadoActual = GrafoActual.darEstadoActual();
+		/*GrafoActual = GrafoPrincipal;
+		estadoActual = GrafoActual.darEstadoActual();*/
 	}
 	
 	//-----------------------------------------------------------
@@ -31,6 +31,7 @@ public class EstadosNivel
 	//-----------------------------------------------------------
 	
 	public NodoGrafo darEstadoActual(){
+		Debug.Log("El estado actual es: " + estadoActual);
 		return estadoActual;	
 	}
 	
@@ -44,6 +45,7 @@ public class EstadosNivel
 			case(PRINCIPAL)	:
 				GrafoActual = GrafoPrincipal;
 				estadoActual = GrafoActual.darEstadoActual();
+			Debug.Log("Grafo: " + GrafoActual + " Estado Actual: " + estadoActual);
 			break;
 			
 			case(GEMELAS) :

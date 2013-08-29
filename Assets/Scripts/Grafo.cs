@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Grafo : MonoBehaviour
+public class Grafo
 {
 	//--------------------------------------------------------------------
 	// Atributos
@@ -36,7 +36,7 @@ public class Grafo : MonoBehaviour
 			grafo[nuevoEstado] = nodo;	
 		}
 		else{
-			print ("El nodo intentar entrar a un estado ya ocupado. Nodo # " + nuevoEstado);	
+			Debug.Log ("El nodo intentar entrar a un estado ya ocupado. Nodo # " + nuevoEstado);	
 		}
 	}
 	/**

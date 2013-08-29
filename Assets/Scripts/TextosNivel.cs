@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class TextosNivel : MonoBehaviour {
+public class TextosNivel{
 
 	private NodoTexto[] listaTextos = new NodoTexto[100];
 	
