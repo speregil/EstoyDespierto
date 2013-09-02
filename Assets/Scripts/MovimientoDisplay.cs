@@ -23,15 +23,12 @@ public class MovimientoDisplay : MonoBehaviour {
 	//=================================================================================
 	
 	void Awake(){
-		
+		globales = (VariablesGlobales)GetComponent(typeof(VariablesGlobales));
+		estados = globales.darEstados();
 	}
 	
 	void Start(){
-		GameObject Global = GameObject.Find("Global");
-		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
-		estados = globales.darEstados();
-		/*NodoGrafo n = estados.darEstadoActual();
-		Camara.transform.position = n.darPosicion();*/	
+	
 	}
 	
 	//=================================================================================
@@ -105,6 +102,7 @@ public class MovimientoDisplay : MonoBehaviour {
 	//==============================================================================================
 	
 	public void cambiarGrafo(int id){
+		Debug.Log("CambiarGrafo Estados: " + estados);
 		estados.cambiarGrafoActual(id);
 	}
 	

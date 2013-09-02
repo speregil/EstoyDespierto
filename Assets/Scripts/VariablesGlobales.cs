@@ -11,6 +11,7 @@ public class VariablesGlobales : MonoBehaviour {
 		DontDestroyOnLoad(transform.gameObject);
 		estados = new EstadosNivel();
 	}
+	
 	void Start(){
 	}
 	

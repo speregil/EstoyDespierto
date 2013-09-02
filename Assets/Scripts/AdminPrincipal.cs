@@ -13,6 +13,7 @@ public class AdminPrincipal : MonoBehaviour {
 	}
 	
 	void Start () {
+		Debug.Log("Admin Start: " + Time.time);
 		textos = (TextoDisplay)GetComponent(typeof(TextoDisplay));
 		Global = GameObject.Find("Global");
 		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
