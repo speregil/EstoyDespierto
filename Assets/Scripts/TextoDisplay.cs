@@ -17,6 +17,7 @@ public class TextoDisplay : MonoBehaviour {
 	private string textoOpcion1;
 	private string textoOpcion2;
 	private string textoActivo;
+	private IEventos admin;
 	
 //=================================================================================
 // Start
@@ -25,7 +26,10 @@ public class TextoDisplay : MonoBehaviour {
 	void Awake(){
 		ventana = new Rect(Screen.width/4,(Screen.height/4), Screen.width/2,(Screen.height/2));
 		mapaTextos = new TextosNivel();
-		//empezarTexto(TextosNivel.TEXTO_PRUEBA);
+	}
+	
+	void Start(){
+		admin = (IEventos)GameObject.Find("Nivel").GetComponent(typeof(IEventos));	
 	}
 
 // ================================================================================
@@ -61,7 +65,7 @@ public class TextoDisplay : MonoBehaviour {
 			}
 		}
 		else{
-			GUI.Label (new Rect (10, 30, ventana.width, ventana.height), textoActivo);
+			GUI.Label (new Rect (10, 30, ventana.width - 20, ventana.height - 30), textoActivo);
 		}
 	}
 
@@ -82,6 +86,7 @@ public class TextoDisplay : MonoBehaviour {
 			}
 			else if(textoActual.estaTerminado() && !textoActual.tieneHijos()){
 				dialogosActivos = false;
+				admin.DialogSwitch(textoActual.getResultado());
 			}
 		}
 	}

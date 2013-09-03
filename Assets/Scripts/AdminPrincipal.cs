@@ -13,8 +13,6 @@ public class AdminPrincipal : MonoBehaviour {
 	}
 	
 	void Start () {
-		Debug.Log("Admin Start: " + Time.time);
-		textos = (TextoDisplay)GetComponent(typeof(TextoDisplay));
 		Global = GameObject.Find("Global");
 		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
 		movimiento = (MovimientoDisplay)Global.GetComponent(typeof(MovimientoDisplay));
@@ -23,8 +21,9 @@ public class AdminPrincipal : MonoBehaviour {
 		movimiento.cambiarGrafo(EstadosNivel.PRINCIPAL);
 		NodoGrafo ultimo = globales.darUltimoEstado();
 		movimiento.irAEstado(ultimo);
+		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
 		if(VariablesGlobales.primeraVez){
-			textos.empezarTexto(TextosNivel.TEXTO_PRUEBA);
+			textos.empezarTexto(TextosNivel.TEXTO_INTRO_CAMA);
 		}
 	}
 	
@@ -34,7 +33,7 @@ public class AdminPrincipal : MonoBehaviour {
 	
 	public void EventSwitch(string comando){
 		if(comando.Equals("prueba")){
-			textos.empezarTexto(TextosNivel.TEXTO_INTERACTOR);
+		
 		}
 		if(comando.Equals("PuertaGemelas")){
 			NodoGrafo actual = movimiento.darEstadoActual();
@@ -46,5 +45,10 @@ public class AdminPrincipal : MonoBehaviour {
 	
 	public void EventDialog(int resultado){
 		
+		if(resultado == TextosNivel.RESULTADO_INTRO){
+			// TODO: Efecto de abrir los ojos
+			Debug.Log("Entre al resultado");
+			textos.empezarTexto(TextosNivel.TEXTO_INTRO_VER_GEMELAS);
+		}
 	}
 }

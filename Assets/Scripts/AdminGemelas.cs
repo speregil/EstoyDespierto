@@ -14,7 +14,6 @@ public class AdminGemelas : MonoBehaviour {
 	}
 	
 	void Start () {
-		textos = (TextoDisplay)GetComponent(typeof(TextoDisplay));
 		Global = GameObject.Find("Global");
 		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
 		movimiento = (MovimientoDisplay)Global.GetComponent(typeof(MovimientoDisplay));
@@ -22,6 +21,7 @@ public class AdminGemelas : MonoBehaviour {
 		movimiento.activar();
 		movimiento.cambiarGrafo(EstadosNivel.GEMELAS);
 		VariablesGlobales.primeraVez = false;
+		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
 	}
 	
 	void Update () {
