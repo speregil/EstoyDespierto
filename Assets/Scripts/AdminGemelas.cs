@@ -36,6 +36,7 @@ public class AdminGemelas : MonoBehaviour {
 		}
 		if(comando.Equals("MiniJuego1")){
 			mini1 = (Minijuego1)GetComponent(typeof(Minijuego1));
+			mini1.activar();
 		}
 	}
 	

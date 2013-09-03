@@ -58,13 +58,6 @@
      <Compile Include="Assets\Scripts\TextoDisplay.cs" />
      <Compile Include="Assets\Scripts\TextosNivel.cs" />
      <Compile Include="Assets\Scripts\VariablesGlobales.cs" />
-     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{DF06DBCC-C8AC-F59F-7222-308660A2BBAE}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
-    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{57F7F5A5-17D3-7C0B-61F0-8ABE10B8AD38}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

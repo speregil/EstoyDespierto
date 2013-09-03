@@ -21,6 +21,7 @@ public class Minijuego1 : MonoBehaviour
 	/*Variable que indica que acaba de pasar un segundo*/
 	private bool pasoSegundo;
 	/*Variable que tiene el score acumulado en el juego*/
+	private bool MinijuegoActivo = false;
 	private int score;
 	public Texture2D botonOprimido;
 	public Texture2D botonNoOprimido;
@@ -29,6 +30,7 @@ public class Minijuego1 : MonoBehaviour
 	
 	void Start ()
 	{
+		score = 1;
 		q =new GUIStyle();
 		q.normal.background = botonNoOprimido;
 		w =new GUIStyle();
@@ -42,20 +44,26 @@ public class Minijuego1 : MonoBehaviour
 		labelTexto.normal.background = backgroundTexto;
 		respuesta = random();
 		pasoSegundo = false;
-		tiempo = Time.time;
-		tiempoParseado = 0;
+		print(Screen.width);
+		//tiempo = Time.time;
+		//tiempoParseado = 0;
 	}
 	
 	void Update ()
 	{
 		/*Parte que maneja todos los eventos de keypressed*/
 		//print ("Cadena: " + respuesta);
+		if(MinijuegoActivo){
 		if(Input.GetKeyDown(KeyCode.Q))
 		{
-			if(verificador("q"))
+			if(verificador("Q"))
 			{
 				//lo hizo bien
 				score++;
+			}
+			else{
+				if(score > 0){
+					score--;}
 			}
 		}
 		if(Input.GetKey(KeyCode.Q))	
@@ -69,10 +77,14 @@ public class Minijuego1 : MonoBehaviour
 		//w
 		if(Input.GetKeyDown(KeyCode.W))
 		{
-			if(verificador("w"))
+			if(verificador("W"))
 			{
 				//lo hizo bien
 				score++;
+			}
+			else{
+				if(score > 0){
+					score--;}
 			}
 		}
 		if(Input.GetKey(KeyCode.W))	
@@ -86,10 +98,14 @@ public class Minijuego1 : MonoBehaviour
 		//e
 		if(Input.GetKeyDown(KeyCode.E))
 		{
-			if(verificador("e"))
+			if(verificador("E"))
 			{
 				//lo hizo bien
 				score++;
+			}
+			else{
+				if(score > 0){
+					score--;}
 			}
 		}
 		if(Input.GetKey(KeyCode.E))	
@@ -103,10 +119,14 @@ public class Minijuego1 : MonoBehaviour
 		//i
 		if(Input.GetKeyDown(KeyCode.I))
 		{
-			if(verificador("i"))
+			if(verificador("I"))
 			{
 				//lo hizo bien
 				score++;
+			}
+			else{
+				if(score > 0){
+					score--;}
 			}
 		}
 		if(Input.GetKey(KeyCode.I))	
@@ -120,10 +140,14 @@ public class Minijuego1 : MonoBehaviour
 		//o
 		if(Input.GetKeyDown(KeyCode.O))
 		{
-			if(verificador("o"))
+			if(verificador("O"))
 			{
 				//lo hizo bien
 				score++;
+			}
+			else{
+				if(score > 0){
+					score--;}
 			}
 		}
 		if(Input.GetKey(KeyCode.O))	
@@ -137,10 +161,14 @@ public class Minijuego1 : MonoBehaviour
 		//p
 		if(Input.GetKeyDown(KeyCode.U))
 		{
-			if(verificador("u"))
+			if(verificador("U"))
 			{
 				//lo hizo bien
 				score++;
+			}
+			else{
+				if(score > 0){
+					score--;}
 			}
 		}
 		if(Input.GetKey(KeyCode.U))	
@@ -152,40 +180,49 @@ public class Minijuego1 : MonoBehaviour
 			u.normal.background = null;
 		}
 		//space
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetKeyDown(KeyCode.T))
 		{
-			if(verificador(" "))
+			if(verificador("T"))
 			{
 				//lo hizo bien
 				score++;
+			}
+			else{
+				if(score > 0){
+					score--;}
 			}
 		}
 		else
 		{
 			space.normal.background = null;
 		}
-		if(Input.GetKey(KeyCode.Space))	
+		if(Input.GetKey(KeyCode.T))	
 		{
 			space.normal.background = botonOprimido;
 		}
 		
 		if(pasoSegundo)
 		{
-			if(respuesta.Equals(""))
+			pasoSegundo = false;
+			if(string.IsNullOrEmpty(respuesta))
 			{
+				Debug.Log("Empty");
 				score ++;
+				respuesta = random();
+				
 			}
-			else
-			{
-				score --;
-			}
-			respuesta = random();
+				if(score*20 >= Screen.width){
+					Debug.Log("Ganaste!!!!!!!");
+					desactivar();		
+				}
+		}
 		}
 	}
 	/*Update del thread de la interfaz*/
 	void OnGUI()
 	{
 		//Creacion de botones
+		if(MinijuegoActivo){
 		if(GUI.Button(new Rect((Screen.width/4),(Screen.height*3/4),20,20), "Q", q))
 		{
 		}
@@ -204,7 +241,7 @@ public class Minijuego1 : MonoBehaviour
 		if(GUI.Button(new Rect((Screen.width*3/4+40),(Screen.height*3/4),20,20), "O", o))
 		{
 		}
-		if(GUI.Button(new Rect((Screen.width/2),(Screen.height*7/8),60,20), "Space", space))
+		if(GUI.Button(new Rect((Screen.width/2),(Screen.height*3/4),60,20), "T", space))
 		{
 		}
 		//Barra de progreso
@@ -212,6 +249,7 @@ public class Minijuego1 : MonoBehaviour
         GUI.Box(new Rect(0, 0, 20 * score, 60), "");
 		
 		GUI.Label(new Rect(Screen.width/2, Screen.height/2, 50, 50), respuesta,labelTexto);
+		}
 	}
 	/*Metodo que crea un numero aleatorio entre 1 y 32 
 	 * para los posibles inputs desafiantes del nivel*/
@@ -223,131 +261,131 @@ public class Minijuego1 : MonoBehaviour
 		//print ("Random seed: " + decision);
 		if(decision == 1)
 		{
-		   respuesta = "q";
+		   respuesta = "Q";
 		}
 		else if(decision == 2)
 		{
-		   respuesta = "w";
+		   respuesta = "W";
 		}
 		else if(decision == 3)
 		{
-		   respuesta = "e";
+		   respuesta = "E";
 		}
 		else if(decision == 4)
 		{
-		   respuesta = " ";
+		   respuesta = "T";
 		}
 		else if(decision == 5)
 		{
-		   respuesta = "u";
+		   respuesta = "U";
 		}
 		else if(decision == 6)
 		{ 
-		   respuesta = "i";
+		   respuesta = "I";
 		}
 		else if(decision == 7)
 		{
-		   respuesta = "o";
+		   respuesta = "O";
 		}
 		else if(decision == 8)
 		{
-		   respuesta = "qw";
+		   respuesta = "QW";
 		}
 		else if(decision == 9)
 		{
-		   respuesta = "we";
+		   respuesta = "WE";
 		}
 		else if(decision == 10)
 		{
-		   respuesta = "e ";
+		   respuesta = "ET";
 		}
 		else if(decision == 11)
 		{
-		   respuesta = " u";
+		   respuesta = "TU";
 		}
 		else if(decision == 12)
 		{
-		   respuesta = "ui";
+		   respuesta = "UI";
 		}
 		else if(decision == 13)
 		{
-		   respuesta = "io";
+		   respuesta = "IO";
 		}
 		else if(decision == 14)
 		{
-		   respuesta = "qo";
+		   respuesta = "QO";
 		} 
 		else if(decision == 15)
 		{
-		   respuesta = "wi";
+		   respuesta = "WI";
 		}
 		else if(decision == 16)
 		{
-		   respuesta = "eu";
+		   respuesta = "EU";
 		}
 		else if(decision == 17)
 		{
-		   respuesta = "qwe";
+		   respuesta = "QWE";
 		}
 		else if(decision == 18)
 		{
-		   respuesta = "we ";
+		   respuesta = "WET";
 		}
 		else if(decision == 19)
 		{
-		   respuesta = "e u";
+		   respuesta = "ETU";
 		}
 		else if(decision == 20)
 		{
-		   respuesta = " ui";
+		   respuesta = "TUI";
 		}
 		else if(decision == 21)
 		{
-		   respuesta = "uio";
+		   respuesta = "UIO";
 		}
 		else if(decision == 22)
 		{
-		   respuesta = "qwo";
+		   respuesta = "QWO";
 		}
 		else if(decision == 23)
 		{
-		   respuesta = "weo";
+		   respuesta = "WEO";
 		}
 		else if(decision == 24)
 		{
-		   respuesta = "e o";
+		   respuesta = "ETO";
 		}
 		else if(decision == 25)
 		{
-		   respuesta = " uo";
+		   respuesta = "TUO";
 		}
 		else if(decision == 26)
 		{
-		   respuesta = "qw ";
+		   respuesta = "QWT";
 		}
 		else if(decision == 27)
 		{
-		   respuesta = "w i";
+		   respuesta = "WTI";
 		}
 		else if(decision == 28)
 		{
-		   respuesta = " io";
+		   respuesta = "TIO";
 		}
 		else if(decision == 29)
 		{
-		   respuesta = "qio";
+		   respuesta = "QIO";
 		}
 		else if(decision == 30)
 		{
-		   respuesta = "qui";
+		   respuesta = "QUI";
 		}
 		else if(decision == 31)
 		{
-		   respuesta = "q u";
+		   respuesta = "QTU";
 		}
 		else if(decision == 32)
 		{
-		   respuesta = "qe ";
+		   respuesta = "QET";
 		}
 		return respuesta;
 	}
@@ -358,20 +396,31 @@ public class Minijuego1 : MonoBehaviour
 		if(respuesta.Contains(caracter))
 		{
 			char[] arreglo = caracter.ToCharArray();
-			respuesta.Trim(arreglo);
+			respuesta = respuesta.Trim(arreglo);
+			Debug.Log("Respuesta: " + respuesta);
 			return true;
 		}
 		return false;
 	}
+	
+	public void activar(){
+		MinijuegoActivo = true;	
+	}
+	
+	public void desactivar(){
+		MinijuegoActivo = false;	
+	}
 	/*Metodo que se ejecuta siempre en un tiempo determinado 
 	 * por lo que es usado para saber cuando pasa un segundo*/
 	void FixedUpdate () {
+		if(MinijuegoActivo){
 		tiempo = Time.time;
 		tiempoParseado = (int) (tiempo+(0.03));
-		if(tiempoParseado > tiempo )
+		if(tiempoParseado%3 == 0)
 		{
 			pasoSegundo = true;
-			Debug.Log ("ha pasado un segundo: "+ tiempo);
+			respuesta = random();
+		}
 		}
 	}
 }

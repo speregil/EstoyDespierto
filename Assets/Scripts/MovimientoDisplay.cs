@@ -102,7 +102,6 @@ public class MovimientoDisplay : MonoBehaviour {
 	//==============================================================================================
 	
 	public void cambiarGrafo(int id){
-		Debug.Log("CambiarGrafo Estados: " + estados);
 		estados.cambiarGrafoActual(id);
 	}
 	
