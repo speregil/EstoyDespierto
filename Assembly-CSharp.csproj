@@ -55,6 +55,8 @@
      <Compile Include="Assets\Scripts\MovimientoDisplay.cs" />
      <Compile Include="Assets\Scripts\NodoGrafo.cs" />
      <Compile Include="Assets\Scripts\NodoTexto.cs" />
+     <Compile Include="Assets\Scripts\Parpado1.cs" />
+     <Compile Include="Assets\Scripts\Parpado2.cs" />
      <Compile Include="Assets\Scripts\TextoDisplay.cs" />
      <Compile Include="Assets\Scripts\TextosNivel.cs" />
      <Compile Include="Assets\Scripts\VariablesGlobales.cs" />

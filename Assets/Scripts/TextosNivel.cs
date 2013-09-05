@@ -9,12 +9,25 @@ public class TextosNivel{
 // Atributos y constantes
 //==============================================================================================================
 	
-	// Constantes de los textos
+	/*
+	 * CONSTANTES DE LOS TEXTOS
+	 */
+	// NIVEL PRINCIPAL
 	public const int TEXTO_INTRO_CAMA = 0;
 	public const int TEXTO_INTRO_VER_GEMELAS = 1;
+	public const int TEXTO_CAMA_GEMELA_IZQUIERDA = 2;
+	public const int TEXTO_CAMA_GEMELA_DERECHA = 3;
+	public const int TEXTO_MUEBLE_CUARTO_SI_NINO = 4;
+	public const int TEXTO_MUEBLE_CUARTO_NO_NINO = 5;
+	public const int TEXTO_CAMA_GEMELAS_SE_VAN = 6;
+	public const int TEXTO_CAMA_PUERTA = 7;
 	
-	// Constantes de los resultados de dialogo
+	/* 
+	 * CONSTANTES RESULTADOS DE LOS DIALOGOS
+	 */
+	//NIVEL PRINCIPAL
 	public const int RESULTADO_INTRO = 0;
+	public const int RESULTADO_CAMA_GEMELAS = 1;
 	
 //==============================================================================================================
 // Constructores
@@ -32,6 +45,11 @@ public class TextosNivel{
 	public void InicializarTextosNivelPrincipal(){
 		textoIntroCama();
 		textoIntroVerGemelas();
+		textoCamaGemelaDerecha();
+		textoCamaGemelaIzquierda();
+		textoMuebleCuartoSiNino();
+		textoMuebleCuartoNoNino();
+		textoCamaGemelasSeVan();
 	}
 
 //==============================================================================================================
@@ -77,5 +95,56 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
 		listaTextos[TEXTO_INTRO_VER_GEMELAS] = nuevoTexto;
+	}
+	
+	private void textoCamaGemelaIzquierda(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "- Tal vez no estás muerto, solo cansado. Cansa estar tanto tiempo en el mismo " +
+			"sitio. Si te paras y sales, verás que es mucho mejor afuera.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_CAMA_GEMELAS);
+		listaTextos[TEXTO_CAMA_GEMELA_IZQUIERDA] = nuevoTexto;
+	}
+	
+	private void textoCamaGemelaDerecha(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "- No estarás muerto ¿o sí? – dice la niña, o una de las niñas, la de la moña en la " +
+			"derecha – porque si estás muerto ¿Para qué te despertaste entonces?";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_CAMA_GEMELAS);
+		listaTextos[TEXTO_CAMA_GEMELA_DERECHA] = nuevoTexto;
+	}
+	
+	private void textoCamaGemelasSeVan(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Las niñas están paradas al frente mío, se sonríen, se miran con picardía, se " +
+			"cogen de las manos y salen corriendo por la puerta.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_CAMA_GEMELAS_SE_VAN] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 3: FRENTE AL MUEBLE
+	 */
+	 
+	 private void textoMuebleCuartoSiNino(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "El frio me acuchilla el vientre y me corta las venas. Deseo volver a la cama para " +
+			"buscar el calor de las cobijas, pero no, me inquieta demasiado el niño, tiene que oír lo que le " +
+			"tengo que decir, y yo también, pues todavía no sé lo que es.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_MUEBLE_CUARTO_SI_NINO] = nuevoTexto;
+	}
+	
+	 private void textoMuebleCuartoNoNino(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Y ahí estoy, de pie. Resulta que estoy descalzo, que la baldosa del piso está " +
+			"helada y no hay alfombra en ningún lado. Los pies se me adormecen, el frio se me sube a la cabeza, " +
+			"me cuesta dar cualquier paso.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_MUEBLE_CUARTO_NO_NINO] = nuevoTexto;
 	}
 }
