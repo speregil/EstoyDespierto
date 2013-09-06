@@ -18,18 +18,21 @@ public class TextoDisplay : MonoBehaviour {
 	private string textoOpcion2;
 	private string textoActivo;
 	private IEventos admin;
+	private GUIStyle stilo;
 	
 //=================================================================================
 // Start
 //=================================================================================
 
 	void Awake(){
-		ventana = new Rect(Screen.width/4,(Screen.height/4), Screen.width/2,(Screen.height/2));
+		ventana = new Rect(Screen.width/4,(Screen.height/4), Screen.width/2 + 20,(Screen.height/2));
 		mapaTextos = new TextosNivel();
 	}
 	
 	void Start(){
-		admin = (IEventos)GameObject.Find("Nivel").GetComponent(typeof(IEventos));	
+		admin = (IEventos)GameObject.Find("Nivel").GetComponent(typeof(IEventos));
+		stilo = new GUIStyle();
+		stilo.font = skin.font;
 	}
 
 // ================================================================================
@@ -65,7 +68,7 @@ public class TextoDisplay : MonoBehaviour {
 			}
 		}
 		else{
-			GUI.Label (new Rect (10, 30, ventana.width - 20, ventana.height - 30), textoActivo);
+			GUI.Label (new Rect (10, 30, ventana.width - 20, ventana.height - 30), textoActivo, stilo);
 		}
 	}
 

@@ -20,7 +20,7 @@ public class Parpado1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(abrir){
-			if(posActual != posAbierto){
+			if(posActual <= posAbierto){
 				posActual += 0.01f;
 				Vector3 temp = transform.localPosition;
 				temp.y += 0.01f;
@@ -31,7 +31,7 @@ public class Parpado1 : MonoBehaviour {
 			}
 		}
 		else if(cerrar){
-			if(posActual != posCerrado){
+			if(posActual >= posCerrado){
 				posActual -= 0.01f;
 				Vector3 temp = transform.localPosition;
 				temp.y -= 0.01f;

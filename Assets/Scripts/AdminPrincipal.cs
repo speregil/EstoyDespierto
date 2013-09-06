@@ -20,6 +20,10 @@ public class AdminPrincipal : MonoBehaviour {
 	private bool gemelaDer = false;
 	private bool verNiño = false;
 	
+	//=================================================================================================
+	// inicializacion
+	//=================================================================================================
+	
 	void Awake(){
 		
 	}
@@ -41,6 +45,10 @@ public class AdminPrincipal : MonoBehaviour {
 		}
 	}
 	
+	// ============================================================================================
+	// Eventos
+	//=============================================================================================
+	
 	void Update () {
 	
 	}
@@ -59,6 +67,11 @@ public class AdminPrincipal : MonoBehaviour {
 			gemelaIzq = true;
 		}
 		
+		// Niño en la puerta
+		else if(comando.Equals("Nino")){
+			textos.empezarTexto(TextosNivel.TEXTO_PUERTA_NINO);
+			verNiño = true;
+		}
 		// Mueble en el cuarto
 		else if(comando.Equals("MuebleH1")){
 			Debug.Log("Mueble");
@@ -84,16 +97,54 @@ public class AdminPrincipal : MonoBehaviour {
 	
 	public void EventDialog(int resultado){
 		
+		// Intro al juego
 		if(resultado == TextosNivel.RESULTADO_INTRO){
-			// TO DO: Efecto de abrir los ojos
 			parpado1.Abrir();
 			parpado2.Abrir();
 			textos.empezarTexto(TextosNivel.TEXTO_INTRO_VER_GEMELAS);
 		}
+		// Hablar con las gemelas
 		else if(resultado == TextosNivel.RESULTADO_CAMA_GEMELAS){
 			if(gemelaDer && gemelaIzq){
 				textos.empezarTexto(TextosNivel.TEXTO_CAMA_GEMELAS_SE_VAN);
+				StartCoroutine(Parpadear());
+				StartCoroutine(GemelasSeVan());
 			}
 		}
+		
+		// Solo en la cama
+		else if(resultado == TextosNivel.RESULTADO_GEMELAS_SE_FUERON){
+			textos.empezarTexto(TextosNivel.TEXTO_CAMA_NINO);
+		}
+		
+		//Solo en la puerta
+		else if(resultado == TextosNivel.RESULTADO_NINO_SE_FUE){
+			textos.empezarTexto(TextosNivel.TEXTO_PUERTA_SOLO);
+			StartCoroutine(Parpadear());
+			StartCoroutine(NinoSeVa());
+		}
+	}
+	
+	//================================================================================================
+	// Corutinas auxiliares
+	//================================================================================================
+	
+	private IEnumerator Parpadear(){
+		parpado1.Cerrar();
+		parpado2.Cerrar();
+		yield return new WaitForSeconds(2);
+		parpado1.Abrir();
+		parpado2.Abrir();
+	}
+	
+	private IEnumerator GemelasSeVan(){
+		yield return new WaitForSeconds(1);
+		Destroy(GameObject.Find("GemelaDer"));
+		Destroy(GameObject.Find("GemelaIzq"));
+	}
+	
+	private IEnumerator NinoSeVa(){
+		yield return new WaitForSeconds(1);
+		Destroy(GameObject.Find("Nino"));
 	}
 }
