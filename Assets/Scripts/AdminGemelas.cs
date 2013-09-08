@@ -8,6 +8,7 @@ public class AdminGemelas : MonoBehaviour {
 	private MovimientoDisplay movimiento;
 	private VariablesGlobales globales;
 	private Minijuego1 mini1;
+	private Minijuego2 mini2;
 	
 	void Awake(){
 		
@@ -37,6 +38,10 @@ public class AdminGemelas : MonoBehaviour {
 		if(comando.Equals("MiniJuego1")){
 			mini1 = (Minijuego1)GetComponent(typeof(Minijuego1));
 			mini1.activar();
+		}
+		if(comando.Equals("MiniJuego2")){
+			mini2 = (Minijuego2)GetComponent(typeof(Minijuego2));
+			mini2.activar();
 		}
 	}
 	

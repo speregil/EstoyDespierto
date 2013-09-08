@@ -45,69 +45,6 @@ public class GUIDisplay : MonoBehaviour {
 		{
 			
 		}
-		//q
-		if(Input.GetKey(KeyCode.Q))
-		{
-			q.normal.background = iconoFlecha;
-		}
-		else
-		{
-			q.normal.background = null;
-		}
-		//w
-		if(Input.GetKey(KeyCode.W))
-		{
-			w.normal.background = iconoFlecha;
-		}
-		else
-		{
-			w.normal.background = null;
-		}
-		//e
-		if(Input.GetKey(KeyCode.E))
-		{
-			e.normal.background = iconoFlecha;
-		}
-		else
-		{
-			e.normal.background = null;
-		}
-		//i
-		if(Input.GetKey(KeyCode.I))
-		{
-			i.normal.background = iconoFlecha;
-		}
-		else
-		{
-			i.normal.background = null;
-		}
-		//o
-		if(Input.GetKey(KeyCode.O))
-		{
-			o.normal.background = iconoFlecha;
-		}
-		else
-		{
-			o.normal.background = null;
-		}
-		//p
-		if(Input.GetKey(KeyCode.P))
-		{
-			p.normal.background = iconoFlecha;
-		}
-		else
-		{
-			p.normal.background = null;
-		}
-		//space
-		if(Input.GetKey(KeyCode.Space))
-		{
-			space.normal.background = iconoFlecha;
-		}
-		else
-		{
-			space.normal.background = null;
-		}
 	}
 	void OnGUI () {
 
