@@ -17,7 +17,13 @@ public class MovimientoDisplay : MonoBehaviour {
 	private float anguloDestino = 0.0f;
 	private VariablesGlobales globales;
 	private EstadosNivel estados;
-	private bool activo = false;
+	private bool enMovimiento = false;
+	
+	private bool puedeMoverse = false;
+	private bool hayAdelante = false;
+	private bool hayDetras = false;
+	private bool hayIzquierda = false;
+	private bool hayDerecha = false;
 	//=================================================================================
 	// Inicializacion
 	//=================================================================================
@@ -37,7 +43,7 @@ public class MovimientoDisplay : MonoBehaviour {
 	
 	void Update ()
 	{
-		if(activo){
+		if(enMovimiento){
 			Vector3 posicionActual = Camara.transform.position;
 			if(flecha){
 				anguloLerp = Mathf.LerpAngle(0.0f,anguloDestino,Time.time*0.2f);
@@ -46,7 +52,8 @@ public class MovimientoDisplay : MonoBehaviour {
 			}
 		
 			if(posicionActual.Equals(posicionDestino)){
-				flecha = false;	
+				flecha = false;
+				activar();
 			}
 		}
 	}
@@ -58,42 +65,78 @@ public class MovimientoDisplay : MonoBehaviour {
 	void OnGUI () {
 
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de arriba
-		if(GUI.Button(new Rect((Screen.width/2)-40,40,80,20), iconoFlecha)) {
-			NodoGrafo estadoActual = estados.darEstadoActual();
-			NodoGrafo estadoSig = estadoActual.darAdelante();
-			estados.cambiarEstadoActual(estadoSig);
-			posicionDestino = estadoSig.darPosicion();
-			print (posicionDestino);
-			anguloDestino = estadoSig.darAngulo();
-			flecha = true;
-		}
+		if(puedeMoverse){
+			if(hayAdelante){
+				if(GUI.Button(new Rect((Screen.width/2)-40,40,80,20), iconoFlecha)) {
+					NodoGrafo estadoActual = estados.darEstadoActual();
+					NodoGrafo estadoSig = estadoActual.darAdelante();
+					estados.cambiarEstadoActual(estadoSig);
+					posicionDestino = estadoSig.darPosicion();
+					desactivar();
+					hayAdelante = estadoSig.TieneAdelante();
+					hayDetras = estadoSig.TieneDetras();
+					hayIzquierda = estadoSig.TieneIzquierda();
+					hayDerecha = estadoSig.TieneDerecha();
+					anguloDestino = estadoSig.darAngulo();
+					flecha = true;
+					enMovimiento = true;
+				}
+			}
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de la izquierda
-		if(GUI.Button(new Rect(20,(Screen.height/2),20,80), iconoFlecha)) {
-			NodoGrafo estadoActual = estados.darEstadoActual();
-			NodoGrafo estadoSig = estadoActual.darIzquierda();
-			estados.cambiarEstadoActual(estadoSig);
-			posicionDestino = estadoSig.darPosicion();
-			anguloDestino = estadoSig.darAngulo();
-			flecha = true;
-		}
+			if(hayIzquierda){
+				if(GUI.Button(new Rect(20,(Screen.height/2),20,80), iconoFlecha)) {
+					NodoGrafo estadoActual = estados.darEstadoActual();
+					NodoGrafo estadoSig = estadoActual.darIzquierda();
+					estados.cambiarEstadoActual(estadoSig);
+					posicionDestino = estadoSig.darPosicion();
+					anguloDestino = estadoSig.darAngulo();
+					desactivar();
+					hayAdelante = estadoSig.TieneAdelante();
+					hayDetras = estadoSig.TieneDetras();
+					hayIzquierda = estadoSig.TieneIzquierda();
+					hayDerecha = estadoSig.TieneDerecha();
+					anguloDestino = estadoSig.darAngulo();
+					flecha = true;
+					enMovimiento = true;
+				}
+			}
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de la derecha
-		if(GUI.Button(new Rect((Screen.width-40),(Screen.height/2),20,80), iconoFlecha)) {
-			NodoGrafo estadoActual = estados.darEstadoActual();
-			NodoGrafo estadoSig = estadoActual.darDerecha();
-			estados.cambiarEstadoActual(estadoSig);
-			posicionDestino = estadoSig.darPosicion();
-			anguloDestino = estadoSig.darAngulo();
-			flecha = true;
-		}
+			if(hayDerecha){
+				if(GUI.Button(new Rect((Screen.width-40),(Screen.height/2),20,80), iconoFlecha)) {
+					NodoGrafo estadoActual = estados.darEstadoActual();
+					NodoGrafo estadoSig = estadoActual.darDerecha();
+					estados.cambiarEstadoActual(estadoSig);
+					posicionDestino = estadoSig.darPosicion();
+					anguloDestino = estadoSig.darAngulo();
+					desactivar();
+					hayAdelante = estadoSig.TieneAdelante();
+					hayDetras = estadoSig.TieneDetras();
+					hayIzquierda = estadoSig.TieneIzquierda();
+					hayDerecha = estadoSig.TieneDerecha();
+					anguloDestino = estadoSig.darAngulo();
+					flecha = true;
+					enMovimiento = true;
+				}
+			}
 		
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de atrás
-		if(GUI.Button(new Rect((Screen.width/2)-40,520,80,20), iconoFlecha)) {
-			NodoGrafo estadoActual = estados.darEstadoActual();
-			NodoGrafo estadoSig = estadoActual.darAtras();
-			estados.cambiarEstadoActual(estadoSig);
-			posicionDestino = estadoSig.darPosicion();
-			anguloDestino = estadoSig.darAngulo();
-			flecha = true;
+			if(hayDetras){
+				if(GUI.Button(new Rect((Screen.width/2)-40,520,80,20), iconoFlecha)) {
+					NodoGrafo estadoActual = estados.darEstadoActual();
+					NodoGrafo estadoSig = estadoActual.darAtras();
+					estados.cambiarEstadoActual(estadoSig);
+					posicionDestino = estadoSig.darPosicion();
+					anguloDestino = estadoSig.darAngulo();
+					desactivar();
+					hayAdelante = estadoSig.TieneAdelante();
+					hayDetras = estadoSig.TieneDetras();
+					hayIzquierda = estadoSig.TieneIzquierda();
+					hayDerecha = estadoSig.TieneDerecha();
+					anguloDestino = estadoSig.darAngulo();
+					flecha = true;
+					enMovimiento = true;
+				}
+			}
 		}
 	}
 	
@@ -124,10 +167,34 @@ public class MovimientoDisplay : MonoBehaviour {
 	}
 	
 	public void activar(){
-		activo = true;	
+		puedeMoverse = true;
+		enMovimiento = false;
 	}
 	
 	public void desactivar(){
-		activo = false;	
+		puedeMoverse = false;	
+	}
+	
+	public void SiHayAdelante(){
+		hayAdelante = true;	
+	}
+	
+	public void SiHayDetras(){
+		hayDetras = true;	
+	}
+	
+	public void SiHayDerecha(){
+		hayDerecha = true;	
+	}
+	
+	public void SiHayIzquierda(){
+		hayIzquierda = true;	
+	}
+	
+	public void reiniciarFlechas(){
+		hayAdelante = false;
+		hayDerecha = false;
+		hayDetras = false;
+		hayIzquierda = false;
 	}
 }

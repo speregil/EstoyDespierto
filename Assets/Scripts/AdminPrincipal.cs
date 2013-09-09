@@ -29,19 +29,39 @@ public class AdminPrincipal : MonoBehaviour {
 	}
 	
 	void Start () {
+		
+		//Inicializa las relaciones con los scripts de control
 		Global = GameObject.Find("Global");
 		parpado1 = (Parpado1)GameObject.Find("Parpado1").GetComponent(typeof(Parpado1));
 		parpado2 = (Parpado2)GameObject.Find("Parpado2").GetComponent(typeof(Parpado2));
 		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
 		movimiento = (MovimientoDisplay)Global.GetComponent(typeof(MovimientoDisplay));
 		movimiento.EstablecerCamara(GameObject.Find("Main Camera"));
-		movimiento.activar();
+		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
+		
+		//Cambia al grafo respectivo y se mueve al estado apropiado
 		movimiento.cambiarGrafo(EstadosNivel.PRINCIPAL);
 		NodoGrafo ultimo = globales.darUltimoEstado();
 		movimiento.irAEstado(ultimo);
-		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
+		movimiento.reiniciarFlechas();
+		ultimo = movimiento.darEstadoActual();
+		if(ultimo.TieneAdelante())
+			movimiento.SiHayAdelante();
+		if(ultimo.TieneDetras())
+			movimiento.SiHayDetras();
+		if(ultimo.TieneIzquierda())
+			movimiento.SiHayIzquierda();
+		if(ultimo.TieneDerecha())
+			movimiento.SiHayDerecha();
+		
+		// Ejecuta las acciones correspondietes a los flags de control
 		if(VariablesGlobales.primeraVez){
 			textos.empezarTexto(TextosNivel.TEXTO_INTRO_CAMA);
+		}
+		else{
+			parpado1.Abrir();
+			parpado2.Abrir();
+			movimiento.activar();
 		}
 	}
 	
@@ -115,6 +135,11 @@ public class AdminPrincipal : MonoBehaviour {
 		// Solo en la cama
 		else if(resultado == TextosNivel.RESULTADO_GEMELAS_SE_FUERON){
 			textos.empezarTexto(TextosNivel.TEXTO_CAMA_NINO);
+		}
+		
+		// Despues de texto de solo en la cama
+		else if(resultado == TextosNivel.RESULTADO_CAMA_SOLO){
+			movimiento.activar();
 		}
 		
 		//Solo en la puerta

@@ -33,6 +33,8 @@ public class TextosNivel{
 	public const int RESULTADO_CAMA_GEMELAS = 1;
 	public const int RESULTADO_GEMELAS_SE_FUERON = 2;
 	public const int RESULTADO_NINO_SE_FUE = 3;
+	public const int RESULTADO_CAMA_SOLO = 4;
+	
 	
 //==============================================================================================================
 // Constructores
@@ -75,9 +77,8 @@ public class TextosNivel{
 	 */
 	private void textoIntroCama(){
 		ArrayList nuevaLista = new ArrayList();
-		string nuevaLinea = "Oigo unos pasitos apagados, unas risitas contenidas, luego algo se sube muy " +
-			"despacio a la cama y unas\n" +
-			"manitas empiezan a tocarme la mejilla.";
+		string nuevaLinea = "Oigo unos pasitos apagados, unas risitas contenidas, luego algo se sube muy despacio a la cama\n" +
+		 	"y unas manitas empiezan a tocarme la mejilla.";
 		nuevaLista.Add(nuevaLinea);
 		nuevaLinea = "- ¿Estas despierto? – dice una vocecita mientras que una mano helada sube lentamente hasta\n" +
 			"llegar al ojo, y antes que yo mismo me responda si estoy despierto o no, ella lo abre con los\n" +
@@ -144,7 +145,7 @@ public class TextosNivel{
 			"abierta,  la luz nunca había estado encendida. Da igual, no recuerdo haber estado nunca en este\n" +
 			"lugar, ni siquiera sé si estoy despierto.";
 		nuevaLista.Add(nuevaLinea);
-		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_CAMA_SOLO);
 		listaTextos[TEXTO_CAMA_NINO] = nuevoTexto;
 	}
 	

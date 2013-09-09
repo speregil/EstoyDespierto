@@ -15,14 +15,30 @@ public class AdminGemelas : MonoBehaviour {
 	}
 	
 	void Start () {
+		
+		//Inicializa las relaciones con los scripts de control
 		Global = GameObject.Find("Global");
 		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
 		movimiento = (MovimientoDisplay)Global.GetComponent(typeof(MovimientoDisplay));
 		movimiento.EstablecerCamara(GameObject.Find("Main Camera"));
 		movimiento.activar();
-		movimiento.cambiarGrafo(EstadosNivel.GEMELAS);
-		VariablesGlobales.primeraVez = false;
 		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
+		
+		//Cambia al grafo respectivo y se mueve al estado apropiado
+		movimiento.cambiarGrafo(EstadosNivel.GEMELAS);
+		movimiento.reiniciarFlechas();
+		NodoGrafo ultimo = movimiento.darEstadoActual();
+		if(ultimo.TieneAdelante())
+			movimiento.SiHayAdelante();
+		if(ultimo.TieneDetras())
+			movimiento.SiHayDetras();
+		if(ultimo.TieneIzquierda())
+			movimiento.SiHayIzquierda();
+		if(ultimo.TieneDerecha())
+			movimiento.SiHayDerecha();
+		
+		//Modifica variables globales
+		VariablesGlobales.primeraVez = false;
 	}
 	
 	void Update () {

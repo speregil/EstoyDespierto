@@ -16,6 +16,11 @@ public class NodoGrafo
 	private float angulo;
 	private int estado;
 	
+	private bool tieneAdelante;
+	private bool tieneDetras;
+	private bool tieneDerecha;
+	private bool tieneIzquierda;
+	
 	//------------------------------------------------------------------------
 	// Constructor
 	//------------------------------------------------------------------------
@@ -25,6 +30,10 @@ public class NodoGrafo
 		dialogo = nDialogo;
 		posicion = nPosicion;
 		angulo = nAngulo;
+		tieneAdelante = false;
+		tieneDetras = false;
+		tieneDerecha = false;
+		tieneIzquierda = false;
 	}
 	
 	//-----------------------------------------------------------------------
@@ -105,6 +114,7 @@ public class NodoGrafo
 	public void asignarDerecho(NodoGrafo nodoDerecho)
 	{
 		derecha = nodoDerecho;
+		tieneDerecha = true;
 	}
 	/*
 	 * Asigna un sucesor Izquierdo directamente
@@ -112,6 +122,7 @@ public class NodoGrafo
 	public void asignarIzquierdo(NodoGrafo nodoIzquierdo)
 	{
 		izquierda = nodoIzquierdo;
+		tieneIzquierda = true;
 	}
 	/*
 	 * Asigna un sucesor delantero directamente
@@ -119,6 +130,7 @@ public class NodoGrafo
 	public void asignarDelantero(NodoGrafo nodoDelantero)
 	{
 		adelante = nodoDelantero;
+		tieneAdelante = true;
 	}
 	/* 
 	 * Asigna un predecesor al nodo
@@ -126,6 +138,7 @@ public class NodoGrafo
 	public void asignarAnterior(NodoGrafo nodoAnterior)
 	{
 		atras = nodoAnterior;
+		tieneDetras = true;
 	}
 	/*
 	 * Asigna un vector al estado
@@ -147,6 +160,26 @@ public class NodoGrafo
 	public void agregarAngulo(float nAngulo)
 	{
 		angulo = nAngulo;
+	}
+	
+	/*
+	 * Retorna true si posee un hijo en la posicion especificada
+	 */
+	
+	public bool TieneAdelante(){
+		return tieneAdelante;	
+	}
+	
+	public bool TieneDetras(){
+		return tieneDetras;	
+	}
+	
+	public bool TieneIzquierda(){
+		return tieneIzquierda;	
+	}
+	
+	public bool TieneDerecha(){
+		return tieneDerecha;	
 	}
 }
 
