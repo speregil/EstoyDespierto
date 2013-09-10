@@ -9,16 +9,19 @@ public class TextoDisplay : MonoBehaviour {
 
 	public GUISkin skin;
 	public TextosNivel mapaTextos;
+	public bool puedoActivarMov = true;
 	
 	private Rect ventana;
 	private NodoTexto textoActual;
 	private bool dialogosActivos = false;
+	private bool ventanaActiva = false;
 	private bool enOpcion = false;
 	private string textoOpcion1;
 	private string textoOpcion2;
 	private string textoActivo;
 	private IEventos admin;
 	private GUIStyle stilo;
+	private MovimientoDisplay movimiento;
 	
 //=================================================================================
 // Start
@@ -33,6 +36,7 @@ public class TextoDisplay : MonoBehaviour {
 		admin = (IEventos)GameObject.Find("Nivel").GetComponent(typeof(IEventos));
 		stilo = new GUIStyle();
 		stilo.font = skin.font;
+		movimiento = (MovimientoDisplay)GetComponent(typeof(MovimientoDisplay));
 	}
 
 // ================================================================================
@@ -41,8 +45,15 @@ public class TextoDisplay : MonoBehaviour {
 
 	void OnGUI () {
 		GUI.skin = skin;
-		if(dialogosActivos){
+		if(dialogosActivos && textoActual != null && !textoActivo.Equals("")){
 			ventana = GUI.Window(0,ventana , WindowFunction,"");
+			ventanaActiva = true;
+			movimiento.desactivar();
+		}
+		else{
+			ventanaActiva = false;
+			//if(puedoActivarMov)
+			//		movimiento.activar();
 		}
 	}
 
@@ -78,7 +89,7 @@ public class TextoDisplay : MonoBehaviour {
 // ================================================================================
 	void Update(){
 
-		if(dialogosActivos && Input.GetKeyDown(KeyCode.Mouse0) && !enOpcion){
+		if(ventanaActiva && Input.GetKeyDown(KeyCode.Mouse0) && !enOpcion){
 
 			if(!textoActual.estaTerminado()){
 				dibujarDialogo();
@@ -89,6 +100,9 @@ public class TextoDisplay : MonoBehaviour {
 			}
 			else if(textoActual.estaTerminado() && !textoActual.tieneHijos()){
 				dialogosActivos = false;
+				textoActivo = "";
+				if(puedoActivarMov)
+					movimiento.activar();
 				admin.DialogSwitch(textoActual.getResultado());
 			}
 		}
@@ -100,16 +114,21 @@ public class TextoDisplay : MonoBehaviour {
 
 	public void empezarTexto(int IDnuevo){
 		textoActual = mapaTextos.darTexto(IDnuevo);
-		dialogosActivos = true;
+		dibujarDialogo();
 	}
 	
 	private void dibujarDialogo(){
 		textoActivo = textoActual.getTextoLinea();
+		dialogosActivos = true;
 	}
 
 	private void dibujarOpcion(){
 		textoOpcion1 = textoActual.getHijo1().getTextoLinea();
 		textoOpcion2 = textoActual.getHijo2().getTextoLinea();
 		textoActivo = "";
+	}
+	
+	public void PuedoActivarMov(bool param){
+		puedoActivarMov = param;	
 	}
 }

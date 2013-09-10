@@ -38,7 +38,7 @@ public class AdminPrincipal : MonoBehaviour {
 		movimiento = (MovimientoDisplay)Global.GetComponent(typeof(MovimientoDisplay));
 		movimiento.EstablecerCamara(GameObject.Find("Main Camera"));
 		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
-		
+		textos.PuedoActivarMov(false);
 		//Cambia al grafo respectivo y se mueve al estado apropiado
 		movimiento.cambiarGrafo(EstadosNivel.PRINCIPAL);
 		NodoGrafo ultimo = globales.darUltimoEstado();
@@ -94,13 +94,10 @@ public class AdminPrincipal : MonoBehaviour {
 		}
 		// Mueble en el cuarto
 		else if(comando.Equals("MuebleH1")){
-			Debug.Log("Mueble");
 			if(verNiño){
-				Debug.Log("Si niño");
 				textos.empezarTexto(TextosNivel.TEXTO_MUEBLE_CUARTO_SI_NINO);
 			}
 			else{
-				Debug.Log("No niño");
 				textos.empezarTexto(TextosNivel.TEXTO_MUEBLE_CUARTO_NO_NINO);
 			}
 		}
@@ -135,6 +132,7 @@ public class AdminPrincipal : MonoBehaviour {
 		// Solo en la cama
 		else if(resultado == TextosNivel.RESULTADO_GEMELAS_SE_FUERON){
 			textos.empezarTexto(TextosNivel.TEXTO_CAMA_NINO);
+			textos.PuedoActivarMov(true);
 		}
 		
 		// Despues de texto de solo en la cama
@@ -147,6 +145,18 @@ public class AdminPrincipal : MonoBehaviour {
 			textos.empezarTexto(TextosNivel.TEXTO_PUERTA_SOLO);
 			StartCoroutine(Parpadear());
 			StartCoroutine(NinoSeVa());
+		}
+	}
+	
+	public void EventEstado (string comando){
+		
+		if(comando.Equals("Puerta")){
+			if(!verNiño)
+				movimiento.NoHayAdelante();
+		}
+		
+		else if(comando.Equals("Corredor1")){
+			textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_1_NO_REJA);
 		}
 	}
 	
@@ -171,5 +181,6 @@ public class AdminPrincipal : MonoBehaviour {
 	private IEnumerator NinoSeVa(){
 		yield return new WaitForSeconds(1);
 		Destroy(GameObject.Find("Nino"));
+		movimiento.SiHayAdelante();
 	}
 }

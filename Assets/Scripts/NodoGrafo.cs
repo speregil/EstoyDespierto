@@ -97,6 +97,12 @@ public class NodoGrafo
 		return izquierda;	
 	}
 	
+	public bool TieneDialogo(){
+		if(!dialogo.Equals(""))
+			return true;
+		return false;
+	}
+	
 	//---------------------------------------------------------------------------
 	// Setters
 	//---------------------------------------------------------------------------

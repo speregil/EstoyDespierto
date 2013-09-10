@@ -10,6 +10,8 @@ public class MovimientoDisplay : MonoBehaviour {
 	public Texture2D iconoFlecha;
 	public float velocidad;
 	
+	private GameObject admin;
+	private IEventos eventos;
 	private GameObject Camara;
 	private bool flecha= false;
 	private float anguloLerp = 0.0f;
@@ -34,7 +36,8 @@ public class MovimientoDisplay : MonoBehaviour {
 	}
 	
 	void Start(){
-	
+		admin = GameObject.Find("Nivel");
+		eventos = (IEventos)admin.GetComponent(typeof(IEventos));
 	}
 	
 	//=================================================================================
@@ -54,6 +57,9 @@ public class MovimientoDisplay : MonoBehaviour {
 			if(posicionActual.Equals(posicionDestino)){
 				flecha = false;
 				activar();
+				if(estados.darEstadoActual().TieneDialogo()){
+					eventos.EstadoTrigger(estados.darEstadoActual().darDialogo());
+				}
 			}
 		}
 	}
@@ -191,10 +197,30 @@ public class MovimientoDisplay : MonoBehaviour {
 		hayIzquierda = true;	
 	}
 	
+	public void NoHayAdelante(){
+		hayAdelante = false;	
+	}
+	
+	public void NoHayDetras(){
+		hayDetras = false;	
+	}
+	
+	public void NoHayDerecha(){
+		hayDerecha = false;	
+	}
+	
+	public void NoHayIzquierda(){
+		hayIzquierda = false;	
+	}
+	
 	public void reiniciarFlechas(){
 		hayAdelante = false;
 		hayDerecha = false;
 		hayDetras = false;
 		hayIzquierda = false;
+	}
+	
+	public void cambiarAdmin(){
+		admin = GameObject.Find("Nivel");
 	}
 }

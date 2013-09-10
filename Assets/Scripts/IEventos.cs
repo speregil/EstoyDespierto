@@ -14,4 +14,10 @@ public class IEventos : MonoBehaviour {
 	public void DialogSwitch(int obj){
 		SendMessage("EventDialog", obj);
 	}
+	
+	public void EstadoTrigger(string objEstado){
+		SendMessage("EventEstado", objEstado);
+	}
+	
+	
 }

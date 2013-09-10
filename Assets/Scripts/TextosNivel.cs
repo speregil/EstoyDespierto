@@ -24,6 +24,7 @@ public class TextosNivel{
 	public const int TEXTO_CAMA_NINO = 8;
 	public const int TEXTO_PUERTA_NINO = 9;
 	public const int TEXTO_PUERTA_SOLO = 10;
+	public const int TEXTO_CORREDOR_1_NO_REJA = 11;
 	
 	/* 
 	 * CONSTANTES RESULTADOS DE LOS DIALOGOS
@@ -60,6 +61,7 @@ public class TextosNivel{
 		textoCamaNino();
 		textoPuertaNino();
 		textoPuertaSolo();
+		textoCorredor1NoReja();
 	}
 
 //==============================================================================================================
@@ -200,5 +202,21 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
 		listaTextos[TEXTO_MUEBLE_CUARTO_NO_NINO] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 1-4: CORREDOR 1
+	 */
+	
+	private void textoCorredor1NoReja(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Con el primer paso, otro lo sigue con rapidez. Estoy parado al otro lado de la puerta, y al mirar\n" +
+			"atrás, no me cabe en la cabeza como deseaba tanto estar ahí, entre sombras y un frío casi\n" +
+			"palpable. La cama se ve pequeña, las sabanas duras y roídas. Cierro la puerta con fuerza,\n" +
+			"ahora no soporto ver la cama, estoy muy cómodo donde estoy parado, aunque todavía piense\n" +
+			"que sigo acostado y arropado, que todavía no he despertado.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_CORREDOR_1_NO_REJA] = nuevoTexto;
 	}
 }
