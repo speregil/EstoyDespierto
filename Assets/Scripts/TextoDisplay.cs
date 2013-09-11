@@ -101,6 +101,7 @@ public class TextoDisplay : MonoBehaviour {
 			else if(textoActual.estaTerminado() && !textoActual.tieneHijos()){
 				dialogosActivos = false;
 				textoActivo = "";
+				textoActual.reiniciar();
 				if(puedoActivarMov)
 					movimiento.activar();
 				admin.DialogSwitch(textoActual.getResultado());

@@ -25,6 +25,16 @@ public class TextosNivel{
 	public const int TEXTO_PUERTA_NINO = 9;
 	public const int TEXTO_PUERTA_SOLO = 10;
 	public const int TEXTO_CORREDOR_1_NO_REJA = 11;
+	public const int TEXTO_CORREDOR_ALFOMBRA = 12;
+	public const int TEXTO_CORREDOR_PARED = 13;
+	public const int TEXTO_CORREDOR_1_SI_REJA = 14;
+	public const int TEXTO_CORREDOR_2_INTRO = 15;
+	public const int TEXTO_CORREDOR_PUERTA = 16;
+	public const int TEXTO_CORREDOR_LAMPARA = 17;
+	public const int TEXTO_FRENTE_ESPEJO = 18;
+	public const int TEXTO_ESPEJO = 19;
+	public const int TEXTO_REJA = 20;
+	public const int TEXTO_PUERTA_GEMELAS = 21;
 	
 	/* 
 	 * CONSTANTES RESULTADOS DE LOS DIALOGOS
@@ -35,6 +45,7 @@ public class TextosNivel{
 	public const int RESULTADO_GEMELAS_SE_FUERON = 2;
 	public const int RESULTADO_NINO_SE_FUE = 3;
 	public const int RESULTADO_CAMA_SOLO = 4;
+	public const int RESULTADO_PUERTA_GEMELAS = 5;
 	
 	
 //==============================================================================================================
@@ -62,6 +73,16 @@ public class TextosNivel{
 		textoPuertaNino();
 		textoPuertaSolo();
 		textoCorredor1NoReja();
+		textoCorredorAlfombra();
+		textoCorredorPared();
+		textoCorredor1SiReja();
+		textoCorredor2Intro();
+		textoCorredorPuerta();
+		textoCorredorLampara();
+		textoFrenteEspejo();
+		textoEspejo();
+		textoReja();
+		textoPuertaGemelas();
 	}
 
 //==============================================================================================================
@@ -218,5 +239,115 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
 		listaTextos[TEXTO_CORREDOR_1_NO_REJA] = nuevoTexto;
+	}
+	
+	private void textoCorredorAlfombra(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Mis pensamientos se centran en una sola cosa, pues no logro entender dónde estoy. No solo la\n" +
+			"alfombra es cálida, lo es también el aire, la luz, el ambiente en general. Estoy en un pasillo\n" +
+			"común y corriente, y sin embargo es extraño, hay algo que no cuadra en él, que me deja una\n" +
+			"duda rondando en la cabeza.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_CORREDOR_ALFOMBRA] = nuevoTexto;
+	}
+	
+	private void textoCorredorPared(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "¿Qué es lo que me molesta? Es lo largo, lo recto del pasillo. Veo hacia el frente y el camino se\n" +
+			"extiende, varios metros de esa alfombra roja, de esa pared color perla, de esa cenefa dorada.\n\n" +
+			"¿Y estas puertas? Hay una tras otra, varias puertas de madera, todas cerradas, todas igual de\n" +
+			"grandes y atemorizantes.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_CORREDOR_PARED] = nuevoTexto;
+	}
+	
+	private void textoCorredor1SiReja(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Corrí- Quiero estar otra vez en la cama, quiero arroparme otra vez con las sabanas. Pero he\n" +
+			"cerrado la puerta, y ahora, por más que halo, empujo y golpeo, no logro abrirla otra vez.\n" +
+			"Eso es bueno, porque, arrodillado en el suelo y apoyado contra la puerta, recuerdo que esa\n" +
+			"cama es dura y el piso muy frio. Estoy mejor aquí, así no sea real, el pasillo en realidad\n" +
+			"no es tan largo, ni el espejo tan grande.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_CORREDOR_1_SI_REJA] = nuevoTexto;
+	}
+	
+	private void textoCorredor2Intro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Cruzo por el frente de cada puerta casi corriendo, como si no quisiera que se abrieran en el\n" +
+			"preciso momento en el que yo estoy ahí.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_CORREDOR_2_INTRO] = nuevoTexto;
+	}
+	
+	private void textoCorredorPuerta(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Estas puertas me devoran, quieren arrastrarme dentro y mostrarme su contenido. Temo abrirlas y\n" +
+			"encontrar algo ahi, algo que no entienda, o que no recuerde, o que ya olvidé. De cualquier forma, algo, y ahora\n" +
+			"no quiero encontrarme con nada.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_CORREDOR_PUERTA] = nuevoTexto;
+	}
+	
+	private void textoCorredorLampara(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "¿Qué es lo que me molesta? Son las dos hileras de lámparas, de esos bombillos ridículos que\n" +
+			"imitan velas, de los brazos plateados, uno después del otro en cada pared, adornando el espacio\n" +
+			"vacío entre las puertas.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_CORREDOR_LAMPARA] = nuevoTexto;
+	}
+	
+	private void textoFrenteEspejo(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Llego al final del pasillo ¿Cuántas puertas crucé? Volteo a ver y no hay más de cuatro, dos a\n" +
+			"cada lado, la puerta de la habitación al fondo. El pasillo no es tan grande, las puertas no son\n" +
+			"tan imponentes.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_FRENTE_ESPEJO] = nuevoTexto;
+	}
+	
+	private void textoEspejo(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "¿Qué es, entonces, lo que me molesta? Es el espejo, si, el espejo que estaba al frente mío,\n" +
+			"y que ahora tengo directamente arriba. Está muy arriba. Mis ojos no llegan ni al marco, estiro la\n" +
+			"mano y apenas si puedo tocarlo. Es un espejo enorme, está muy arriba ¿O seré yo el que es\n " +
+			"mas pequeño y estoy muy abajo? Eso es precisamente lo que me molesta, que no lo sé.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_ESPEJO] = nuevoTexto;
+	}
+	
+	private void textoReja(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "También está la reja, justo al lado, solo a unos pasos. Es de un metal negro brillante,\n" +
+			"hay un candado enorme cerrándolo, unas escaleras oscuras al otro lado, y arriba, otra puerta,\n" +
+			"también cerrada, parece luz lo que se escurre por debajo.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "No es esta luz amarilla y caliente que me rodea. Es más blanca, más fría, mucho más real.\n" +
+			"Más real que este pasillo con sus detallitos molestos que me hacen dar cuenta que no puedo\n" +
+			"estar despierto, y que no debería estar ahí parado, sino en la cama, donde debería estar\n" +
+			"la gente que duerme.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_REJA] = nuevoTexto;
+	}
+	
+	private void textoPuertaGemelas(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Creo estar por fin a gusto, el rostro sobre la puerta y las rodillas hundidas en la alfombra,\n" +
+			"cuando oigo de nuevo las risas, y vuelve a mí la urgencia de hablarle a ese niño, y ahora que\n" +
+			"lo pienso, necesito hablar también con las niñas, pues nunca se disculparon por despertarme,\n" +
+			"o por no despertarme completamente.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_PUERTA_GEMELAS);
+		listaTextos[TEXTO_PUERTA_GEMELAS] = nuevoTexto;
 	}
 }

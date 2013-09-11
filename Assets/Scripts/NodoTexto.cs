@@ -86,4 +86,8 @@ public class NodoTexto{
 	public int getResultado(){
 		return resultado;
 	}
+	
+	public void reiniciar(){
+		indiceActual = 0;	
+	}
 }

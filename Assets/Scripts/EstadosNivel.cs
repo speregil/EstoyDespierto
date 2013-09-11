@@ -80,7 +80,7 @@ public class EstadosNivel
 		NodoGrafo estado5 = new NodoGrafo(5,"",new Vector3(0,0,13),90.0f);
 		GrafoPrincipal.agregarEstado(estado5);
 		
-		NodoGrafo estado6 = new NodoGrafo(6,"",new Vector3(0,0,25),0.0f);
+		NodoGrafo estado6 = new NodoGrafo(6,"Corredor2",new Vector3(0,0,25),0.0f);
 		GrafoPrincipal.agregarEstado(estado6);
 		
 		NodoGrafo estado7 = new NodoGrafo(7,"",new Vector3(0,0,25),-90.0f);
@@ -89,7 +89,7 @@ public class EstadosNivel
 		NodoGrafo estado8 = new NodoGrafo(8,"",new Vector3(0,0,25),90.0f);
 		GrafoPrincipal.agregarEstado(estado8);
 		
-		NodoGrafo estado9 = new NodoGrafo(9,"",new Vector3(0,0,34),0.0f);
+		NodoGrafo estado9 = new NodoGrafo(9,"Espejo",new Vector3(0,0,34),0.0f);
 		GrafoPrincipal.agregarEstado(estado9);
 		
 		NodoGrafo estado10 = new NodoGrafo(10,"",new Vector3(0,0,34),90.0f);

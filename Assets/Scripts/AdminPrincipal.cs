@@ -19,6 +19,11 @@ public class AdminPrincipal : MonoBehaviour {
 	private bool gemelaIzq = false;
 	private bool gemelaDer = false;
 	private bool verNiño = false;
+	private bool corredor1 = false;
+	private bool corredor2 = false;
+	private bool espejo = false;
+	private bool verReja = false;
+	private bool volver = false;
 	
 	//=================================================================================================
 	// inicializacion
@@ -104,10 +109,70 @@ public class AdminPrincipal : MonoBehaviour {
 		
 		//Puerta a la habitacion de las gemelas
 		else if(comando.Equals("PuertaGemelas")){
-			NodoGrafo actual = movimiento.darEstadoActual();
-			globales.establecerUltimoEstado(actual.darIzquierda());
-			movimiento.desactivar();
-			Application.LoadLevel("CuartoGemelas");
+			if(volver){
+				textos.empezarTexto(TextosNivel.TEXTO_PUERTA_GEMELAS);
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
+			}
+		}
+		
+		else if(comando.Equals("PuertaGaraje")){
+			if(volver){
+				NodoGrafo actual = movimiento.darEstadoActual();
+				globales.establecerUltimoEstado(actual.darIzquierda());
+				movimiento.desactivar();
+				Application.LoadLevel("Garaje");
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
+			}
+		}
+		
+		else if(comando.Equals("PuertaCocina")){
+			if(volver){
+				NodoGrafo actual = movimiento.darEstadoActual();
+				globales.establecerUltimoEstado(actual.darIzquierda());
+				movimiento.desactivar();
+				Application.LoadLevel("Cocina");
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
+			}
+		}
+		
+		else if(comando.Equals("PuertaStar")){
+			if(volver){
+				NodoGrafo actual = movimiento.darEstadoActual();
+				globales.establecerUltimoEstado(actual.darIzquierda());
+				movimiento.desactivar();
+				Application.LoadLevel("Star");
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
+			}
+		}
+		
+		else if(comando.Equals("Alfombra")){
+			textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_ALFOMBRA);
+		}
+		
+		else if(comando.Equals("Pared")){
+			textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PARED);
+		}
+		
+		else if(comando.Equals("Lampara")){
+			textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_LAMPARA);
+		}
+		
+		else if(comando.Equals("Espejo")){
+			textos.empezarTexto(TextosNivel.TEXTO_ESPEJO);
+		}
+		
+		else if(comando.Equals("Reja")){
+			textos.empezarTexto(TextosNivel.TEXTO_REJA);
+			verReja = true;
+			corredor1 = false;
 		}
 		
 	}
@@ -146,6 +211,14 @@ public class AdminPrincipal : MonoBehaviour {
 			StartCoroutine(Parpadear());
 			StartCoroutine(NinoSeVa());
 		}
+		
+		// Ir al cuarto de las gemelas
+		else if(resultado == TextosNivel.RESULTADO_PUERTA_GEMELAS){
+			NodoGrafo actual = movimiento.darEstadoActual();
+			globales.establecerUltimoEstado(actual.darIzquierda());
+			movimiento.desactivar();
+			Application.LoadLevel("CuartoGemelas");
+		}
 	}
 	
 	public void EventEstado (string comando){
@@ -156,7 +229,33 @@ public class AdminPrincipal : MonoBehaviour {
 		}
 		
 		else if(comando.Equals("Corredor1")){
-			textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_1_NO_REJA);
+			movimiento.NoHayDetras();
+			if(!verReja){
+				if(!corredor1){
+					textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_1_NO_REJA);
+					corredor1 = true;
+				}
+			}
+			else{
+				if(!corredor1){
+					textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_1_SI_REJA);
+					volver = true;
+				}
+			}
+		}
+		
+		else if(comando.Equals("Corredor2")){
+			if(!corredor2){
+				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_2_INTRO);
+				corredor2 = true;
+			}
+		}
+		
+		else if(comando.Equals("Espejo")){
+			if(!espejo){
+				textos.empezarTexto(TextosNivel.TEXTO_FRENTE_ESPEJO);
+				espejo = true;
+			}
 		}
 	}
 	
