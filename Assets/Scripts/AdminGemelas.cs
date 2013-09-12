@@ -5,10 +5,20 @@ public class AdminGemelas : MonoBehaviour {
 
 	private GameObject Global;
 	private TextoDisplay textos;
+	private Parpado1 parpado1;
+	private Parpado2 parpado2;
 	private MovimientoDisplay movimiento;
 	private VariablesGlobales globales;
 	private Minijuego1 mini1;
 	private Minijuego2 mini2;
+	
+	// Flags de control
+	private bool puerta = false;
+	private bool minijuego = false;
+	private bool aprobacion = false;
+	private bool gemelas = false;
+	private bool reina = false;
+	private bool bufon = false;
 	
 	void Awake(){
 		
@@ -19,6 +29,8 @@ public class AdminGemelas : MonoBehaviour {
 		//Inicializa las relaciones con los scripts de control
 		Global = GameObject.Find("Global");
 		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
+		parpado1 = (Parpado1)GameObject.Find("Parpado1").GetComponent(typeof(Parpado1));
+		parpado2 = (Parpado2)GameObject.Find("Parpado2").GetComponent(typeof(Parpado2));
 		movimiento = (MovimientoDisplay)Global.GetComponent(typeof(MovimientoDisplay));
 		movimiento.EstablecerCamara(GameObject.Find("Main Camera"));
 		movimiento.activar();
@@ -36,9 +48,16 @@ public class AdminGemelas : MonoBehaviour {
 			movimiento.SiHayIzquierda();
 		if(ultimo.TieneDerecha())
 			movimiento.SiHayDerecha();
-		
+		movimiento.irAEstado(movimiento.darEstadoActual());
 		//Modifica variables globales
 		VariablesGlobales.primeraVez = false;
+		parpado1.Abrir();
+		parpado2.Abrir();
+		
+		if(!puerta){
+			textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_INTR0);
+			puerta = true;
+		}
 	}
 	
 	void Update () {
@@ -47,21 +66,69 @@ public class AdminGemelas : MonoBehaviour {
 	
 	public void EventSwitch(string comando){
 		if(comando.Equals("Puerta")){
-			print ("Ultimo estado: " + globales.darUltimoEstado());
-			movimiento.desactivar();
-			Application.LoadLevel("Principal");	
+			
+			if(!minijuego){
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_PUERTA_SIN_JUEGO);	
+			}
+			else{
+				if(aprobacion){
+					textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_PUERTA_CON_APROBACION);
+				}
+				else{
+					textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_PUERTA_SIN_APROBACION);	
+				}
+			}
 		}
-		if(comando.Equals("MiniJuego1")){
-			mini1 = (Minijuego1)GetComponent(typeof(Minijuego1));
-			mini1.activar();
+		if(comando.Equals("Armario")){
+			if(reina)
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_REINA);
+			else
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_SIN_REINA);
 		}
-		if(comando.Equals("MiniJuego2")){
-			mini2 = (Minijuego2)GetComponent(typeof(Minijuego2));
-			mini2.activar();
+		if(comando.Equals("Tapete")){
+			if(bufon)
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_BUFON);
+			else
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_SIN_BUFON);
 		}
 	}
 	
 	public void EventDialog(int resultado){
+		if(resultado == TextosNivel.RESULTADO_APROPACION){
+			movimiento.desactivar();
+			Application.LoadLevel("Principal");
+		}
 		
+		else if(resultado == TextosNivel.RESULTADO_REINA){
+			reina = true;
+		}
+		
+		else if(resultado == TextosNivel.RESULTADO_BUFON){
+			bufon = true;
+		}
+		
+		else if(resultado == TextosNivel.RESULTADO_INICIO_JUEGO1){
+			mini1 = (Minijuego1)GetComponent(typeof(Minijuego1));
+			mini1.activar();
+		}
+	}
+	
+	public void EventEstado (string comando){
+		if(comando.Equals("Gemelas")){
+			if(!gemelas)
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_INTRO_FRENTE);
+		}
+	}
+	
+	//================================================================================================
+	// Corutinas auxiliares
+	//================================================================================================
+	
+	private IEnumerator Parpadear(){
+		parpado1.Cerrar();
+		parpado2.Cerrar();
+		yield return new WaitForSeconds(2);
+		parpado1.Abrir();
+		parpado2.Abrir();
 	}
 }

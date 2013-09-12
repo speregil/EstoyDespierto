@@ -60,7 +60,7 @@ public class TextoDisplay : MonoBehaviour {
 	void WindowFunction (int windowID) {
 
 		if(enOpcion){
-			if(GUI.Button(new Rect (10, 20, ventana.width, 75), textoOpcion1)){
+			if(GUI.Button(new Rect (10, 20, ventana.width-20, 75), textoOpcion1)){
 				print("Escogio Opcion 1:");
 				textoActual = textoActual.getHijo1();
 				dibujarDialogo();
@@ -69,7 +69,7 @@ public class TextoDisplay : MonoBehaviour {
 				textoOpcion2 = "";
 			}
 			
-			if(GUI.Button(new Rect (10, 95, ventana.width, 75), textoOpcion2)){
+			if(GUI.Button(new Rect (10, ventana.height/2, ventana.width-20, 75), textoOpcion2)){
 				print("Escogio Opcion 2:");
 				textoActual = textoActual.getHijo2();
 				dibujarDialogo();
@@ -126,7 +126,7 @@ public class TextoDisplay : MonoBehaviour {
 	private void dibujarOpcion(){
 		textoOpcion1 = textoActual.getHijo1().getTextoLinea();
 		textoOpcion2 = textoActual.getHijo2().getTextoLinea();
-		textoActivo = "";
+		textoActivo = "opcion";
 	}
 	
 	public void PuedoActivarMov(bool param){

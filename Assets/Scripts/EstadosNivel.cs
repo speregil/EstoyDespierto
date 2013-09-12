@@ -120,7 +120,7 @@ public class EstadosNivel
 		NodoGrafo estado1 = new NodoGrafo(1,"",new Vector3(6,0,-1),0.0f);
 		GrafoGemelas.agregarEstado(estado1);
 		
-		NodoGrafo estado2 = new NodoGrafo(2,"",new Vector3(6,0,1),0.0f);
+		NodoGrafo estado2 = new NodoGrafo(2,"Gemelas",new Vector3(6,0,1),0.0f);
 		GrafoGemelas.agregarEstado(estado2);
 		
 		NodoGrafo estado3 = new NodoGrafo(3,"",new Vector3(6,0,-1),90.0f);

@@ -36,6 +36,17 @@ public class TextosNivel{
 	public const int TEXTO_REJA = 20;
 	public const int TEXTO_PUERTA_GEMELAS = 21;
 	
+	// CUARTO DE LAS GEMELAS
+	public const int TEXTO_GEMELAS_INTR0 = 22;
+	public const int TEXTO_GEMELAS_PUERTA_SIN_JUEGO = 23;
+	public const int TEXTO_GEMELAS_PUERTA_SIN_APROBACION = 24;
+	public const int TEXTO_GEMELAS_PUERTA_CON_APROBACION = 25;
+	public const int TEXTO_GEMELAS_INTRO_FRENTE = 26;
+	public const int TEXTO_GEMELAS_REINA = 27;
+	public const int TEXTO_GEMELAS_SIN_REINA = 28;
+	public const int TEXTO_GEMELAS_BUFON = 29;
+	public const int TEXTO_GEMELAS_SIN_BUFON = 30;
+	
 	/* 
 	 * CONSTANTES RESULTADOS DE LOS DIALOGOS
 	 */
@@ -47,6 +58,12 @@ public class TextosNivel{
 	public const int RESULTADO_CAMA_SOLO = 4;
 	public const int RESULTADO_PUERTA_GEMELAS = 5;
 	
+	// CUARTO DE LAS GEMELAS
+	public const int RESULTADO_APROPACION = 6;
+	public const int RESULTADO_REINA = 7;
+	public const int RESULTADO_BUFON = 8;
+	public const int RESULTADO_INICIO_JUEGO1 = 9;
+	
 	
 //==============================================================================================================
 // Constructores
@@ -54,7 +71,8 @@ public class TextosNivel{
 	
 	
 	public TextosNivel(){
-		InicializarTextosNivelPrincipal();		
+		InicializarTextosNivelPrincipal();
+		InicializarTextosNivelGemelas();
 	}
 	
 	public NodoTexto darTexto(int indice){
@@ -83,6 +101,19 @@ public class TextosNivel{
 		textoEspejo();
 		textoReja();
 		textoPuertaGemelas();
+		textoGemelasIntroFrente();
+	}
+	
+	public void InicializarTextosNivelGemelas(){
+		textoGemelasIntro();
+		textoGemelasPuertaSinJuego();
+		textoGemelasPuertaSinAprobacion();
+		textoGemelasPuertaConAprobacion();
+		textoGemelasIntroFrente();
+		textoGemelasReina();
+		textoGemelasSinReina();
+		textoGemelasBufon();
+		textoGemelasSinBufon();
 	}
 
 //==============================================================================================================
@@ -275,6 +306,20 @@ public class TextosNivel{
 		listaTextos[TEXTO_CORREDOR_1_SI_REJA] = nuevoTexto;
 	}
 	
+	private void textoPuertaGemelas(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Creo estar por fin a gusto, el rostro sobre la puerta y las rodillas hundidas en la alfombra,\n" +
+			"cuando oigo de nuevo las risas, y vuelve a mí la urgencia de hablarle a ese niño, y ahora que\n" +
+			"lo pienso, necesito hablar también con las niñas, pues nunca se disculparon por despertarme,\n" +
+			"o por no despertarme completamente.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_PUERTA_GEMELAS);
+		listaTextos[TEXTO_PUERTA_GEMELAS] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 1-5: CORREDOR 2
+	 */ 
 	private void textoCorredor2Intro(){
 		ArrayList nuevaLista = new ArrayList();
 		string nuevaLinea = "Cruzo por el frente de cada puerta casi corriendo, como si no quisiera que se abrieran en el\n" +
@@ -303,6 +348,10 @@ public class TextosNivel{
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
 		listaTextos[TEXTO_CORREDOR_LAMPARA] = nuevoTexto;
 	}
+	
+	/*
+	 * ESTADO 1-6 ESPEJO
+	 */
 	
 	private void textoFrenteEspejo(){
 		ArrayList nuevaLista = new ArrayList();
@@ -340,14 +389,198 @@ public class TextosNivel{
 		listaTextos[TEXTO_REJA] = nuevoTexto;
 	}
 	
-	private void textoPuertaGemelas(){
+	
+	/*
+	 * ESCENA 2: CUARTO DE LAS GEMELAS
+	 */
+	
+	/*
+	 * ESTADO 2-1: INTRO
+	 */
+	
+	 private void textoGemelasIntro(){
 		ArrayList nuevaLista = new ArrayList();
-		string nuevaLinea = "Creo estar por fin a gusto, el rostro sobre la puerta y las rodillas hundidas en la alfombra,\n" +
-			"cuando oigo de nuevo las risas, y vuelve a mí la urgencia de hablarle a ese niño, y ahora que\n" +
-			"lo pienso, necesito hablar también con las niñas, pues nunca se disculparon por despertarme,\n" +
-			"o por no despertarme completamente.";
+		string nuevaLinea = "Me reciben dos moñas, una al lado izquierdo de la cabeza y otra al lado derecho. Me reciben\n" +
+			"también dos sonrisas, enormes, brillantes y sin algunos dientes, las sonrisas más grandes que he\n" +
+			"visto, como si verme fuera lo mejor que les hubiera pasado.";
 		nuevaLista.Add(nuevaLinea);
-		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_PUERTA_GEMELAS);
-		listaTextos[TEXTO_PUERTA_GEMELAS] = nuevoTexto;
+		nuevaLinea = "Es ridículo, pues no sabría a quién podría parecerle yo una buena noticia. No sé por qué\n" +
+			"pienso en eso,solo se me vino a la mente, y no puedo pensar por qué lo pensé, pues las\n" +
+			"gemelas ya están al frente mío, una en cada mano, y me meten al cuarto a la fuerza.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		
+		listaTextos[TEXTO_GEMELAS_INTR0] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 2-3: FRENTE A LAS GEMELAS
+	 */
+	private void textoGemelasIntroFrente(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "- Ven, ven – dice con emoción la de la moña derecha – o te quedaras de nuevo dormido\n" +
+			"ahí parado.\n\n"+
+			"- Lo mejor para despertarse es jugar – dice ahora la de la izquierda, y me jalonea el brazo\n" +
+			"para que me siente en el tapete, en medio de la habitación – Ahora si podemos jugar a lo que\n" +
+			"el rey manda, ya somos tres.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "-  Bien, pero esta vez yo no seré el rey. Siempre me toca el bufón, y no me gusta ese papel.\n"+
+			"La de la moña en la izquierda se ríe con gana, con verdadera felicidad en su voz. – Bien, bien,\n" +
+			"yo seré la reina y nuestro amigo será el bufón.\n\n"+
+			"- ¡No seas tan maleducada! Deja que él elija.\n\n"+
+			"- Está bien, pero empecemos ya, o se quedará dormido otra vez.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Y aunque se supone que creo seguir dormido, ahora eso no me preocupa, hay una cuestion más\n" +
+			"grave en mis manos ahora ¿Qué papel quiero ser en el juego?";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		// Opcion 1
+		nuevaLista = new ArrayList();
+		nuevaLinea = "La Reina";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Digo que quiero ser la reina, aunque no sé qué diferencia hay entre ser eso o ser bufón.\n" +
+			"La niña de la moña derecha corre hacia la esquina del cuarto, agarra un banquito pequeño,\n" +
+			"lo trae, se para en él, se arregla el vestido, hincha el pecho, se aclara la garganta  y\n" +
+			"sube el mentón:";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Atención todo el mundo que habla el rey\n"+
+			"Siéntese el peón, el herrero y hasta el buey\n"+
+			"Y que nadie lo mantenga en secreto\n"+
+			"Que este es mi primer decreto";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "La niña pasa la vista por toda la habitación, pensando en su primer decreto. Algo se le viene\n" +
+			"a la cabeza, pues su expresión cambia: “Quiero ver un baile, pero no se puede hacer nada en\n" +
+			"este desorden ¡El rey decreta que se limpie el cuarto, y que se guarde todo en el armario!”.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Al parecer es trabajo de la reina ordenar, y algo en mi interior se alegra de que me permitan\n" +
+			"hacerlo. Me preocupa más ordenar el cuarto que no saber por qué me preocupa.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto opcion1 = new NodoTexto(nuevaLista, RESULTADO_REINA);
+		nuevoTexto.setHijo1(opcion1);
+		// Opcion 2
+		nuevaLista = new ArrayList();
+		nuevaLinea = "El Bufón";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Digo que quiero ser el bufón, aunque no sé qué diferencia hay entre ser eso o ser reina. La\n" +
+			"niña de la moña derecha corre hacia la esquina del cuarto, agarra un banquito pequeño, lo trae,\n" +
+			"se para en él, se arregla el vestido, hincha el pecho, se aclara la garganta  y sube el mentón:";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Atención todo el mundo que habla el rey\n"+
+			"Siéntese el peón, el herrero y hasta el buey\n"+
+			"Y que nadie lo mantenga en secreto\n"+
+			"Que este es mi primer decreto";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "La niña mira hacia el techo, pensando cual va a ser su primer decreto. Cuando lo tiene en\n" +
+			"la cabeza,se sonríe con malicia y me mira: “El rey decreta que en el tapete de danzas se le\n" +
+			"muestre un baile exótico”. La de la moña izquierda suelta una risa ahogada, y ambas se quedan\n" +
+			"mirándome, esperando que yo haga algo.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Al parecer es trabajo del bufón bailar, y algo en mi interior se alegra de que me permitan\n" +
+			"hacerlo. Se me ocurren mil cosas, que no sé de donde salen o por qué las conozco. Pero ahora\n" +
+			"quiero bailar, no averiguar por qué se hacerlo.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto opcion2 = new NodoTexto(nuevaLista, RESULTADO_BUFON);
+		nuevoTexto.setHijo2(opcion2);
+		listaTextos[TEXTO_GEMELAS_INTRO_FRENTE] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 2-4: TAPETE
+	 */
+	
+	private void textoGemelasBufon(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Mi escenario no es más que un tapete. Creo que es suficiente y adecuado, pero no\n" +
+			"puedo evitar sentirme nervioso ¿Les agradará? ¿Lo aceptarán?"; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "No bailo ante cualquiera, es un rey y una reina que esperan que su bufón los entretenga,\n" +
+			"o por lo menos así tengo que creerlo si quiero hacer todo bien. No entiendo ese afán por que\n" +
+			"todo salga bien, porque me acepten, porque les guste.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Saco una analogía tonta, no sé de donde: “Bailar es como ordenar palabras, salen letras de\n" +
+			"todos lados, y tú solo tienes que darles sentido”. Es en verdad una analogía muy tonta.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_INICIO_JUEGO1);
+		listaTextos[TEXTO_GEMELAS_BUFON] = nuevoTexto;
+	}
+	
+	private void textoGemelasSinBufon(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Ese tapete rodeado de libros para colorear y juguetes me recuerda algo, pero no se qué.\n" +
+			"No importa mucho, porque el espejo y la reja también me hicieron acordar de algo. El pasillo\n" +
+			"me acuerda de algo."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "El niño, por sobre todo lo demás, es el que más cosas me hace recordar. Si en verdad estuviera\n" +
+			"despierto, sabría qué es lo que se supone que recuerdo.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_GEMELAS_SIN_BUFON] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 2-6: ARMARIO
+	 */
+	private void textoGemelasReina(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Me doy cuenta que en efecto hay un desorden monumental. Juguetes, libros y ropa casi\n" +
+			"cubren el suelo con otro tapete, las camas están destendidas, las cobijas revueltas y enredadas,\n" +
+			"las cortinas no están amarradas y el closet parece una jungla de sacos y chaquetas."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Nada está en su sitio, y no parece haber sitio para todo. El desorden me molesta, me inquieta,\n" +
+			"y de mi cabeza no saco el porqué de esos sentimientos, solo sale un estribillo tonto:\n" +
+			"“Ordena rápido o no lo ordenes, no sales de aquí hasta que acabes”.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_INICIO_JUEGO1);
+		listaTextos[TEXTO_GEMELAS_REINA] = nuevoTexto;
+	}
+	
+	private void textoGemelasSinReina(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Este cuarto no se parece al anterior, tampoco se parece a lo que he visto de la casa.\n" +
+			"Es cálido, pero no me siento incómodo. Tampoco tengo sueño, y creo que por fin estoy\n" +
+			"despierto."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Pero igual, también creo que no lo estoy, porque para ser el cuarto de unas niñas, hay muchas\n" +
+			"cosas que me preocupan. No se cuales, solo sé que están ahí, como ese armario, que es tan\n" +
+			"grande, o tan viejo, o tal vez solo sea que en su interior todo está muy desordenado.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_GEMELAS_SIN_REINA] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 2-7: PUERTA
+	 */
+	private void textoGemelasPuertaSinJuego(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Algo en el ambiente me pone nervioso, me oprime. La idea de salir me ronda la cabeza, pues\n" +
+			"el pasillo es menos apabullante que esta habitación. Pero las niñas me miran\n" +
+			"desde el otro lado, me esperan con ansías ¿Por qué? No creo ser así de especial..";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_GEMELAS_PUERTA_SIN_JUEGO] = nuevoTexto;
+	}
+	
+	private void textoGemelasPuertaSinAprobacion(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "De alguna u otra manera, he logrado hacer lo que el rey me pide ¿Si habrá sido de su agrado?\n" +
+			"¿Si habré cumplido sus expectativas? La duda me acosa, tengo que hablar con ella.\n" +
+			"Los nervios no se me van, ni cuando me acuerdo que solo es un juego entre niñas.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_GEMELAS_PUERTA_SIN_APROBACION] = nuevoTexto;
+	}
+	
+	private void textoGemelasPuertaConAprobacion(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Creo que es todo lo que puedo hacer aquí, y salgo, no con una respuesta, sino con una idea.\n" +
+			"No es una idea buena, pues ahora me pesa la memoria, y la necesidad de hablar con ese\n" +
+			"niño se convierte en una obsesión."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Hay muchas preguntas en mi cabeza. Una de esas me causa más curiosidad que las otras:\n" +
+			"¿No eran dos las niñas que me despertaron?";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_APROPACION);
+		listaTextos[TEXTO_GEMELAS_PUERTA_CON_APROBACION] = nuevoTexto;
 	}
 }
