@@ -22,7 +22,7 @@ public class AdminPrincipal : MonoBehaviour {
 	private bool corredor1 = false;
 	private bool corredor2 = false;
 	private bool espejo = false;
-	private bool verReja = false;
+	private bool verReja = true;
 	private bool volver = false;
 	
 	//=================================================================================================
@@ -44,8 +44,11 @@ public class AdminPrincipal : MonoBehaviour {
 		movimiento.EstablecerCamara(GameObject.Find("Main Camera"));
 		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
 		textos.PuedoActivarMov(false);
+		textos.cambiarAdmin();
 		//Cambia al grafo respectivo y se mueve al estado apropiado
 		movimiento.cambiarGrafo(EstadosNivel.PRINCIPAL);
+		movimiento.cambiarAdmin();
+		movimiento.reiniciarFlechas();
 		NodoGrafo ultimo = globales.darUltimoEstado();
 		movimiento.irAEstado(ultimo);
 		movimiento.reiniciarFlechas();

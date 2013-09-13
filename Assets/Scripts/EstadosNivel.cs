@@ -45,7 +45,6 @@ public class EstadosNivel
 			case(PRINCIPAL)	:
 				GrafoActual = GrafoPrincipal;
 				estadoActual = GrafoActual.darEstadoActual();
-			Debug.Log("Grafo: " + GrafoActual + " Estado Actual: " + estadoActual);
 			break;
 			
 			case(GEMELAS) :

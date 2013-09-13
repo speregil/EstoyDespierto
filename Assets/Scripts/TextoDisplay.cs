@@ -132,4 +132,8 @@ public class TextoDisplay : MonoBehaviour {
 	public void PuedoActivarMov(bool param){
 		puedoActivarMov = param;	
 	}
+	
+	public void cambiarAdmin(){
+		admin = (IEventos)GameObject.Find("Nivel").GetComponent(typeof(IEventos));
+	}
 }

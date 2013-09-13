@@ -17,7 +17,5 @@ public class IEventos : MonoBehaviour {
 	
 	public void EstadoTrigger(string objEstado){
 		SendMessage("EventEstado", objEstado);
-	}
-	
-	
+	}	
 }

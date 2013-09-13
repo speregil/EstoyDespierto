@@ -1,14 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TextosNivel.cs">
-    <Files>
-      <File FileName="Assets\Scripts\AdminGemelas.cs" Line="88" Column="20" />
-      <File FileName="Assets\Scripts\AdminPrincipal.cs" Line="226" Column="3" />
-      <File FileName="Assets\Scripts\TextosNivel.cs" Line="501" Column="92" />
-      <File FileName="Assets\Scripts\MovimientoDisplay.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EstadosNivel.cs" Line="123" Column="47" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

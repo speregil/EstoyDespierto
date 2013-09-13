@@ -35,9 +35,10 @@ public class AdminGemelas : MonoBehaviour {
 		movimiento.EstablecerCamara(GameObject.Find("Main Camera"));
 		movimiento.activar();
 		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
-		
+		textos.cambiarAdmin();
 		//Cambia al grafo respectivo y se mueve al estado apropiado
 		movimiento.cambiarGrafo(EstadosNivel.GEMELAS);
+		movimiento.cambiarAdmin();
 		movimiento.reiniciarFlechas();
 		NodoGrafo ultimo = movimiento.darEstadoActual();
 		if(ultimo.TieneAdelante())
