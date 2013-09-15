@@ -22,7 +22,7 @@ public class AdminPrincipal : MonoBehaviour {
 	private bool corredor1 = false;
 	private bool corredor2 = false;
 	private bool espejo = false;
-	private bool verReja = true;
+	private bool verReja = false;
 	private bool volver = false;
 	
 	//=================================================================================================

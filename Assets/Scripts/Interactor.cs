@@ -12,8 +12,19 @@ public class Interactor : MonoBehaviour {
 	
 	private IEventos interfaz;
 	
+	private MovimientoDisplay movimiento;
+	
+	private Texture2D cursor;
+	
+	// Conexion con al administrador global del juego
+	private GameObject globales;
+	
 	//Determina el comando de acción del evento
 	public string comando;
+	
+	// Determian el ID del estado donde se puede activar este interactor
+	public int estadoBase;
+	
 	//Conexión con el administrador del nivel
 	public GameObject admin;
 
@@ -22,7 +33,13 @@ public class Interactor : MonoBehaviour {
 //================================================================================================
 
 	void Awake(){
-		interfaz = (IEventos)admin.GetComponent(typeof(IEventos));	
+		interfaz = (IEventos)admin.GetComponent(typeof(IEventos));
+	}
+	
+	void Start(){
+		globales = GameObject.Find("Global");
+		movimiento = (MovimientoDisplay)globales.GetComponent(typeof(MovimientoDisplay));
+		cursor = VariablesGlobales.cursorOver;
 	}
 	
 	public void encender(){
@@ -34,19 +51,27 @@ public class Interactor : MonoBehaviour {
 	}
 
 	public void OnMouseEnter(){
-			//TODO Iluminar el objeto
-			print ("SOBRE UN INTERACTOR");
+		if(OnEstado()){
+			Debug.Log("Enter");
+			Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+		}
 	}
 
 	public void OnMouseExit(){
-		//TODO Deseleccionar el objeto
-		print ("SALIO DE UN INTERACTOR");
+		Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
 	}
 
 	public void OnMouseDown(){	
-		if(control){
-			print("Click!!!!!");
+		if(control && OnEstado()){
 			interfaz.Switch(comando);
 		}
+	}
+	
+	public bool OnEstado(){
+		NodoGrafo estadoActual = movimiento.darEstadoActual();
+		if(estadoActual.darEstado() == estadoBase){
+			return true;
+		}
+		return false;
 	}
 }
