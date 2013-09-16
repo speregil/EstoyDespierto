@@ -3,7 +3,13 @@ using System.Collections;
 
 public class VariablesGlobales : MonoBehaviour {
 	
+	// Control de eventos
 	public static bool primeraVez = true;
+	
+	//Flags de personalidad
+	public static bool racional = false;
+	public static bool artistico = false;
+	
 	public static Texture2D cursorOver;
 	
 	public NodoGrafo ultimoEstado;

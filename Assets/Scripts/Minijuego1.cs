@@ -30,7 +30,7 @@ public class Minijuego1 : MonoBehaviour
 	
 	void Start ()
 	{
-		score = 1;
+		score = 35;
 		q =new GUIStyle();
 		q.normal.background = botonNoOprimido;
 		w =new GUIStyle();
@@ -212,7 +212,11 @@ public class Minijuego1 : MonoBehaviour
 				
 			}
 				if(score*20 >= Screen.width){
-					Debug.Log("Ganaste!!!!!!!");
+					VariablesGlobales.racional = true;
+					desactivar();		
+				}
+				else if(score <= 0){
+					VariablesGlobales.artistico = true;
 					desactivar();		
 				}
 		}

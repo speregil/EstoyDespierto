@@ -16,9 +16,7 @@ public class AdminGemelas : MonoBehaviour {
 	private bool puerta = false;
 	private bool minijuego = false;
 	private bool aprobacion = false;
-	private bool gemelas = false;
-	private bool reina = false;
-	private bool bufon = false;
+	private bool hablarGemelas = false;
 	
 	void Awake(){
 		
@@ -81,16 +79,32 @@ public class AdminGemelas : MonoBehaviour {
 			}
 		}
 		if(comando.Equals("Armario")){
-			if(reina)
+			if(hablarGemelas){
 				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_REINA);
+				minijuego = true;
+			}
 			else
 				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_SIN_REINA);
 		}
 		if(comando.Equals("Tapete")){
-			if(bufon)
-				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_BUFON);
-			else
 				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_SIN_BUFON);
+		}
+		
+		if(comando.Equals("Derecha")){
+			if(VariablesGlobales.racional){	
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_GANO_DERECHA);
+				aprobacion = true;
+			}
+			else
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_DERECHA);
+		}
+		if(comando.Equals("Izquierda")){
+			if(VariablesGlobales.artistico){	
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_GANO_IZQUIERDA);
+				aprobacion = true;
+			}
+			else
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_IZQUIERDA);
 		}
 	}
 	
@@ -98,14 +112,6 @@ public class AdminGemelas : MonoBehaviour {
 		if(resultado == TextosNivel.RESULTADO_APROPACION){
 			movimiento.desactivar();
 			Application.LoadLevel("Principal");
-		}
-		
-		else if(resultado == TextosNivel.RESULTADO_REINA){
-			reina = true;
-		}
-		
-		else if(resultado == TextosNivel.RESULTADO_BUFON){
-			bufon = true;
 		}
 		
 		else if(resultado == TextosNivel.RESULTADO_INICIO_JUEGO1){
@@ -116,8 +122,19 @@ public class AdminGemelas : MonoBehaviour {
 	
 	public void EventEstado (string comando){
 		if(comando.Equals("Gemelas")){
-			if(!gemelas)
+			if(!hablarGemelas){
 				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_INTRO_FRENTE);
+				hablarGemelas = true;	
+			}
+		}
+		
+		if(comando.Equals("Prueba")){
+			if(VariablesGlobales.racional){
+				GameObject.Destroy(GameObject.Find("GemelaIzq"));	
+			}
+			else if(VariablesGlobales.artistico){
+				GameObject.Destroy(GameObject.Find("GemelaDer"));	
+			}
 		}
 	}
 	
