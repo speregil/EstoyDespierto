@@ -22,7 +22,7 @@ public class AdminPrincipal : MonoBehaviour {
 	private bool corredor1 = false;
 	private bool corredor2 = false;
 	private bool espejo = false;
-	private bool verReja = false;
+	private bool verReja = true;
 	private bool volver = false;
 	
 	//=================================================================================================
@@ -43,7 +43,6 @@ public class AdminPrincipal : MonoBehaviour {
 		movimiento = (MovimientoDisplay)Global.GetComponent(typeof(MovimientoDisplay));
 		movimiento.EstablecerCamara(GameObject.Find("Main Camera"));
 		textos = (TextoDisplay)Global.GetComponent(typeof(TextoDisplay));
-		textos.PuedoActivarMov(false);
 		textos.cambiarAdmin();
 		//Cambia al grafo respectivo y se mueve al estado apropiado
 		movimiento.cambiarGrafo(EstadosNivel.PRINCIPAL);
@@ -65,11 +64,18 @@ public class AdminPrincipal : MonoBehaviour {
 		// Ejecuta las acciones correspondietes a los flags de control
 		if(VariablesGlobales.primeraVez){
 			textos.empezarTexto(TextosNivel.TEXTO_INTRO_CAMA);
+			textos.PuedoActivarMov(false);
 		}
 		else{
 			parpado1.Abrir();
 			parpado2.Abrir();
 			movimiento.activar();
+			
+			corredor1 = true;
+			corredor2 = true;
+			espejo = true;
+			verReja = true;
+			volver = true;
 		}
 	}
 	
@@ -232,6 +238,7 @@ public class AdminPrincipal : MonoBehaviour {
 		}
 		
 		else if(comando.Equals("Corredor1")){
+			movimiento.darEstadoActual().eliminarAnterior();
 			movimiento.NoHayDetras();
 			if(!verReja){
 				if(!corredor1){

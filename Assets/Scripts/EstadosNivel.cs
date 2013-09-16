@@ -31,7 +31,6 @@ public class EstadosNivel
 	//-----------------------------------------------------------
 	
 	public NodoGrafo darEstadoActual(){
-		Debug.Log("El estado actual es: " + estadoActual);
 		return estadoActual;	
 	}
 	

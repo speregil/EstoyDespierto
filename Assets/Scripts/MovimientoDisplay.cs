@@ -73,7 +73,6 @@ public class MovimientoDisplay : MonoBehaviour {
 	//==============================================================================================
 	
 	void OnGUI () {
-
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de arriba
 		if(puedeMoverse){
 			if(hayAdelante){
@@ -90,6 +89,7 @@ public class MovimientoDisplay : MonoBehaviour {
 					anguloDestino = estadoSig.darAngulo();
 					flecha = true;
 					enMovimiento = true;
+					//Debug.Log("Ad: " + hayAdelante + " Atr: " + hayDetras + " Izq: " + hayIzquierda + " Der: " + hayDerecha);
 				}
 			}
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de la izquierda
@@ -165,9 +165,7 @@ public class MovimientoDisplay : MonoBehaviour {
 	}
 	
 	public void irAEstado(NodoGrafo estado){
-		print ("Por fuera del if");
 		if(estado != null){
-			print ("Ir a estado se lanzo");
 			Camara.transform.position = estado.darPosicion();
 			estados.cambiarEstadoActual(estado);
 		}

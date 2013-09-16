@@ -169,6 +169,39 @@ public class NodoGrafo
 	}
 	
 	/*
+	 * Elimina un sucesor derecho directamente
+	 * */
+	public void eliminarDerecho()
+	{
+		derecha = null;
+		tieneDerecha = false;
+	}
+	/*
+	 * Elimina un sucesor Izquierdo directamente
+	 * */
+	public void eliminarIzquierdo()
+	{
+		izquierda = null;
+		tieneIzquierda = false;
+	}
+	/*
+	 * Elimina un sucesor delantero directamente
+	 * */
+	public void eliminarDelantero()
+	{
+		adelante = null;
+		tieneAdelante = false;
+	}
+	/* 
+	 * Elimina un predecesor al nodo
+	 * */
+	public void eliminarAnterior()
+	{
+		atras = null;
+		tieneDetras = false;
+	}
+	
+	/*
 	 * Retorna true si posee un hijo en la posicion especificada
 	 */
 	
