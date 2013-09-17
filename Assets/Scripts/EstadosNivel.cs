@@ -10,10 +10,12 @@ public class EstadosNivel
 	private Grafo GrafoActual;
 	private Grafo GrafoPrincipal;
 	private Grafo GrafoGemelas;
+	private Grafo GrafoCocina;
 	public NodoGrafo estadoActual;
 	
 	public const int PRINCIPAL = 0;
 	public const int GEMELAS = 1;
+	public const int COCINA = 2;
 	
 	//-----------------------------------------------------------
 	// Constructor
@@ -22,6 +24,7 @@ public class EstadosNivel
 	public EstadosNivel(){
 		inicializarGrafoPrincipal();
 		inicializarGrafoGemelas();
+		inicializarGrafoCocina();
 		/*GrafoActual = GrafoPrincipal;
 		estadoActual = GrafoActual.darEstadoActual();*/
 	}
@@ -50,6 +53,11 @@ public class EstadosNivel
 				GrafoActual = GrafoGemelas;
 				estadoActual = GrafoActual.darEstadoActual();
 			break;
+			
+			case(COCINA) :
+				GrafoActual = GrafoCocina;
+				estadoActual = GrafoActual.darEstadoActual();
+			break;
 		}
 	}
 	
@@ -58,7 +66,7 @@ public class EstadosNivel
 	//--------------------------------------------------------------
 	
 	public void inicializarGrafoPrincipal(){
-		GrafoPrincipal = new Grafo(100);
+		GrafoPrincipal = new Grafo(12);
 		
 		NodoGrafo estado0 = new NodoGrafo(0,"",new Vector3(3,0,0),0.0f);
 		GrafoPrincipal.agregarEstado(estado0);
@@ -110,7 +118,7 @@ public class EstadosNivel
 	//-------------------------------------------------------------------------------------
 	
 	public void inicializarGrafoGemelas(){
-		GrafoGemelas = new Grafo(100);
+		GrafoGemelas = new Grafo(8);
 		
 		NodoGrafo estado0 = new NodoGrafo(0,"",new Vector3(5,0,-3),0.0f);
 		GrafoGemelas.agregarEstado(estado0);
@@ -139,5 +147,49 @@ public class EstadosNivel
 		GrafoGemelas.asignarDelantero(estado4.darEstado(), estado5.darEstado());
 		GrafoGemelas.asignarDelantero(estado1.darEstado(), estado2.darEstado());
 		GrafoGemelas.asignarIzquierdo(estado4.darEstado(), estado6.darEstado());
+	}
+	
+	public void inicializarGrafoCocina(){
+		GrafoCocina = new Grafo(100);
+		
+		NodoGrafo estado0 = new NodoGrafo(0,"",new Vector3(3,0,2),0.0f);
+		GrafoCocina.agregarEstado(estado0);
+		
+		NodoGrafo estado1 = new NodoGrafo(1,"",new Vector3(1,0,6),0.0f);
+		GrafoCocina.agregarEstado(estado1);
+		
+		NodoGrafo estado2 = new NodoGrafo(2,"",new Vector3(1,0,6),-90.0f);
+		GrafoCocina.agregarEstado(estado2);
+		
+		NodoGrafo estado3 = new NodoGrafo(3,"",new Vector3(1,0,6),90.0f);
+		GrafoCocina.agregarEstado(estado3);
+		
+		NodoGrafo estado4 = new NodoGrafo(4,"",new Vector3(0,0,9),0.0f);
+		GrafoCocina.agregarEstado(estado4);
+		
+		NodoGrafo estado5 = new NodoGrafo(5,"",new Vector3(0,0,9),90.0f);
+		GrafoCocina.agregarEstado(estado5);
+		
+		NodoGrafo estado6 = new NodoGrafo(6,"",new Vector3(3,0,10),90.0f);
+		GrafoCocina.agregarEstado(estado6);
+		
+		NodoGrafo estado7 = new NodoGrafo(7,"",new Vector3(5,0,7),90.0f);
+		GrafoCocina.agregarEstado(estado7);
+		
+		NodoGrafo estado8 = new NodoGrafo(8,"",new Vector3(5,0,7),180.0f);
+		GrafoCocina.agregarEstado(estado8);
+		
+		NodoGrafo estado9 = new NodoGrafo(9,"",new Vector3(3,0,5),180.0f);
+		GrafoCocina.agregarEstado(estado9);
+		
+		GrafoCocina.asignarDelantero(estado0.darEstado(), estado1.darEstado());
+		GrafoCocina.asignarIzquierdo(estado1.darEstado(), estado2.darEstado());
+		GrafoCocina.asignarDerecho(estado1.darEstado(), estado3.darEstado());
+		GrafoCocina.asignarDelantero(estado1.darEstado(), estado4.darEstado());
+		GrafoCocina.asignarDerecho(estado4.darEstado(), estado5.darEstado());
+		GrafoCocina.asignarDelantero(estado5.darEstado(), estado6.darEstado());
+		GrafoCocina.asignarDelantero(estado6.darEstado(), estado7.darEstado());
+		GrafoCocina.asignarDerecho(estado7.darEstado(), estado8.darEstado());
+		GrafoCocina.asignarDelantero(estado8.darEstado(), estado9.darEstado());
 	}
 }
