@@ -1,12 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AdminPrincipal.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AdminCocina.cs">
     <Files>
-      <File FileName="Assets\Scripts\AdminPrincipal.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\VariablesGlobales.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\NodoGrafo.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MovimientoDisplay.cs" Line="75" Column="17" />
-      <File FileName="Assets\Scripts\EstadosNivel.cs" Line="33" Column="37" />
+      <File FileName="Assets\Scripts\AdminCocina.cs" Line="53" Column="20" />
+      <File FileName="Assets\Scripts\AdminPrincipal.cs" Line="294" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

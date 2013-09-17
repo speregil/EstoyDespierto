@@ -44,6 +44,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AdminCocina.cs" />
      <Compile Include="Assets\Scripts\AdminGemelas.cs" />
      <Compile Include="Assets\Scripts\AdminPrincipal.cs" />
      <Compile Include="Assets\Scripts\EstadosNivel.cs" />
