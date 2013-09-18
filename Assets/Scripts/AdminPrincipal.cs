@@ -22,8 +22,8 @@ public class AdminPrincipal : MonoBehaviour {
 	private bool corredor1 = false;
 	private bool corredor2 = false;
 	private bool espejo = false;
-	private bool verReja = true;
-	private bool volver = false;
+	private bool verReja = false;
+	private bool volver = true;
 	
 	//=================================================================================================
 	// inicializacion
@@ -118,7 +118,11 @@ public class AdminPrincipal : MonoBehaviour {
 		
 		//Puerta a la habitacion de las gemelas
 		else if(comando.Equals("PuertaGemelas")){
-			if(volver){
+			
+			if(VariablesGlobales.racional || VariablesGlobales.artistico){
+				textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_COMPLETO);	
+			}
+			else if(volver){
 				textos.empezarTexto(TextosNivel.TEXTO_PUERTA_GEMELAS);
 			}
 			else{
@@ -140,10 +144,7 @@ public class AdminPrincipal : MonoBehaviour {
 		
 		else if(comando.Equals("PuertaCocina")){
 			if(volver){
-				NodoGrafo actual = movimiento.darEstadoActual();
-				globales.establecerUltimoEstado(actual.darIzquierda());
-				movimiento.desactivar();
-				Application.LoadLevel("Cocina");
+				textos.empezarTexto(TextosNivel.TEXTO_PUERTA_COCINA);	
 			}
 			else{
 				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
@@ -227,6 +228,14 @@ public class AdminPrincipal : MonoBehaviour {
 			globales.establecerUltimoEstado(actual.darIzquierda());
 			movimiento.desactivar();
 			Application.LoadLevel("CuartoGemelas");
+		}
+		
+		// Ir a la cocina
+		else if(resultado == TextosNivel.RESULTADO_PUERTA_COCINA){
+			NodoGrafo actual = movimiento.darEstadoActual();
+			globales.establecerUltimoEstado(actual.darDerecha());
+			movimiento.desactivar();
+			Application.LoadLevel("Cocina");
 		}
 	}
 	

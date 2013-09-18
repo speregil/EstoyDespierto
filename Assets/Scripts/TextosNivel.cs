@@ -35,6 +35,8 @@ public class TextosNivel{
 	public const int TEXTO_ESPEJO = 19;
 	public const int TEXTO_REJA = 20;
 	public const int TEXTO_PUERTA_GEMELAS = 21;
+	public const int TEXTO_PUERTA_COCINA = 35;
+	public const int TEXTO_GEMELAS_COMPLETO = 36;
 	
 	// CUARTO DE LAS GEMELAS
 	public const int TEXTO_GEMELAS_INTR0 = 22;
@@ -51,6 +53,20 @@ public class TextosNivel{
 	public const int TEXTO_GEMELAS_GANO_IZQUIERDA = 33;
 	public const int TEXTO_GEMELAS_GANO_DERECHA = 34;
 	
+	// COCINA
+	public const int TEXTO_COCINA_INTRO = 37;
+	public const int TEXTO_COCINA_CENTRO = 38;
+	public const int TEXTO_COCINA_JOVEN_INTRO = 39;
+	public const int TEXTO_COCINA_OLLA_SI_INTRO = 40;
+	public const int TEXTO_COCINA_OLLA_NO_INTRO = 41;
+	public const int TEXTO_COCINA_JOVEN_SOPA = 42;
+	public const int TEXTO_COCINA_LIBRO = 43;
+	public const int TEXTO_COCINA_LAVADORA_SI_INTRO = 44;
+	public const int TEXTO_COCINA_LAVADORA_NO_INTRO = 45;
+	public const int TEXTO_COCINA_SERVILLETA = 46;
+	public const int TEXTO_COCINA_LOCKER_SI_INTRO = 47;
+	public const int TEXTO_COCINA_LOCKER_NO_INTRO = 48;
+	
 	/* 
 	 * CONSTANTES RESULTADOS DE LOS DIALOGOS
 	 */
@@ -61,11 +77,16 @@ public class TextosNivel{
 	public const int RESULTADO_NINO_SE_FUE = 3;
 	public const int RESULTADO_CAMA_SOLO = 4;
 	public const int RESULTADO_PUERTA_GEMELAS = 5;
+	public const int RESULTADO_PUERTA_COCINA = 9;
 	
 	// CUARTO DE LAS GEMELAS
 	public const int RESULTADO_APROPACION = 6;
 	public const int RESULTADO_HABLAR_CUARTO = 7;
 	public const int RESULTADO_INICIO_JUEGO1 = 8;
+	
+	// COCINA
+	public const int RESULTADO_INTRO_JOVEN = 10;
+	
 	
 	
 //==============================================================================================================
@@ -76,10 +97,7 @@ public class TextosNivel{
 	public TextosNivel(){
 		InicializarTextosNivelPrincipal();
 		InicializarTextosNivelGemelas();
-	}
-	
-	public NodoTexto darTexto(int indice){
-		return listaTextos[indice];	
+		InicializarTextosNivelCocina();
 	}
 	
 	public void InicializarTextosNivelPrincipal(){
@@ -105,6 +123,8 @@ public class TextosNivel{
 		textoReja();
 		textoPuertaGemelas();
 		textoGemelasIntroFrente();
+		textoPuertaCocina();
+		textoGemelasCompleto();
 	}
 	
 	public void InicializarTextosNivelGemelas(){
@@ -122,6 +142,29 @@ public class TextosNivel{
 		textoGemelasGanoDerecha();
 		textoGemelasGanoIzquierda();
 	}
+	
+	public void InicializarTextosNivelCocina(){
+		textoCocinaIntro();
+		textoCocinaCentro();
+		textoCocinaJovenIntro();
+		textoCocinaOllaSiIntro();
+		textoCocinaOllaNoIntro();
+		textoCocinaJovenSopa();
+		textoCocinaLibro();
+		textoCocinaLavadoraSiIntro();
+		textoCocinaLavadoraNoIntro();
+		textoCocinaServilleta();
+		textoCocinaLockerSiIntro();
+		textoCocinaLockerNoIntro();
+	}
+
+//===============================================================================================================
+// Metodos Auxiliares
+//===============================================================================================================
+
+	public NodoTexto darTexto(int indice){
+		return listaTextos[indice];	
+	}
 
 //==============================================================================================================
 // Textos
@@ -138,7 +181,13 @@ public class TextosNivel{
 	 */
 	private void textoIntroCama(){
 		ArrayList nuevaLista = new ArrayList();
-		string nuevaLinea = "Oigo unos pasitos apagados, unas risitas contenidas, luego algo se sube muy despacio a la cama\n" +
+		string nuevaLinea = "Tengo uno de esos sueños extraños en que uno intenta entender algo que no tiene sentido.\n" +
+			"Me repito constantemente que debo usar los botones en pantalla para avanzar, que adelanto los\n" +
+			"textos e interactuó con los objetos con click, y que eventualmente tendré que usar el teclado.\n\n"+
+			"Nada tiene sentido, ni importancia, pues todo cambia de un momento a otro. Hay algo distinto\n" +
+			"en mis sueños.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Oigo unos pasitos apagados, unas risitas contenidas, luego algo se sube muy despacio a la cama\n" +
 		 	"y unas manitas empiezan a tocarme la mejilla.";
 		nuevaLista.Add(nuevaLinea);
 		nuevaLinea = "- ¿Estas despierto? – dice una vocecita mientras que una mano helada sube lentamente hasta\n" +
@@ -324,6 +373,15 @@ public class TextosNivel{
 		listaTextos[TEXTO_PUERTA_GEMELAS] = nuevoTexto;
 	}
 	
+	private void textoGemelasCompleto(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "He tenido suficiente diversión con las niñas, y suficientes recuerdos, y suficiente culpa.\n" +
+			"Debo buscar más cosas, hay más puertas en este pasillo.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_GEMELAS_COMPLETO] = nuevoTexto;
+	}
+	
 	/*
 	 * ESTADO 1-5: CORREDOR 2
 	 */ 
@@ -354,6 +412,18 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
 		listaTextos[TEXTO_CORREDOR_LAMPARA] = nuevoTexto;
+	}
+	
+	private void textoPuertaCocina(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Ya había notado que en este pasillo la luz y los colores me hipnotizan, me tranquilizan, pero\n" +
+			"justo al pasar al lado de esta puerta siento con facilidad que ahora mi nariz también entra a este\n" +
+			"juego de sobrecargar mi mente con sensaciones. Es un olor dulce que no hace sino despertar\n" +
+			"recuerdos en mi cabeza, de esos recuerdos que solo se pueden oler. Es mi nariz la que\n" +
+			"me obliga a entrar.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_PUERTA_COCINA);
+		listaTextos[TEXTO_PUERTA_COCINA] = nuevoTexto;
 	}
 	
 	/*
@@ -623,5 +693,169 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_APROPACION);
 		listaTextos[TEXTO_GEMELAS_PUERTA_CON_APROBACION] = nuevoTexto;
+	}
+	
+	
+	/**
+	 * ESCENA 3: COCINA
+	 * ESTADO 3-1: INTRO
+	 */
+	
+	private void textoCocinaIntro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "No me sorprende encontrarme en una cocina al otro lado de la puerta. El lugar entero grita\n" +
+			"comodidad. No la comodidad de sentarse en una silla confortable o en una cama cálida.\n" +
+			"Es la comodidad de estar en un lugar conocido, un lugar familiar. "; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Es una idea ridícula, pues nunca había estado aquí.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_INTRO] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 3-3: CENTRO
+	 */
+	
+	private void textoCocinaCentro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Hay alguien más aquí conmigo. No es un desconocido, aunque no tengo idea de quién es. Es un joven,\n" +
+			"un muchacho que solo hace muy poco dejó de ser niño."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Mira con aburrimiento la estufa, donde una enorme olla se calienta con una pequeña llama azul\n" +
+			"mientras una columna de humo esparce por todo el lugar el aroma ácido que me atrajo.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_CENTRO] = nuevoTexto;
+	}
+	
+	private void textoCocinaJovenIntro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "El muchacho da por sentado que yo existo, como si me conociera de toda la vida. Aunque trato de\n" +
+			"hacerme notar, mi presencia no lo inmuta en lo más mínimo."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Me veo obligado a ser más directo, y le hablo. Nada importante, pues no tengo nada interesante que\n" +
+			"decir, solo un “hola”, y un “¿Qué haces?” a lo que el muchacho solo contesta con “sopa”.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_INTRO_JOVEN);
+		listaTextos[TEXTO_COCINA_JOVEN_INTRO] = nuevoTexto;
+	}
+	
+	private void textoCocinaJovenSopa(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Hay algo que le preocupa al muchacho. Su expresión aburrida me cuenta muchas cosas, o por lo\n" +
+			"menos me da a entender que hay muchas cosas alrededor de este chico y su sopa que podría estar\n" +
+			"diciéndome y no lo hace. "; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "De verdad creo que es importante saber en qué piensa, saber qué es lo que no me dice ¿Por qué?\n" +
+			"No lo sé, quizás sea porque la sopa si me ha abierto el apetito.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_JOVEN_SOPA] = nuevoTexto;
+	}
+	
+	private void textoCocinaLibro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "- No es que me preocupe como hacer la sopa – dice el muchacho de repente – Porque sé\n" +
+			"hacer una sopa. El problema es servirla en el lugar adecuado, y con lo necesario, ese es el\n" +
+			"problema. Alguien más tiene que decirme qué hacer ahí."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "El muchacho quiere decir algo más, pero no lo deja salir. Creo saber qué es, porque es obvio.\n" +
+			"No hay nadie más ahí ¿A quién le pregunta entonces? ¿A mí? ";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Pues no lo ha hecho, seguramente porque no estoy ahí, sino dormido, o porque intuye que yo no\n" +
+			"sé nada sobre sopas, o porque todavía no quiere hablarme, y esa conversación se la soltó al\n" +
+			"viento. Yo haría lo mismo que ese muchacho en su lugar ¿O no?";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_LIBRO] = nuevoTexto;
+	}
+	
+	private void textoCocinaServilleta(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "- Todo el mundo tiene sus preferencias, y sus gustos, y sus manías. Es difícil servir una\n" +
+			"buena cena si todo el mundo es así ¿Cómo sabré a quien ponerle cuchara y a quien tenedor?\n" +
+			"¿A quién le gusta esta salsa o la otra? ¿Medio o tres cuartos? Me gusta hacer sopa, pero\n" +
+			"servirla es terrible."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Comprendo al muchacho perfectamente. En parte porque tampoco me agrada servir la cena, y\n" +
+			"también porque encuentro a la gente difícil de manejar. Por lo menos a las personas que me he\n" +
+			"encontrado hasta el momento, como este muchacho.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_SERVILLETA] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 3-4: ESTUFA
+	 */
+	
+	private void textoCocinaOllaSiIntro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "En efecto, en la olla solo hay sopa, pero además del olor picante que despide, no puedo dar con sus\n" +
+			"ingredientes. ¿Detecto ajo? ¿Algo de cilantro? No me gruñe el estómago, sino la cabeza, y no es\n" +
+			"sobre la sopa, sino sobre el muchacho."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_OLLA_SI_INTRO] = nuevoTexto;
+	}
+	
+	private void textoCocinaOllaNoIntro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Hay algo cocinándose en esta olla, algo que despide un aroma dulce y cautivador. Relaciono el olor\n" +
+			"con personas, tal vez con gente a la que conocía y con la que solía hablar, o con la que tal vez\n" +
+			"nunca hablé. No lo sé, el olor no me cuenta muchas cosas, solo fragmentos."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_OLLA_NO_INTRO] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 3-6: LAVADORA
+	 */
+	
+	private void textoCocinaLavadoraSiIntro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "La lavadora se ha retirado de la sinfonía de sonidos del lugar, y se queda esperando que alguien la\n" +
+			"despoje de su contenido. Cuando miro dentro, no puedo pasar por alto una hermoso juego de\n" +
+			"individuales recién lavado ¿Será que el muchacho espera comer con alguien? Pienso en\n" +
+			"muchas personas, y por último en mí ¿Trata de decirme algo el muchacho?"; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_LAVADORA_SI_INTRO] = nuevoTexto;
+	}
+	
+	private void textoCocinaLavadoraNoIntro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "De alguna manera el sonido de la lavadora es eclipsado por el burbujeo de la olla, y el olor a\n" +
+			"detergente se mezcla con el aire salado que el humo de la sopa ha creado."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_LAVADORA_NO_INTRO] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 3-7: LOCKERS
+	 */
+	
+	private void textoCocinaLockerSiIntro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Al ver tantos y tan distintos utensilios, entiendo por qué el muchacho insiste en darle la\n" +
+			"espalda a estos armarios. Le recuerdan que tiene que decidir, y hacerlo sabiamente. No puede servir\n" +
+			"a unos igual que a otros, ni puede hacer distinciones cuando se supone que todos sean iguales.\n" +
+			"Pensarlo me indispone, o quizás solo sea que la sopa ya va oliendo a rancio."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_LOCKER_SI_INTRO] = nuevoTexto;
+	}
+	
+	private void textoCocinaLockerNoIntro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Hay en este armario utensilios para cada ocasión: Fiestas, cena familiar, desayunos, incluso\n" +
+			"implementos solo para el servicio. Por lo visto esta cocina ha visto un sinfín de personas\n" +
+			"y un sin fin de estilos."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_LOCKER_NO_INTRO] = nuevoTexto;
 	}
 }

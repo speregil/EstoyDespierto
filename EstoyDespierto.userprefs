@@ -1,12 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EstadosNivel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AdminCocina.cs">
     <Files>
-      <File FileName="Assets\Scripts\AdminCocina.cs" Line="38" Column="54" />
-      <File FileName="Assets\Scripts\AdminPrincipal.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EstadosNivel.cs" Line="194" Column="3" />
-      <File FileName="Assets\Scripts\Grafo.cs" Line="63" Column="1" />
-      <File FileName="Assets\Scripts\AdminGemelas.cs" Line="54" Column="20" />
+      <File FileName="Assets\Scripts\AdminCocina.cs" Line="131" Column="37" />
+      <File FileName="Assets\Scripts\TextosNivel.cs" Line="849" Column="43" />
+      <File FileName="Assets\Scripts\VariablesGlobales.cs" Line="41" Column="2" />
+      <File FileName="Assets\Scripts\EstadosNivel.cs" Line="164" Column="46" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

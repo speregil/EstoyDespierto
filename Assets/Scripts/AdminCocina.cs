@@ -11,8 +11,12 @@ public class AdminCocina : MonoBehaviour {
 	private MovimientoDisplay movimiento;
 	private VariablesGlobales globales;
 	
+	private GameObject libro;
+	private GameObject servilleta;
+	private GameObject botella;
 	//Flags particulares
-	
+	private bool introJoven = false;
+	private bool olla = false;
 	
 	//=================================================================================================
 	// inicializacion
@@ -48,10 +52,24 @@ public class AdminCocina : MonoBehaviour {
 		if(ultimo.TieneDerecha())
 			movimiento.SiHayDerecha();
 		movimiento.irAEstado(movimiento.darEstadoActual());
+		
+		//Administracion de objetos particulares a este nivel
+		libro = GameObject.Find("Libro");
+		libro.renderer.enabled = false;
+		libro.collider.enabled = false;
+		
+		servilleta = GameObject.Find("Servilleta");
+		servilleta.renderer.enabled = false;
+		servilleta.collider.enabled = false;
+		
+		botella = GameObject.Find("Botella");
+		botella.renderer.enabled = false;
+		botella.collider.enabled = false;
 		//Modifica variables globales
 		parpado1.Abrir();
 		parpado2.Abrir();
-		
+		VariablesGlobales.primeraVez = false;
+		textos.empezarTexto(TextosNivel.TEXTO_COCINA_INTRO);
 	}
 	
 	// ============================================================================================
@@ -63,9 +81,59 @@ public class AdminCocina : MonoBehaviour {
 	}
 	
 	public void EventSwitch(string comando){
+		if(comando.Equals("Joven")){
+			if(!introJoven){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_JOVEN_INTRO);
+				introJoven = true;
+			}
+			else if(olla){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_JOVEN_SOPA);	
+			}
+		}
 		
+		else if(comando.Equals("Olla")){
+			if(introJoven){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_OLLA_SI_INTRO);
+				olla = true;
+				libro.renderer.enabled = true;
+				libro.collider.enabled = true;
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_OLLA_NO_INTRO);
+			}
+		}
 		
+		else if(comando.Equals("Libro")){
+			textos.empezarTexto(TextosNivel.TEXTO_COCINA_LIBRO);
+		}
 		
+		else if(comando.Equals("Lavadora")){
+			if(introJoven){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_LAVADORA_SI_INTRO);
+				olla = true;
+				servilleta.renderer.enabled = true;
+				servilleta.collider.enabled = true;
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_LAVADORA_NO_INTRO);
+			}
+		}
+		
+		else if(comando.Equals("Servilleta")){
+			textos.empezarTexto(TextosNivel.TEXTO_COCINA_SERVILLETA);
+		}
+		
+		else if(comando.Equals("Locker")){
+			if(introJoven){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_LOCKER_SI_INTRO);
+				olla = true;
+				botella.renderer.enabled = true;
+				botella.collider.enabled = true;
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_LOCKER_NO_INTRO);
+			}
+		}
 	}
 	
 	public void EventDialog(int resultado){
@@ -75,6 +143,10 @@ public class AdminCocina : MonoBehaviour {
 	
 	public void EventEstado (string comando){
 		
+		if(comando.Equals("Centro")){
+			if(!introJoven)
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_CENTRO);	
+		}
 		
 	}
 	

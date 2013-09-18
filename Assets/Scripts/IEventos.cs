@@ -7,7 +7,6 @@ public class IEventos : MonoBehaviour {
 	// implementen estos métodos
 
 	public void Switch(string objName){
-		print("En interfaz");
 		SendMessage("EventSwitch", objName);
 	}
 

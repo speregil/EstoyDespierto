@@ -44,7 +44,6 @@ public class Minijuego1 : MonoBehaviour
 		labelTexto.normal.background = backgroundTexto;
 		respuesta = random();
 		pasoSegundo = false;
-		print(Screen.width);
 		//tiempo = Time.time;
 		//tiempoParseado = 0;
 	}

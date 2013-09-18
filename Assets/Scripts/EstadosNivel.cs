@@ -161,7 +161,7 @@ public class EstadosNivel
 		NodoGrafo estado2 = new NodoGrafo(2,"",new Vector3(1,0,6),-90.0f);
 		GrafoCocina.agregarEstado(estado2);
 		
-		NodoGrafo estado3 = new NodoGrafo(3,"",new Vector3(1,0,6),90.0f);
+		NodoGrafo estado3 = new NodoGrafo(3,"Centro",new Vector3(1,0,6),90.0f);
 		GrafoCocina.agregarEstado(estado3);
 		
 		NodoGrafo estado4 = new NodoGrafo(4,"",new Vector3(0,0,9),0.0f);

@@ -33,11 +33,9 @@ public class MovimientoDisplay : MonoBehaviour {
 	void Awake(){
 		globales = (VariablesGlobales)GetComponent(typeof(VariablesGlobales));
 		estados = globales.darEstados();
-		Debug.Log(estados);
 	}
 	
 	void Start(){
-		Debug.Log("Movimiento start()");
 		admin = GameObject.Find("Nivel");
 		eventos = (IEventos)admin.GetComponent(typeof(IEventos));
 	}
@@ -155,7 +153,6 @@ public class MovimientoDisplay : MonoBehaviour {
 	//==============================================================================================
 	
 	public void cambiarGrafo(int id){
-		Debug.Log(estados);
 		estados.cambiarGrafoActual(id);
 	}
 	

@@ -28,7 +28,7 @@ public class TextoDisplay : MonoBehaviour {
 //=================================================================================
 
 	void Awake(){
-		ventana = new Rect(Screen.width/4,(Screen.height/4), Screen.width/2 + 20,(Screen.height/2));
+		ventana = new Rect(Screen.width/6,(Screen.height/4), Screen.width/2+250,(Screen.height/2));
 		mapaTextos = new TextosNivel();
 	}
 	
