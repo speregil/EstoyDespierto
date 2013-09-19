@@ -33,7 +33,7 @@ public class Minijuego2 : MonoBehaviour
 	
 	void Start ()
 	{
-		score = 1;
+		score = 35;
 		botonNormal =new GUIStyle();
 		botonNormal.normal.background = botonNormalT;
 		botonPresionado =new GUIStyle();
@@ -82,7 +82,11 @@ public class Minijuego2 : MonoBehaviour
 		{
 				pasoSegundo = false;
 				if(score*20 >= Screen.width){
-					Debug.Log("Ganaste!!!!!!!");
+					VariablesGlobales.extrovertido = true;
+					desactivar();		
+				}
+				else if(score <= 0){
+					VariablesGlobales.introvertido = true;
 					desactivar();		
 				}
 		}

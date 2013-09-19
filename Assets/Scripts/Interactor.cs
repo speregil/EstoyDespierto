@@ -51,7 +51,7 @@ public class Interactor : MonoBehaviour {
 	}
 
 	public void OnMouseEnter(){
-		if(OnEstado()){
+		if(OnEstado() && control){
 			Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
 		}
 	}

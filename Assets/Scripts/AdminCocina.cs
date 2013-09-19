@@ -10,13 +10,19 @@ public class AdminCocina : MonoBehaviour {
 	private TextoDisplay textos;
 	private MovimientoDisplay movimiento;
 	private VariablesGlobales globales;
+	private Minijuego2 mini;
 	
 	private GameObject libro;
 	private GameObject servilleta;
 	private GameObject botella;
+	private GameObject sopa;
 	//Flags particulares
 	private bool introJoven = false;
 	private bool olla = false;
+	private bool iniciarMinijuego = false;
+	private bool terminarMinijuego = false;
+	private bool aprobacion = false;
+	private int contMesa = 0;
 	
 	//=================================================================================================
 	// inicializacion
@@ -28,6 +34,7 @@ public class AdminCocina : MonoBehaviour {
 	
 	void Start () {
 		//Inicializa las relaciones con los scripts de control
+		mini = (Minijuego2)GetComponent(typeof(Minijuego2));
 		Global = GameObject.Find("Global");
 		globales = (VariablesGlobales)Global.GetComponent(typeof(VariablesGlobales));
 		parpado1 = (Parpado1)GameObject.Find("Parpado1").GetComponent(typeof(Parpado1));
@@ -65,6 +72,10 @@ public class AdminCocina : MonoBehaviour {
 		botella = GameObject.Find("Botella");
 		botella.renderer.enabled = false;
 		botella.collider.enabled = false;
+		
+		sopa = GameObject.Find("Sopa");
+		sopa.renderer.enabled = false;
+		sopa.collider.enabled = false;
 		//Modifica variables globales
 		parpado1.Abrir();
 		parpado2.Abrir();
@@ -87,7 +98,14 @@ public class AdminCocina : MonoBehaviour {
 				introJoven = true;
 			}
 			else if(olla){
-				textos.empezarTexto(TextosNivel.TEXTO_COCINA_JOVEN_SOPA);	
+				if(terminarMinijuego){
+					textos.empezarTexto(TextosNivel.TEXTO_COCINA_JOVEN_FIN);
+					sopa.renderer.enabled = true;
+					sopa.collider.enabled = true;
+				}
+				else{
+					textos.empezarTexto(TextosNivel.TEXTO_COCINA_JOVEN_SOPA);
+				}
 			}
 		}
 		
@@ -105,6 +123,8 @@ public class AdminCocina : MonoBehaviour {
 		
 		else if(comando.Equals("Libro")){
 			textos.empezarTexto(TextosNivel.TEXTO_COCINA_LIBRO);
+			Interactor i = (Interactor)libro.GetComponent(typeof(Interactor));
+			i.apagar();
 		}
 		
 		else if(comando.Equals("Lavadora")){
@@ -121,6 +141,8 @@ public class AdminCocina : MonoBehaviour {
 		
 		else if(comando.Equals("Servilleta")){
 			textos.empezarTexto(TextosNivel.TEXTO_COCINA_SERVILLETA);
+			Interactor i = (Interactor)libro.GetComponent(typeof(Interactor));
+			i.apagar();
 		}
 		
 		else if(comando.Equals("Locker")){
@@ -134,10 +156,62 @@ public class AdminCocina : MonoBehaviour {
 				textos.empezarTexto(TextosNivel.TEXTO_COCINA_LOCKER_NO_INTRO);
 			}
 		}
+		
+		else if(comando.Equals("Botella")){
+			textos.empezarTexto(TextosNivel.TEXTO_COCINA_BOTELLA);
+			Interactor i = (Interactor)libro.GetComponent(typeof(Interactor));
+			i.apagar();
+		}
+		
+		else if(comando.Equals("Nevera")){
+			if(iniciarMinijuego){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_MINIJUEGO);
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_NEVERA);	
+			}
+		}
+		
+		else if(comando.Equals("Sopa")){
+			aprobacion = true;
+			if(VariablesGlobales.extrovertido){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_SOPA_EXTRO);
+			}
+			else if(VariablesGlobales.introvertido){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_SOPA_INTROV);	
+			}
+		}
+		
+		else if(comando.Equals("Puerta")){
+			if(aprobacion){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_PUERTA_FIN);
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_PUERTA_NO_FIN);	
+			}
+		}
 	}
 	
 	public void EventDialog(int resultado){
+		if(resultado == TextosNivel.RESULTADO_MESA){
+			contMesa++;
+			if(contMesa >= 3){
+				iniciarMinijuego = true;
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_JOVEN_MINIJUEGO);
+			}
+		}
 		
+		else if(resultado == TextosNivel.RESULTADO_MINIJUEGO){
+			Interactor i = (Interactor)GameObject.Find("Refrigerator").GetComponent(typeof(Interactor));
+			i.apagar();
+			terminarMinijuego = true;
+			mini.activar();
+		}
+		
+		else if(resultado == TextosNivel.RESULTADO_FIN){
+			movimiento.desactivar();
+			Application.LoadLevel("Principal");
+		}
 		
 	}
 	

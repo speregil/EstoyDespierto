@@ -37,6 +37,7 @@ public class TextosNivel{
 	public const int TEXTO_PUERTA_GEMELAS = 21;
 	public const int TEXTO_PUERTA_COCINA = 35;
 	public const int TEXTO_GEMELAS_COMPLETO = 36;
+	public const int TEXTO_COCINA_COMPLETO = 58;
 	
 	// CUARTO DE LAS GEMELAS
 	public const int TEXTO_GEMELAS_INTR0 = 22;
@@ -66,6 +67,15 @@ public class TextosNivel{
 	public const int TEXTO_COCINA_SERVILLETA = 46;
 	public const int TEXTO_COCINA_LOCKER_SI_INTRO = 47;
 	public const int TEXTO_COCINA_LOCKER_NO_INTRO = 48;
+	public const int TEXTO_COCINA_BOTELLA = 49;
+	public const int TEXTO_COCINA_JOVEN_MINIJUEGO = 50;
+	public const int TEXTO_COCINA_NEVERA = 51;
+	public const int TEXTO_COCINA_MINIJUEGO = 52;
+	public const int TEXTO_COCINA_JOVEN_FIN = 53;
+	public const int TEXTO_COCINA_SOPA_EXTRO = 54;
+	public const int TEXTO_COCINA_SOPA_INTROV = 55;
+	public const int TEXTO_COCINA_PUERTA_NO_FIN = 56;
+	public const int TEXTO_COCINA_PUERTA_FIN = 57;
 	
 	/* 
 	 * CONSTANTES RESULTADOS DE LOS DIALOGOS
@@ -86,6 +96,9 @@ public class TextosNivel{
 	
 	// COCINA
 	public const int RESULTADO_INTRO_JOVEN = 10;
+	public const int RESULTADO_MESA = 11;
+	public const int RESULTADO_MINIJUEGO = 12;
+	public const int RESULTADO_FIN = 13;
 	
 	
 	
@@ -125,6 +138,7 @@ public class TextosNivel{
 		textoGemelasIntroFrente();
 		textoPuertaCocina();
 		textoGemelasCompleto();
+		textoCocinaCompleto();
 	}
 	
 	public void InicializarTextosNivelGemelas(){
@@ -156,6 +170,15 @@ public class TextosNivel{
 		textoCocinaServilleta();
 		textoCocinaLockerSiIntro();
 		textoCocinaLockerNoIntro();
+		textoCocinaBotella();
+		textoCocinaJovenMinijuego();
+		textoCocinaNevera();
+		textoCocinaMinijuego();
+		textoCocinaJovenFin();
+		textoCocinaSopaExtro();
+		textoCocinaSopaIntrov();
+		textoCocinaPuertaNoFin();
+		textoCocinaPuertaFin();
 	}
 
 //===============================================================================================================
@@ -424,6 +447,15 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_PUERTA_COCINA);
 		listaTextos[TEXTO_PUERTA_COCINA] = nuevoTexto;
+	}
+	
+	private void textoCocinaCompleto(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "He comido suficiente por ahora, y pienso que si entro, terminaré dándole más vueltas al\n" +
+			"problema del muchacho. Es más sabio quedarme aquí.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_COMPLETO] = nuevoTexto;
 	}
 	
 	/*
@@ -714,6 +746,39 @@ public class TextosNivel{
 	}
 	
 	/*
+	 * ESTADO 3-2: MESA
+	 */
+	
+	private void textoCocinaSopaExtro(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "La sopa me sabe a todo, porque sé que hay un poco de todo ahí. Después de pensarlo mucho, en\n" +
+			"especial mientras elegía los ingredientes, me di cuenta que no es tan difícil manejar cada ingrediente,\n" +
+			"entenderlo, usarlo y luego ir por el siguiente."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Sé que ahora estoy hablando de sopas y verduras, pero me hace pensar en todas las demás personas.\n" +
+			"¿Qué personas son esas? No lo sé, pero sé que son varias, que son muy diferentes, y que\n" +
+			"puedo manejarlas.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_SOPA_EXTRO] = nuevoTexto;
+	}
+	
+	private void textoCocinaSopaIntrov(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "La sopa no me sabe a nada, porque al final termine dejando todo en la nevera. Todo el tiempo me\n" +
+			"estuvo fastidiando la idea que también molesta al muchacho, y que se hizo más real al estar frente\n" +
+			"a la nevera y ver todos esos ingredientes diferentes, únicos, irrepetibles. Me agobiaba, me\n" +
+			"estresaba, y finalmente me derrotó."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Sé que ahora estoy hablando de sopas y verduras, pero me hace pensar en todas las demás personas\n" +
+			"¿Qué personas son esas? No lo sé, pero sé que son muchas, y no quiero tener nada que ver con\n" +
+			"ninguna de ellas, no me atrevo.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_SOPA_INTROV] = nuevoTexto;
+	}
+	
+	/*
 	 * ESTADO 3-3: CENTRO
 	 */
 	
@@ -767,23 +832,67 @@ public class TextosNivel{
 			"sé nada sobre sopas, o porque todavía no quiere hablarme, y esa conversación se la soltó al\n" +
 			"viento. Yo haría lo mismo que ese muchacho en su lugar ¿O no?";
 		nuevaLista.Add(nuevaLinea);
-		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_MESA);
 		listaTextos[TEXTO_COCINA_LIBRO] = nuevoTexto;
 	}
 	
 	private void textoCocinaServilleta(){
 		ArrayList nuevaLista = new ArrayList();
-		string nuevaLinea = "- Todo el mundo tiene sus preferencias, y sus gustos, y sus manías. Es difícil servir una\n" +
-			"buena cena si todo el mundo es así ¿Cómo sabré a quien ponerle cuchara y a quien tenedor?\n" +
-			"¿A quién le gusta esta salsa o la otra? ¿Medio o tres cuartos? Me gusta hacer sopa, pero\n" +
-			"servirla es terrible."; 
+		string nuevaLinea = "- Todo el mundo tiene sus preferencias, y sus gustos, y sus manías. - comienza a decir de repente\n" +
+			"el muchacho - Es difícil servir una buena cena si todo el mundo es así ¿Cómo sabré a quien\n" +
+			"ponerle cuchara y a quien tenedor?\n" +
+			"¿A quién le gusta esta salsa o la otra?\n" +
+			"¿Medio o tres cuartos?\n" +
+			"Me gusta hacer sopa, pero servirla es terrible."; 
 		nuevaLista.Add(nuevaLinea);
 		nuevaLinea = "Comprendo al muchacho perfectamente. En parte porque tampoco me agrada servir la cena, y\n" +
 			"también porque encuentro a la gente difícil de manejar. Por lo menos a las personas que me he\n" +
 			"encontrado hasta el momento, como este muchacho.";
 		nuevaLista.Add(nuevaLinea);
-		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_MESA);
 		listaTextos[TEXTO_COCINA_SERVILLETA] = nuevoTexto;
+	}
+	
+	private void textoCocinaBotella(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "- Hay gente que se molesta si uno no sirve bien la sopa – dice de un momento a otro\n" +
+			"el muchacho - como también hay otra a la que no le importa. Todo se resume a saber cómo\n" +
+			"servirle la comida a la gente, es más, a veces creo que no es tan importante saber hacer\n" +
+			"la sopa, solo servirla."; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Me parece un comentario extraño el del muchacho, pero con mucho sentido. Me lleva a pensar que\n" +
+			"tengo que decidir cómo voy a sobrellevar yo mismo esa cuestión que atormenta al muchacho\n" +
+			"¿Aprendo a preparar, o a servir? Sé que ya no estoy hablando de sopa, sino de otra cosa,\n" +
+			"pero da igual, creo que es una pregunta importante.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_MESA);
+		listaTextos[TEXTO_COCINA_BOTELLA] = nuevoTexto;
+	}
+	
+	private void textoCocinaJovenMinijuego(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "- ¡Suficiente! – Grita el muchacho, y golpea la mesa con fuerza – Da igual si sirvo la sopa\n" +
+			"en taza o en plato, o si pongo la servilleta a la derecha o a la izquierda. ¡No me importa\n" +
+			"la gente! ¡Solo me importa la sopa!"; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "No soporto ver al muchacho tan afligido y tan impotente. Quiero encontrar una forma de ayudarlo,\n" +
+			"pero no soy muy distinto a él. Si su problema es de decisión, y de hacer sopa, tal vez encuentre\n" +
+			"una respuesta en la nevera, donde al menos sé que mis decisiones se tendrán que limitar a\n" +
+			"escoger ingredientes.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_JOVEN_MINIJUEGO] = nuevoTexto;
+	}
+	
+	private void textoCocinaJovenFin(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "El muchacho, por primera vez desde que entré, me está mirando. Podría decir que sonríe, pero\n" +
+			"no es verdad, simplemente ya no tiene el ceño fruncido, y para mi es equivalente a un gracias. Me\n" +
+			"señala la mesa que está detrás, y me indica que puedo empezar. Al parecer si era yo quien estaba\n" +
+			"invitado a la cena, o por lo menos terminé siendo yo después de estar tanto tiempo aquí."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_JOVEN_FIN] = nuevoTexto;
 	}
 	
 	/*
@@ -808,6 +917,30 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
 		listaTextos[TEXTO_COCINA_OLLA_NO_INTRO] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 3-5: NEVERA
+	 */
+	
+	private void textoCocinaNevera(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Esta nevera está a reventar de ingredientes, varios de ellos seguramente en la sopa. Son tantos, y\n" +
+			"tan diferentes, que tal vez sea por eso que la sopa me huele a todo y a nada al mismo tiempo."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_NEVERA] = nuevoTexto;
+	}
+	
+	private void textoCocinaMinijuego(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Hay tantas cosas en la nevera, tanto de donde elegir. Es una sensación apabullante, tener tantas\n" +
+			"elecciones. Se torna peor cuando sé que ninguna es incorrecta. Ante tantas opciones, tomo\n" +
+			"una decisión radical: Voy a coger lo más rápido que pueda el ingrediente que vea, y voy a\n" +
+			"ver cuántos alcanzo a coger."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_MINIJUEGO);
+		listaTextos[TEXTO_COCINA_MINIJUEGO] = nuevoTexto;
 	}
 	
 	/*
@@ -857,5 +990,30 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
 		listaTextos[TEXTO_COCINA_LOCKER_NO_INTRO] = nuevoTexto;
+	}
+	
+	/*
+	 * ESTADO 3-8: PUERTA
+	 */
+	
+	private void textoCocinaPuertaNoFin(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "El olor me tiene anclado a este lugar, no me iré hasta que ese olor se traduzca en una sensación\n" +
+			"de mi boca. Lo chistoso es que no tengo hambre, solo quiero que deje de oler y que empiece\n" +
+			"a gustar."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_COCINA_PUERTA_NO_FIN] = nuevoTexto;
+	}
+	
+	private void textoCocinaPuertaFin(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Puedo decir que he quedado satisfecho. La sopa me ha abierto los ojos en muchos sentidos. No\n" +
+			"pretendo comprender qué me está pasando, pero siento que es un avance entender que tengo que\n" +
+			"comprender algo. Necesito respuestas a preguntas que no tengo totalmente claras ¿Quizás las\n" +
+			"encuentro en las otras habitaciones?"; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_FIN);
+		listaTextos[TEXTO_COCINA_PUERTA_FIN] = nuevoTexto;
 	}
 }

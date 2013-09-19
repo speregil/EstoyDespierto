@@ -10,6 +10,7 @@ public class MovimientoDisplay : MonoBehaviour {
 	public Texture2D iconoFlecha;
 	public float velocidad;
 	
+	public GUISkin skin;
 	private GameObject admin;
 	private IEventos eventos;
 	private GameObject Camara;
@@ -72,6 +73,7 @@ public class MovimientoDisplay : MonoBehaviour {
 	
 	void OnGUI () {
 		//Condicional en el que se crea y se ordena que hacer cuando se oprime la flecha de arriba
+		GUI.skin = skin;
 		if(puedeMoverse){
 			if(hayAdelante){
 				if(GUI.Button(new Rect((Screen.width/2)-40,40,80,20), iconoFlecha)) {

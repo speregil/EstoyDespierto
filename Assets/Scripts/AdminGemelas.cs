@@ -10,7 +10,6 @@ public class AdminGemelas : MonoBehaviour {
 	private MovimientoDisplay movimiento;
 	private VariablesGlobales globales;
 	private Minijuego1 mini1;
-	private Minijuego2 mini2;
 	
 	// Flags de control
 	private bool puerta = false;

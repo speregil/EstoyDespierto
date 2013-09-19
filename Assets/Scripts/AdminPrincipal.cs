@@ -23,7 +23,7 @@ public class AdminPrincipal : MonoBehaviour {
 	private bool corredor2 = false;
 	private bool espejo = false;
 	private bool verReja = false;
-	private bool volver = true;
+	private bool volver = false;
 	
 	//=================================================================================================
 	// inicializacion
@@ -132,10 +132,7 @@ public class AdminPrincipal : MonoBehaviour {
 		
 		else if(comando.Equals("PuertaGaraje")){
 			if(volver){
-				NodoGrafo actual = movimiento.darEstadoActual();
-				globales.establecerUltimoEstado(actual.darIzquierda());
-				movimiento.desactivar();
-				Application.LoadLevel("Garaje");
+				
 			}
 			else{
 				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
@@ -143,7 +140,11 @@ public class AdminPrincipal : MonoBehaviour {
 		}
 		
 		else if(comando.Equals("PuertaCocina")){
-			if(volver){
+			
+			if(VariablesGlobales.extrovertido || VariablesGlobales.introvertido){
+				textos.empezarTexto(TextosNivel.TEXTO_COCINA_COMPLETO);	
+			}
+			else if(volver){
 				textos.empezarTexto(TextosNivel.TEXTO_PUERTA_COCINA);	
 			}
 			else{
@@ -153,10 +154,7 @@ public class AdminPrincipal : MonoBehaviour {
 		
 		else if(comando.Equals("PuertaStar")){
 			if(volver){
-				NodoGrafo actual = movimiento.darEstadoActual();
-				globales.establecerUltimoEstado(actual.darIzquierda());
-				movimiento.desactivar();
-				Application.LoadLevel("Star");
+				
 			}
 			else{
 				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
