@@ -38,6 +38,7 @@ public class TextosNivel{
 	public const int TEXTO_PUERTA_COCINA = 35;
 	public const int TEXTO_GEMELAS_COMPLETO = 36;
 	public const int TEXTO_COCINA_COMPLETO = 58;
+	public const int TEXTO_NO_ALCANZAMOS = 59;
 	
 	// CUARTO DE LAS GEMELAS
 	public const int TEXTO_GEMELAS_INTR0 = 22;
@@ -77,6 +78,16 @@ public class TextosNivel{
 	public const int TEXTO_COCINA_PUERTA_NO_FIN = 56;
 	public const int TEXTO_COCINA_PUERTA_FIN = 57;
 	
+	// FINAL
+	public const int TEXTO_FINAL_ESPEJO = 60;
+	public const int TEXTO_FINAL_NINO_NO_ESPEJO = 61;
+	public const int TEXTO_FINAL_NINO_ESPEJO = 62;
+	public const int TEXTO_FINAL_ESPEJO_2 = 63;
+	public const int TEXTO_FINAL_RACIONAL_INTROVERTIDO = 64;
+	public const int TEXTO_FINAL_RACIONAL_EXTROVERTIDO = 65;
+	public const int TEXTO_FINAL_ARTISTICO_INTROVERTIDO = 66;
+	public const int TEXTO_FINAL_ARTISTICO_EXTROVERTIDO = 67;
+	public const int TEXTO_FINAL_DECISION = 68;
 	/* 
 	 * CONSTANTES RESULTADOS DE LOS DIALOGOS
 	 */
@@ -88,6 +99,11 @@ public class TextosNivel{
 	public const int RESULTADO_CAMA_SOLO = 4;
 	public const int RESULTADO_PUERTA_GEMELAS = 5;
 	public const int RESULTADO_PUERTA_COCINA = 9;
+	public const int RESULTADO_ESPEJO_FINAL = 14;
+	public const int RESULTADO_NINO_FINAL = 15;
+	public const int RESULTADO_FINAL_JUEGO = 16;
+	public const int RESULTADO_DESPERTAR = 17;
+	public const int RESULTADO_DORMIR = 18;
 	
 	// CUARTO DE LAS GEMELAS
 	public const int RESULTADO_APROPACION = 6;
@@ -99,6 +115,23 @@ public class TextosNivel{
 	public const int RESULTADO_MESA = 11;
 	public const int RESULTADO_MINIJUEGO = 12;
 	public const int RESULTADO_FIN = 13;
+	
+	// Strings base para las historias finales
+	private string Racional = "Siempre creí que no es suficiente saber cosas, si no se puede hacer nada con ellas. Yo sabía cosas,\n" +
+		"pero no me interesaba demostrarlo en un papel, o en un examen. Yo hacía cosas, yo mostraba en\n" +
+		"la práctica.";
+	
+	private string Artistico = "Las ideas me fluyen mejor en lo abstracto, lo sensitivo. Eso es lo que logro escribir, y lo que\n" +
+		"logro trasmitir. Por eso las personas me dicen que tengo talento, aunque muchas veces creo que\n" +
+		"solo son condescendientes, que no lo dicen en serio, o que no saben lo que dicen.";
+	
+	private string Introvertido = "No importa qué habilidades poseas, lo que importa es hacer algo con ellas. Hacer las cosas sólo\n" +
+		"es imposible, y para mi es imposible hacerlas con alguien más. No soporto a la gente, y creo que\n" +
+		"la gente no me soporta a mí. Eso es lo que creo.";
+	
+	private string Extrovertido = "La gente aprecia que uno se exponga al ridículo, con tal de sacar un provecho. Yo lo disfrutaba,\n" +
+		"la gente lo disfrutaba. Pero no importaba si en verdad tenía más cosas que dar, más cosas que crear.\n" +
+		"Cuando la gente te cree un tonto, es imposible sacarles esa idea de la cabeza.";
 	
 	
 	
@@ -139,6 +172,16 @@ public class TextosNivel{
 		textoPuertaCocina();
 		textoGemelasCompleto();
 		textoCocinaCompleto();
+		textoNoAlcanzamos();
+		textoFinalEspejo();
+		textoFinalEspejo2();
+		textoFinalNinoNoEspejo();
+		textoFinalNinoEspejo();
+		textoFinalRacionalExtrovertido();
+		textoFinalRacionalIntrovertido();
+		textoFinalArtisticoExtrovertido();
+		textoFinalArtisticoIntrovertido();
+		textoFinalDecision();
 	}
 	
 	public void InicializarTextosNivelGemelas(){
@@ -1015,5 +1058,181 @@ public class TextosNivel{
 		nuevaLista.Add(nuevaLinea);
 		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_FIN);
 		listaTextos[TEXTO_COCINA_PUERTA_FIN] = nuevoTexto;
+	}
+	
+//Texto extra
+	
+	private void textoNoAlcanzamos(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "La puerta está cerrada con llave y no puedo entrar. Veo que hay una nota colgada:";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "“Por cuestiones de tiempo no alcanzamos a implementar estas habitaciones, prometemos hacerlo\n" +
+			"cuando podamos. Por ahora disfruten las que hay.\n\n" +
+			"Att: El equipo de programación"; 
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Promesas, promesas, solo promesas."; 
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_NO_ALCANZAMOS] = nuevoTexto;
+	}
+	
+/*
+ * ESCENA FINAL
+ */
+	
+	private void textoFinalEspejo(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Noto algo en el espejo que antes no había visto. Lo veo con asombro, con desdén, con rabia. \n\n" +
+			"Me veo a mí.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_ESPEJO_FINAL);
+		listaTextos[TEXTO_FINAL_ESPEJO] = nuevoTexto;
+	}
+	
+	private void textoFinalEspejo2(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Estoy ahí, reflejado en el espejo, por fin me reconozco, y no me gusta lo que veo. Esa es la cara\n" +
+			"de alguien que está dormido. Es verdad, estoy dormido. Más que dormido, estoy en coma, lo\n" +
+			"recuerdo con claridad.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "¿Qué es eso que veo en el espejo? Un residuo de mi mente, un grito desesperado. ¿Y estos niños\n" +
+			"que me rodean? Un intento de mi cabeza por despertar, por tratar de recordar.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Es un intento dudoso, porque ahora que ya estoy seguro que me encuentro dormido, postrado en\n" +
+			"algún hospital y conectado a un sinfín de máquinas, no estoy totalmente seguro que quiera\n" +
+			"despertar.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_FINAL_ESPEJO_2] = nuevoTexto;
+	}
+	
+	private void textoFinalNinoNoEspejo(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Aquí está, finalmente. El niño me mira con curiosidad, con incertidumbre, casi que con pesar.\n" +
+			"Estaba desesperado por hablar con este niño ¿Por qué? No lo entiendo bien todavía, pero\n" +
+			"ahora que comprendo más cosas, me doy cuenta que ese niño se parece mucho a mí.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "\n¿Pero qué veo ahora? El espejo, que tengo justo al lado, me muestra algo que no esperaba. ";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		listaTextos[TEXTO_FINAL_NINO_NO_ESPEJO] = nuevoTexto;
+	}
+	
+	private void textoFinalNinoEspejo(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Ahora lo entiendo perfectamente, el por qué me desespera tanto hablar con este chico, por qué lo\n" +
+			"hallo tan familiar, tan cercano a mí.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Este chico soy yo, tiempo atrás. Antes de este coma, antes del accidente, antes de la universidad,\n" +
+			"antes de que la vida me golpeara. Ese niño es lo que yo quiero ser.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_NINO_FINAL);
+		listaTextos[TEXTO_FINAL_NINO_ESPEJO] = nuevoTexto;
+	}
+	
+	private void textoFinalRacionalExtrovertido(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = Racional;
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = Extrovertido;
+		nuevaLista.Add(nuevaLinea);
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Por eso terminé en esta cama, porque por más que intentaba ser serio, más payaso me volvía. Entre\n" +
+			"más intenté convencer a los demás de mi valía, más terminé haciendo cosas que no debía. Y aquí\n" +
+			"quedé, atrapado en mi mente, después que alguien simplemente no me aguantó más, y me metió\n" +
+			"tres tiros en la cabeza.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_FINAL_JUEGO);
+		listaTextos[TEXTO_FINAL_RACIONAL_EXTROVERTIDO] = nuevoTexto;
+	}
+	
+	private void textoFinalRacionalIntrovertido(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = Racional;
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = Introvertido;
+		nuevaLista.Add(nuevaLinea);
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Por eso terminé en esta cama, porque la gente nunca me dio buena espina. Tenía ideas, proyectos,\n" +
+			"éxitos. Pero la gente gusta mucho de lo que no es suyo, y no pude soportarlo, no podía evitar\n" +
+			"terminar en pleitos. Uno de esos pleitos me botó por la ventana seis pisos.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_FINAL_JUEGO);
+		listaTextos[TEXTO_FINAL_RACIONAL_INTROVERTIDO] = nuevoTexto;
+	}
+	
+	private void textoFinalArtisticoIntrovertido(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = Artistico;
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = Introvertido;
+		nuevaLista.Add(nuevaLinea);
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Por eso terminé en esta cama, porque decidí creer en mis amigos, en sus supuestos elogios, y salí\n" +
+			"al público, le mostré al mundo lo que tenía, y me destruyó. El mío, más que un coma cerebral,\n" +
+			"es un coma emocional.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_FINAL_JUEGO);
+		listaTextos[TEXTO_FINAL_ARTISTICO_INTROVERTIDO] = nuevoTexto;
+	}
+	
+	private void textoFinalArtisticoExtrovertido(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = Artistico;
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = Extrovertido;
+		nuevaLista.Add(nuevaLinea);
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Por eso terminé en esta cama, porque me dediqué solo a complacer a los demás, a mostrarles lo que\n" +
+			"querían, lo que los emocionaba, o los enfurecía. Trabajé tanto tiempo y tan duro para otras\n" +
+			"personas, que me sorprende que el paro cardiaco no me hubiera llegado antes, o que no me\n" +
+			"hubiera matado.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista, RESULTADO_FINAL_JUEGO);
+		listaTextos[TEXTO_FINAL_ARTISTICO_EXTROVERTIDO] = nuevoTexto;
+	}
+	
+	private void textoFinalDecision(){
+		ArrayList nuevaLista = new ArrayList();
+		string nuevaLinea = "Finalmente, todo se reduce a una decisión. Así funciona la vida, y por la visto así funciona\n" +
+			"el coma también ¿Qué haré?";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Si me quedo, fingiré que estoy despierto. Me quedaré conmigo mismo, con estos niños, que me conocen\n" +
+			"tan bien. Y hablaré. Hablaré de mí. De lo que soy. De lo que no soy. De lo que me gustaría\n" +
+			"haber sido. Tengo todo el tiempo del mundo para hablar de eso.";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Si despierto, vuelvo a la realidad, a lo que no puedo cambiar y de lo que no puedo hablar con nadie.\n" +
+			"Pero realidad al fin. Podré decir que no estoy escapando, que me enfrento a las cosas. No me\n" +
+			"emociona, pero podría decirse que es lo correcto.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto nuevoTexto = new NodoTexto(nuevaLista);
+		
+		nuevaLista = new ArrayList();
+		nuevaLinea = "DESPERTAR";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Aquí, esta. Ya no siento el calor del corredor, ni escucho la respiración del niño. Solo oigo el\n" +
+			"resoplido de una máquina, un grito emotivo  y el tacto de alguien en mis manos. No he\n" +
+			"abierto los ojos, pero desde la primera vez que mi conciencia comenzó a moverse, estoy\n" +
+			"totalmente seguro de una cosa: ";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Estoy despierto.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto hijo1 = new NodoTexto(nuevaLista, RESULTADO_DESPERTAR);
+		nuevoTexto.setHijo1(hijo1);
+		
+		nuevaLista = new ArrayList();
+		nuevaLinea = "QUEDARSE DORMIDO";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "Y Aquí me quedo, frente al muchacho, que me sonríe sin razón alguna. Puedo oír las voces de los\n" +
+			"otros niños que se habían desvanecido tiempo atrás. Ya no siento temor del pasillo, ni de\n" +
+			"la cámara, ni del rostro irreconocible que me mira desde el espejo. Nada me atemoriza, pues\n" +
+			"ya puedo asegurarlo con certeza:";
+		nuevaLista.Add(nuevaLinea);
+		nuevaLinea = "No estoy despierto.";
+		nuevaLista.Add(nuevaLinea);
+		NodoTexto hijo2 = new NodoTexto(nuevaLista, RESULTADO_DORMIR);
+		nuevoTexto.setHijo2(hijo2);
+		
+		listaTextos[TEXTO_FINAL_DECISION] = nuevoTexto;
 	}
 }

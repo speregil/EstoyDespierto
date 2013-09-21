@@ -8,6 +8,7 @@ public class AdminPrincipal : MonoBehaviour {
 	//==================================================================================================
 	
 	//Objetos
+	public Texture2D texturaImagen;
 	private GameObject Global;
 	private Parpado1 parpado1;
 	private Parpado2 parpado2;
@@ -18,12 +19,15 @@ public class AdminPrincipal : MonoBehaviour {
 	//Flags particulares
 	private bool gemelaIzq = false;
 	private bool gemelaDer = false;
-	private bool verNiño = false;
+	private bool verNino = false;
 	private bool corredor1 = false;
 	private bool corredor2 = false;
 	private bool espejo = false;
 	private bool verReja = false;
 	private bool volver = false;
+	private bool enFinal = false;
+	private bool reflejo = false;
+	private bool imagen = false;
 	
 	//=================================================================================================
 	// inicializacion
@@ -61,6 +65,9 @@ public class AdminPrincipal : MonoBehaviour {
 		if(ultimo.TieneDerecha())
 			movimiento.SiHayDerecha();
 		
+		GameObject nino = GameObject.Find("NinoFinal");
+		nino.renderer.enabled = false;
+		nino.collider.enabled = false;
 		// Ejecuta las acciones correspondietes a los flags de control
 		if(VariablesGlobales.primeraVez){
 			textos.empezarTexto(TextosNivel.TEXTO_INTRO_CAMA);
@@ -76,6 +83,13 @@ public class AdminPrincipal : MonoBehaviour {
 			espejo = true;
 			verReja = true;
 			volver = true;
+			
+			if((VariablesGlobales.racional || VariablesGlobales.artistico) && (VariablesGlobales.introvertido || VariablesGlobales.extrovertido)){
+				enFinal = true;
+				Destroy(GameObject.Find("Reja"));
+				nino.renderer.enabled = true;
+				nino.collider.enabled = true;
+			}
 		}
 	}
 	
@@ -83,9 +97,13 @@ public class AdminPrincipal : MonoBehaviour {
 	// Eventos
 	//=============================================================================================
 	
-	void Update () {
-	
+	void OnGUI(){
+		if(imagen){
+			GUI.Box (new Rect (0,0, Screen.width, Screen.height),"");
+			GUI.Label (new Rect (Screen.width/2 - (512/2),0, Screen.width, Screen.height), texturaImagen);
+		}
 	}
+
 	
 	public void EventSwitch(string comando){
 		
@@ -104,11 +122,11 @@ public class AdminPrincipal : MonoBehaviour {
 		// Niño en la puerta
 		else if(comando.Equals("Nino")){
 			textos.empezarTexto(TextosNivel.TEXTO_PUERTA_NINO);
-			verNiño = true;
+			verNino = true;
 		}
 		// Mueble en el cuarto
 		else if(comando.Equals("MuebleH1")){
-			if(verNiño){
+			if(verNino){
 				textos.empezarTexto(TextosNivel.TEXTO_MUEBLE_CUARTO_SI_NINO);
 			}
 			else{
@@ -132,7 +150,7 @@ public class AdminPrincipal : MonoBehaviour {
 		
 		else if(comando.Equals("PuertaGaraje")){
 			if(volver){
-				
+				textos.empezarTexto(TextosNivel.TEXTO_NO_ALCANZAMOS);	
 			}
 			else{
 				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
@@ -154,7 +172,7 @@ public class AdminPrincipal : MonoBehaviour {
 		
 		else if(comando.Equals("PuertaStar")){
 			if(volver){
-				
+				textos.empezarTexto(TextosNivel.TEXTO_NO_ALCANZAMOS);
 			}
 			else{
 				textos.empezarTexto(TextosNivel.TEXTO_CORREDOR_PUERTA);	
@@ -174,7 +192,12 @@ public class AdminPrincipal : MonoBehaviour {
 		}
 		
 		else if(comando.Equals("Espejo")){
-			textos.empezarTexto(TextosNivel.TEXTO_ESPEJO);
+			if(enFinal){
+				textos.empezarTexto(TextosNivel.TEXTO_FINAL_ESPEJO);
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_ESPEJO);
+			}
 		}
 		
 		else if(comando.Equals("Reja")){
@@ -183,6 +206,14 @@ public class AdminPrincipal : MonoBehaviour {
 			corredor1 = false;
 		}
 		
+		else if(comando.Equals("NinoFinal")){
+			if(reflejo){
+				textos.empezarTexto(TextosNivel.TEXTO_FINAL_NINO_ESPEJO);
+			}
+			else{
+				textos.empezarTexto(TextosNivel.TEXTO_FINAL_NINO_NO_ESPEJO);
+			}
+		}
 	}
 	
 	public void EventDialog(int resultado){
@@ -235,12 +266,45 @@ public class AdminPrincipal : MonoBehaviour {
 			movimiento.desactivar();
 			Application.LoadLevel("Cocina");
 		}
+		
+		else if(resultado == TextosNivel.RESULTADO_ESPEJO_FINAL){
+			StartCoroutine(EnEspejo());
+		}
+		
+		else if(resultado == TextosNivel.RESULTADO_NINO_FINAL){
+			if(VariablesGlobales.racional && VariablesGlobales.extrovertido){
+				textos.empezarTexto(TextosNivel.TEXTO_FINAL_RACIONAL_EXTROVERTIDO);	
+			}
+			else if(VariablesGlobales.racional && VariablesGlobales.introvertido){
+				textos.empezarTexto(TextosNivel.TEXTO_FINAL_RACIONAL_INTROVERTIDO);	
+			}
+			else if(VariablesGlobales.artistico && VariablesGlobales.introvertido){
+				textos.empezarTexto(TextosNivel.TEXTO_FINAL_ARTISTICO_INTROVERTIDO);	
+			}
+			else if(VariablesGlobales.artistico && VariablesGlobales.extrovertido){
+				textos.empezarTexto(TextosNivel.TEXTO_FINAL_ARTISTICO_EXTROVERTIDO);	
+			}
+		}
+		
+		else if(resultado == TextosNivel.RESULTADO_FINAL_JUEGO){
+			parpado1.Cerrar();
+			parpado2.Cerrar();
+			textos.empezarTexto(TextosNivel.TEXTO_FINAL_DECISION);
+		}
+		
+		else if(resultado == TextosNivel.RESULTADO_DESPERTAR){
+			Debug.Log("Desperte");
+		}
+		
+		else if(resultado == TextosNivel.RESULTADO_DORMIR){
+			Debug.Log("En coma");
+		}
 	}
 	
 	public void EventEstado (string comando){
 		
 		if(comando.Equals("Puerta")){
-			if(!verNiño)
+			if(!verNino)
 				movimiento.NoHayAdelante();
 		}
 		
@@ -279,6 +343,14 @@ public class AdminPrincipal : MonoBehaviour {
 	//================================================================================================
 	// Corutinas auxiliares
 	//================================================================================================
+	
+	private IEnumerator EnEspejo(){
+		imagen = true;
+		yield return new WaitForSeconds(2);
+		imagen = false;
+		textos.empezarTexto(TextosNivel.TEXTO_FINAL_ESPEJO_2);
+		reflejo = true;
+	}
 	
 	private IEnumerator Parpadear(){
 		parpado1.Cerrar();
