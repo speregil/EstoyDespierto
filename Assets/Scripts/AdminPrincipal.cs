@@ -293,11 +293,11 @@ public class AdminPrincipal : MonoBehaviour {
 		}
 		
 		else if(resultado == TextosNivel.RESULTADO_DESPERTAR){
-			Debug.Log("Desperte");
+			Application.LoadLevel("Menu");
 		}
 		
 		else if(resultado == TextosNivel.RESULTADO_DORMIR){
-			Debug.Log("En coma");
+			Application.LoadLevel("Menu");
 		}
 	}
 	

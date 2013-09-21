@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Grafo.cs" />
      <Compile Include="Assets\Scripts\IEventos.cs" />
      <Compile Include="Assets\Scripts\Interactor.cs" />
+     <Compile Include="Assets\Scripts\Menu.cs" />
      <Compile Include="Assets\Scripts\Minijuego1.cs" />
      <Compile Include="Assets\Scripts\Minijuego2.cs" />
      <Compile Include="Assets\Scripts\Minijuego3.cs" />
