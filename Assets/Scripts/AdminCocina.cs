@@ -81,6 +81,10 @@ public class AdminCocina : MonoBehaviour {
 		parpado2.Abrir();
 		VariablesGlobales.primeraVez = false;
 		textos.empezarTexto(TextosNivel.TEXTO_COCINA_INTRO);
+		if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork){
+		    GoogleAnalyticsHelper.Settings("UA-44248318-1", "http://juegalibre.virtual.uniandes.edu.co");
+			GoogleAnalyticsHelper.LogEvent("Cocina", "Inicio", "Entro a la cocina", "", 0);
+		}
 	}
 	
 	// ============================================================================================

@@ -56,6 +56,10 @@ public class AdminGemelas : MonoBehaviour {
 			textos.empezarTexto(TextosNivel.TEXTO_GEMELAS_INTR0);
 			puerta = true;
 		}
+		if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork){
+		    GoogleAnalyticsHelper.Settings("UA-44248318-1", "http://juegalibre.virtual.uniandes.edu.co");
+			GoogleAnalyticsHelper.LogEvent("Gemelas", "Inicio", "Entro donde las gemelas", "", 0);
+		}
 	}
 	
 	void Update () {

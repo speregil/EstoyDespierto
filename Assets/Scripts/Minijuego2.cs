@@ -58,6 +58,7 @@ public class Minijuego2 : MonoBehaviour
 		posicion1 = random();
 		posicion2 = random();
 		posicion3= random();
+		
 		//tiempo = Time.time;
 		//tiempoParseado = 0;
 	}
@@ -83,10 +84,12 @@ public class Minijuego2 : MonoBehaviour
 				pasoSegundo = false;
 				if(score*20 >= Screen.width){
 					VariablesGlobales.extrovertido = true;
+					GoogleAnalyticsHelper.LogEvent("Cocina", "Minijuego", "gano minijuego", "extrovertido", score);
 					desactivar();		
 				}
 				else if(score <= 0){
 					VariablesGlobales.introvertido = true;
+					GoogleAnalyticsHelper.LogEvent("Cocina", "Minijuego", "perdio minijuego", "introvertido", score);
 					desactivar();		
 				}
 		}

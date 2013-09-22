@@ -91,6 +91,10 @@ public class AdminPrincipal : MonoBehaviour {
 				nino.collider.enabled = true;
 			}
 		}
+		if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork){
+		    GoogleAnalyticsHelper.Settings("UA-44248318-1", "http://juegalibre.virtual.uniandes.edu.co");
+			GoogleAnalyticsHelper.LogEvent("Pasillo", "Inicio", "Empezo a jugar", "", 0);
+		}
 	}
 	
 	// ============================================================================================

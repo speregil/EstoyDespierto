@@ -44,6 +44,9 @@ public class Minijuego1 : MonoBehaviour
 		labelTexto.normal.background = backgroundTexto;
 		respuesta = random();
 		pasoSegundo = false;
+		if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork){
+		    GoogleAnalyticsHelper.Settings("UA-44248318-1", "http://juegalibre.virtual.uniandes.edu.co");
+		}
 		//tiempo = Time.time;
 		//tiempoParseado = 0;
 	}
@@ -212,10 +215,12 @@ public class Minijuego1 : MonoBehaviour
 			}
 				if(score*20 >= Screen.width){
 					VariablesGlobales.racional = true;
+					GoogleAnalyticsHelper.LogEvent("Gemelas", "Minijuego","gano el minijuego", "racional", score);
 					desactivar();		
 				}
 				else if(score <= 0){
 					VariablesGlobales.artistico = true;
+					GoogleAnalyticsHelper.LogEvent("Gemelas", "Minijuego", "perdio el minijuego", "artistico", score);
 					desactivar();		
 				}
 		}
